@@ -1,0 +1,469 @@
+
+# ---- Parte 0: Identificación y descripción general ---- 
+# Sintaxis de procesamiento
+# Electivo metodológico: Taller del trabajo
+# Docente: Giorgio Boccardo 
+# Trabajo subcontrato feminizado del sector servicio 
+
+# ---- Parte 1: Librerías principales a utilizar en el análisis ---- 
+#Cargar paquetes
+pacman::p_load(readr, #lectura formato csv
+               stargazer, #descriptivos
+               sjmisc, #Desciptivos opción 2
+               car,
+               sjlabelled, #etiquetado
+               dplyr) #manipulacion de datos
+
+#Cargar Base 2019
+ene2019 <- read.csv("/cloud/project/ene2019.csv", header=FALSE, sep = ",")
+View(ene2019)
+
+#---- Limpiar base 2019 ---- 
+
+#---- Posibles preguntas a usar ----
+                                                                                     
+#adapatación ENE 2020
+  #a6_orig
+  #a6_otro_covid
+  #b16_orig
+  #b16_otro_covid
+  #c9_orig
+  
+data('ene2019')
+Base <- dplyr::select(ene2019, V7, V3, V19, V27, V32, V42, V43, 
+                      V44, V45, V46, V47, V48, V50, V53, V54, V66, V74, V75, V76, 
+                      V84, V85, V138, V141, V142)
+
+names(ene2019)
+names(Base)
+
+# ---- Limpieza de datos base 2019 ----
+
+# ---- Variable: Región Metropolitana ----
+#V7:Región. Metropolitana código 13
+#a.Descriptivo
+frq(Base$V7)
+
+#c. Etiquetado
+Base <- Base %>% rename("region"= V7) 
+
+Base$region <- set_label(x = Base$region, label = "Región")
+
+get_label(Base$region)
+
+frq(Base$region) #revisión final
+
+# ---- Variable: MES Mayo - Julio ----
+#V3:mes_central. 6 mayo -julio
+#a.Descriptivo
+frq(Base$V3)
+
+#c. Etiquetado
+Base <- Base %>% rename("mes_central"= V3) 
+
+Base$mes_central <- set_label(x = Base$mes_central,label = "mes_mayo-julio")
+
+get_label(Base$mes_central)
+
+frq(Base$mes_central) #revisión final
+
+# ---- Variable Sexo ----
+#a.Descriptivo
+frq(Base$V19)
+
+#c. Etiquetado
+Base <- Base %>% rename("sexo"= V19) 
+
+Base$sexo <- set_label(x = Base$sexo,label = "Sexo")
+
+get_label(Base$sexo)
+
+frq(Base$sexo) #revisión final
+
+# ---- Variable Trabajo ----
+#a.Descriptivo
+frq(Base$V27)
+
+#c. Etiquetado
+Base <- Base %>% rename("trabaj_sem_pas"= V27) 
+
+Base$trabaj_sem_pas <- set_label(x = Base$trabaj_sem_pas, label = "Trabajo semana pasada")
+
+get_label(Base$trabaj_sem_pas)
+
+frq(Base$trabaj_sem_pas) #revisión final
+
+#---- Variable razones de no trabajo ----
+#a.Descriptivo
+frq(Base$V32)
+
+#c. Etiquetado
+Base <- Base %>% rename("razones_no_trabajo"= V32) 
+
+Base$razones_no_trabajo <- set_label(x = Base$razones_no_trabajo, label = "Razones de no trabajo")
+
+get_label(Base$razones_no_trabajo)
+
+frq(Base$razones_no_trabajo) #revisión final
+
+# ---- Variable Cotización previsión ----
+#V42:Su empleador, ¿cotiza por usted en el sistema previsional o de pensión? (b7a_1)
+#a.descriptivos
+frq(Base$V42)
+
+#c. Etiquetado
+Base <- Base %>% rename("coti_prevision"= V42) 
+
+Base$coti_prevision <- set_label(x = Base$coti_prevision, label = "Cotización Previsión")
+
+get_label(Base$coti_prevision)
+
+frq(Base$coti_prevision) #revisión final
+
+#---- Variable Cotización Salud ----
+#V43:Su empleador, ¿cotiza por usted en el sistema de salud (público o privado)? (b7a_2)
+#a.Descriptivo
+frq(Base$V43)
+
+#c. Etiquetado
+Base <- Base %>% rename("coti_salud"= V43) 
+
+Base$coti_salud <- set_label(x = Base$coti_salud, label = "Cotización Salud")
+
+get_label(Base$coti_salud)
+
+frq(Base$coti_salud) #revisión final
+
+# ---- Variable Cotización Seguro Desempleo ----
+#V44:Su empleador, ¿cotiza por usted en el sistema de seguro de desempleo? (b7a_3)
+#a.Descriptivo
+frq(Base$V44)
+
+#c. Etiquetado
+Base <- Base %>% rename("coti_seg_desem"= V44) 
+
+Base$coti_seg_desem <- set_label(x = Base$coti_seg_desem, label = "Cotización seguro de desempleo")
+
+get_label(Base$coti_seg_desem)
+
+frq(Base$coti_seg_desem) #revisión final
+
+#---- Variable Acceso vacaciones anuales----
+#a.Descriptivo
+frq(Base$V45)
+
+#c. Etiquetado
+Base <- Base %>% rename("vaca_anual"= V45) 
+
+Base$vaca_anual <- set_label(x = Base$vaca_anual, label = "Acceso a vacaciones anuales")
+
+get_label(Base$vaca_anual)
+
+frq(Base$vaca_anual) #revisión final
+
+# ---- Variable Acceso licencia pagada ----
+#a.Descriptivo
+frq(Base$V46)
+
+#b.Recodificación
+Base$V46 <- recode(Base$V46, "c(99)=NA")
+
+#c. Etiquetado
+Base <- Base %>% rename("licen_pag"= V46) 
+
+Base$licen_pag <- set_label(x = Base$licen_pag, label = "Acceso a licencias pagadas")
+
+get_label(Base$licen_pag)
+
+frq(Base$licen_pag) #revisión final
+
+#---- Variable Acceso permisos por Maternidad/Paternidad ----
+#V47En este trabajo, ¿tiene derecho, aunque no utilice, a permiso por maternidad o paternidad? (b7b_3)
+#a.Descriptivo
+frq(Base$V47)
+
+#b.Recodificación
+Base$V47 <- recode(Base$V47, "c(99)=NA")
+
+#c. Etiquetado
+Base <- Base %>% rename("uso_permi_mat_pat"= V47) 
+
+Base$uso_permi_mat_pat <- set_label(x = Base$uso_permi_mat_pat, label = "Acceso a permiso parternidad y maternidad")
+
+get_label(Base$uso_permi_mat_pat)
+
+frq(Base$uso_permi_mat_pat) #revisión final
+
+#---- Variable Acceso guardería infantil ----
+#V48En este trabajo, ¿tiene derecho, aunque no utilice, a servicio de guardería infantil? (b7b_4)
+#a.Descriptivo
+frq(Base$V48)
+
+#b.Recodificación
+Base$V48 <- recode(Base$V48, "c(99)=NA")
+
+#c. Etiquetado
+Base <- Base %>% rename("guarderia"= V48) 
+
+Base$guarderia <- set_label(x = Base$guarderia, label = "Acceso a guarderia")
+
+get_label(Base$guarderia)
+
+frq(Base$guarderia) #revisión final
+
+# ---- Variable Duración de contrato ----
+#a.Descriptivo
+frq(Base$V50)
+
+#c. Etiquetado
+Base <- Base %>% rename("dura_contrato"= V50) 
+
+Base$dura_contrato <- set_label(x = Base$dura_contrato, label = "Duración del contrato")
+
+get_label(Base$dura_contrato)
+
+frq(Base$dura_contrato) #revisión final
+
+# ---- Variable subcontrato ----
+#a.Descriptivos
+frq(Base$V53)
+
+#b.Recodificación
+Base$V53 <- recode(Base$V53, "c(1, 4)=NA") #(duda de si usar filter o no)
+
+#c. Etiquetado
+Base <- Base %>% rename("subcon"= V53) 
+
+Base$subcon <- set_label(x = Base$subcon, label = "Subcontrato")
+
+get_label(Base$subcon)
+
+frq(Base$subcon) #revisión final
+
+# ---- Variable Lugar trabajo ----
+#a.Descriptivo
+frq(Base$V66)
+
+#c. Etiquetado
+Base <- Base %>% rename("lug_trab"= V66) 
+
+Base$lug_trab <- set_label(x = Base$lug_trab, label = "Lugar de trabajo")
+
+get_label(Base$lug_trab)
+
+frq(Base$lug_trab) #revisión final
+
+#---- Variable Jornada de Trabajo ----
+#a.Descriptivo
+frq(Base$V74)
+
+#c. Etiquetado
+Base <- Base %>% rename("jornada_trab"= V74) 
+
+Base$jornada_trab <- set_label(x = Base$jornada_trab, label = "Jornada de trabajo")
+
+get_label(Base$jornada_trab)
+
+frq(Base$jornada_trab) #revisión final
+
+#---- Variable Horas y Dias trabajados ----
+#a.Descriptivo
+frq(Base$V75)#Horas
+frq(Base$V76)#dias
+
+#b.Recodificación
+Base$V75 <- recode(Base$V75, "c(999)=NA")
+Base$V76 <- recode(Base$V76, "c(999)=NA")
+
+#c. Etiquetado
+Base <- Base %>% rename("horas_diarias_trab"= V75) 
+Base <- Base %>% rename("dias_trabajados"= V76)
+
+Base$horas_diarias_trab <- set_label(x = Base$horas_diarias_trab, label = "Horas diarias trabajadas")
+Base$dias_trabajados <- set_label(x = Base$dias_trabajados, label = "Dias a la semana trabajados")
+
+get_label(Base$horas_diarias_trab)
+get_label(Base$dias_trabajados)
+
+frq(Base$horas_diarias_trab) #revisión final
+frq(Base$dias_trabajados) #revisión final
+
+#---- Variable Educación ----
+#a.Descriptivo
+frq(Base$V138)
+
+#b.Recodificación
+Base$V138 <- recode(Base$V138, "c(999)=NA")
+
+#c. Etiquetado
+Base <- Base %>% rename("educacion"= V138) 
+
+Base$educacion <- set_label(x = Base$educacion, label = "Nivel educativo")
+
+get_label(Base$educacion)
+
+frq(Base$educacion) #revisión final
+
+#---- Variable Edad ----
+#a.Descriptivo
+frq(Base$V142)
+
+#c. Etiquetado
+Base <- Base %>% rename("tramo_edad"= V142) 
+
+Base$tramo_edad <- set_label(x = Base$tramo_edad, label = "Tramo edad")
+
+get_label(Base$tramo_edad)
+
+frq(Base$tramo_edad) #revisión final
+
+#---- Variable Sector CIIU V54 ----
+#7:Comercio - 8 Transporte y almacenamiento - 9 Alojamiento y servicios de comida
+#10 Información y comunicación - 11 Actividades financieras y de seguros
+#14 Actividades administrativas y servicios de apoyo - 15 Administración pública
+#16 Enseñanza - 17 Servicios sociales y relacionados con la salud humana
+#19 Otras actividades de servicios - 20 Actividades de los hogares en calidad de empleadores
+
+#a.Descriptivo
+frq(Base$V54)
+
+#b.Recodificación
+Base$V54 <- recode(Base$V54, "c(1, 2, 3, 4, 6, 12, 13, 18, 21)=NA")
+
+#c. Etiquetado
+Base <- Base %>% rename("trab_servicios_vend_CIIU_2019"= V54) 
+
+Base$trab_servicios_vend_CIIU_2019 <- set_label(x = Base$trab_servicios_vend_CIIU_2019, label = "Sector servicios según CIIU 2019")
+
+get_label(Base$trab_servicios_vend_CIIU)
+
+frq(Base$trab_servicios_vend_CIIU_2019) #revisión final
+
+#---- Variable Horas extras ----
+#a.Descriptivo
+frq(Base$V84)
+frq(Base$V85)
+
+#c. Etiquetado
+Base <- Base %>% rename("pago_horas_ex"= V84) 
+Base <- Base %>% rename("hace_horas_ex"= V85) 
+
+Base$pago_horas_ex <- set_label(x = Base$pago_horas_ex, label = "Pago de horas extra")
+Base$hace_horas_ex <- set_label(x = Base$hace_horas_ex, label = "Realiza horas extra")
+
+get_label(Base$pago_horas_ex)
+get_label(Base$hace_horas_ex)
+
+frq(Base$pago_horas_ex) #revisión final
+frq(Base$hace_horas_ex) #revisión final
+
+# ---- Generación de base de datos procesada ---- 
+Base_proc_2019 <-Base
+save.image("../project/Base_proc_2019.RData")
+
+# ---- Creación de tabla descriptiva de sector sevicios feminizado en 2019 ----
+
+#Selección variables 
+descriptivos <- dplyr::select(ene2019, 
+                              V7, #Región
+                              V19, #Sexo
+                              V54, #CIUU
+                              V36) #CIUO
+
+descriptivosprueba <- dplyr::select(ene2019,
+                                    V54,
+                                    V53) 
+# ---- Variable: Región Metropolitana ----
+#a.Descriptivo
+frq(descriptivos$V7)
+
+#b.Recodificación
+descriptivos$V7 <- recode(descriptivos$V7, "c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16)=NA")
+
+#c. Etiquetado
+descriptivos <- descriptivos %>% rename("Reg_RM"= V7) 
+
+descriptivos$Reg_RM <- set_label(x = descriptivos$Reg_RM,label = "Región Metropolitana")
+
+get_label(descriptivos$Reg_RM)
+
+frq(descriptivos$Reg_RM) #revisión final
+
+# ---- Variable: Sexo V19 ----
+#a.Descriptivo
+frq(descriptivos$V19)
+
+#c. Etiquetado
+descriptivos <- descriptivos %>% rename("sexo"= V19) 
+
+descriptivos$sexo <- set_label(x = descriptivos$sexo,label = "Sexo")
+
+get_label(descriptivos$sexo)
+
+frq(descriptivos$sexo) #revisión final
+
+#---- Variable Sector CIIU V54 ----
+#7:Comercio - 8 Transporte y almacenamiento - 9 Alojamiento y servicios de comida
+#10 Información y comunicación - 11 Actividades financieras y de seguros
+#14 Actividades administrativas y servicios de apoyo - 15 Administración pública
+#16 Enseñanza - 17 Servicios sociales y relacionados con la salud humana
+#19 Otras actividades de servicios - 20 Actividades de los hogares en calidad de empleadores
+
+#a.Descriptivo
+frq(descriptivos$V54)
+
+#b.Recodificación
+descriptivosprueba$V54 <- recode(descriptivosprueba$V54, "c(1, 2, 3, 4, 6, 12, 13, 18, 21)=NA")
+
+#c. Etiquetado
+descriptivosprueba <- descriptivosprueba %>% rename("trab_servicios_vend_CIIU_2019"= V54) 
+
+descriptivosprueba$trab_servicios_vend_CIIU_2019 <- set_label(x = descriptivosprueba$trab_servicios_vend_CIIU_2019, label = "Sector servicios según CIIU 2019")
+
+get_label(descriptivos$trab_servicios_vend_CIIU)
+
+frq(descriptivosprueba$trab_servicios_vend_CIIU_2019) #revisión final
+
+
+#---- Variable Ocupación CIUO V36 ----
+#5 Trabajadores de los servicios y vendedores de comercios y mercados
+
+#a.Descriptivo
+frq(descriptivos$V36)
+
+#b.Recodificación
+descriptivos$V36 <- recode(descriptivos$V36, "c(1, 2, 3, 4, 6, 7, 8, 9, 10, NA)=NA")
+
+#c. Etiquetado
+descriptivos <- descriptivos %>% rename("trab_servicios_vend_CIUO"= V36) 
+
+descriptivos$trab_servicios_vend_CIUO <- set_label(x = descriptivos$trab_servicios_vend_CIUO,label = "Sector servicios y cormercio según CIUO")
+
+get_label(descriptivos$trab_servicios_vend_CIUO)
+
+frq(descriptivos$trab_servicios_vend_CIUO) #revisión final
+
+
+#tabla descriptiva inicial 
+dfSummary(descriptivos, plain.ascii = FALSE)
+
+view(dfSummary(descriptivos, headings=FALSE))
+
+#NA's
+descriptivos_sna <-na.omit(descriptivos)
+descriptivosprueba_SNA <- na.omit(descriptivosprueba)
+
+descriptivosprueba_SNA <- filter(descriptivosprueba_SNA, V53 == 2:3)
+
+descriptivosprueba_SNA
+# Tabla de contingencia CIUO
+sjt.xtab(descriptivos$sexo, descriptivos$trab_servicios_vend_CIUO,
+         title = "Tabla de contingencia: Sector servicios feminizado 2019 CIUO",
+         show.col.prc=TRUE,
+         show.summary=FALSE)
+# Tabla de contingencia CIIU
+sjt.xtab(descriptivos$sexo, descriptivos$trab_servicios_vend_CIIU,
+         title = "Tabla de contingencia: Sector servicios feminizado 2019 CIIU",
+         show.col.prc=TRUE,
+         show.summary=FALSE)
+
