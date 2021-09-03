@@ -1,0 +1,28 @@
+<table style="border-collapse:collapse; border:none;">
+<caption>Data frame: inseguridad</caption>
+<tr>
+<th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">ID</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Name</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Label</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Values</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Value Labels</th>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">3</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">cotiza_prev</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">b7a_1. Su empleador, ¿cotiza por usted en el<br>sistema previsional o de pensión?</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">1<br>2<br>77<br>88<br>99</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">Sí<br>No<br>No aplica<br>No sabe<br>No responde</td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">4</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">cotiza_salud</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">b7a_2. Su empleador, ¿cotiza por usted en el<br>sistema de salud (público o privado</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">1<br>2<br>77<br>88<br>99</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">Sí<br>No<br>No aplica<br>No sabe<br>No responde</td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">5</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">cotiza_seguro</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">b7a_3. Su empleador, ¿cotiza por usted en el<br>sistema de seguro de desempleo?</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">1<br>2<br>77<br>88<br>99</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">Sí<br>No<br>No aplica<br>No sabe<br>No responde</td>
+</tr>
+
+</table>

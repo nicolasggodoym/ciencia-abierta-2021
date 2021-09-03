@@ -1,0 +1,57 @@
+---
+title: "Tarea 1. Markdown y RMarkdown"
+linktitle: "1: Markdown y RMarkdown"
+date: "2021-08-16"
+due_date: "2021-08-20"
+due_time: "11:59 PM"
+menu:
+  assignment:
+    parent: Tareas
+    weight: 1
+type: docs
+toc: true
+editor_options: 
+  chunk_output_type: console
+---
+
+# Instrucciones
+
+Esta tarea debe ser resolvida en GitHub Class Room. Para acceder a la <i class="fas fa-external-link-square-alt"></i>  [Tarea N°1 hacer click aquí](). Si aún tienes dudas de cómo interactuar con [GitHub Class Roomm revisa el práctico](../example/01-practico)
+
+## Objetivo de la tarea y resultados del aprendizaje
+
+El objetivo de esta tarea es poder introducirnos al al **lenguaje Markdown** y creación de archivos con formato **RMarkdown**, lo que nos permitirá la creación de informes reproducibles, desarrollando las herramientas que RStudio nos entrega. Para ello debes seguir los pasos requeridos en el repositorio de GitHub Classroom. Luego de seguir esos pasos debes hacer "push" a tu tarea.
+
+
+# Básicos: antes de iniciar
+
+
+
+##  Tarea 1
+
+Esta actividad consiste en la creación de un **RMarkdown** que contenga lo siguiente:
+
+1. Un encabezado (YAML) con el título: "01-tarea". También deben incorporar su nombre y fecha
+
+2. Este encabezado debe tener una salida (output), esta debe ser en **html**
+
+4. Crea un .Rproject llamado 01-tarea.Rproject
+
+5. En el repositorio, crea una carpeta llamada "imagenes". Dentro de esta carpeta deja una imagen de un gráfico interesante para ti. Al archivo debes llamarlo "grafico01.jpg"
+
+6. En el código deben incorporar un chunk, en este deben llamar al grafico01, de la carpeta imagenes
+
+7. Deja una breve explicación de ese gráfico, intenta utilizar _**lenguaje Markdown**_
+
+8. Finalmente, deben crear una _**tabla simple**_ de un tema interesante para ustedes, junto a una breve descripción.
+
+
+## Recursos
+
+- [R Markdown](https://rmarkdown.rstudio.com/) 
+- [Tutoriales Markdown](https://rmarkdown.rstudio.com/lesson-1.html) 
+- [cheatsheets](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+- Para practicar ir a [Tutorial de Markdown](https://www.markdowntutorial.com/es/)
+
+
+

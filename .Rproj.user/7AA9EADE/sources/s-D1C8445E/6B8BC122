@@ -1,27 +1,27 @@
 {
-    "id": "9AFFF8C4",
+    "id": "6B8BC122",
     "path": "~/GitHub/ciencia-abierta-2021/R/script.R",
     "project_path": "R/script.R",
     "type": "r_source",
-    "hash": "1587356530",
+    "hash": "705500469",
     "contents": "",
     "dirty": false,
-    "created": 1630620535262.0,
+    "created": 1630623665159.0,
     "source_on_save": false,
     "relative_order": 1,
     "properties": {
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "52,0",
-        "scrollLine": "31"
+        "cursorPosition": "90,0",
+        "scrollLine": "67"
     },
     "folds": "",
-    "lastKnownWriteTime": 1630622977,
+    "lastKnownWriteTime": 1630636209,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1630622977426,
+    "last_content_update": 1630636209010,
     "read_only": false,
     "read_only_alternatives": []
 }
