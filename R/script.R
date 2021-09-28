@@ -4,23 +4,23 @@
 
 
 pacman::p_load(tidyverse, #Muchas cosas
-               haven, #Cargar datos 
+               haven, #Cargar datos.dta
                sjPlot, #Crear tablas y gráficos
-               sjmisc,
-               dplyr,
-               sjlabelled) #Explorar datos
+               sjmisc,#Explorar datos
+               dplyr, #Manipular datos
+               sjlabelled) #Etiquetar datos
 
 
 # 1. Cargar datos ---------------------------------------------------------
 
 
-datos <- read_dta("input/data/esi-2020---personas.dta")
+data <- read_dta("https://www.ine.cl/docs/default-source/encuesta-suplementaria-de-ingresos/bbdd/stata_esi/2020/esi-2020---personas.dta?sfvrsn=7a4b0e2b_4&download=true")
 
 
 # 2. Procesar datos -------------------------------------------------------
 
 
-data_proc <- datos %>% 
+data_proc <- data %>% 
   filter(b13_rev4cl_caenes != 1 | 
          b13_rev4cl_caenes != 2 |
          b13_rev4cl_caenes != 3 |
@@ -40,6 +40,7 @@ data_proc <- datos %>%
          cond_guarderia = b7b_4,
          horas = c2_1_3,
          sexo,
+         edad,
          educacion = cine)
 
 
@@ -47,7 +48,7 @@ data_proc <- datos %>%
 
 
 data_proc <- data_proc %>% 
-  mutate_at(vars(-c(exp, ingresos, horas)), ~(as_factor(.))) %>% 
+  mutate_at(vars(-c(exp, ingresos, horas, edad)), ~(as_factor(.))) %>% 
   mutate(horas = as.numeric(.$horas)) %>% 
   mutate(ing_int = case_when(ingresos <= 291974 ~ "$0 a $291.974",
                              ingresos > 291974 & ingresos <= 380500 ~ "$291.975 a $380.500",
@@ -88,3 +89,11 @@ insuficiencia$ing_int <- sjlabelled::set_label(insuficiencia$ing_int, "Quintiles
 
 sjPlot::view_df(insuficiencia,
                 file = "output/tablas/insuficiencia.doc")
+
+extras <- select(data_proc, 
+                 sexo,
+                 edad,
+                 educacion)
+
+sjPlot::view_df(extras,
+                file = "output/tablas/extras.doc")

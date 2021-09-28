@@ -4,17 +4,17 @@
 
 
 pacman::p_load(tidyverse, #Muchas cosas
-               haven, #Cargar datos 
+               haven, #Cargar datos.dta
                sjPlot, #Crear tablas y gráficos
-               sjmisc,
-               dplyr,
-               sjlabelled) #Explorar datos
+               sjmisc,#Explorar datos
+               dplyr, #Manipular datos
+               sjlabelled) #Etiquetar datos
 
 
 # 1. Cargar datos ---------------------------------------------------------
 
 
-data <- read_dta("input/data/esi-2020---personas.dta")
+data <- read_dta("https://www.ine.cl/docs/default-source/encuesta-suplementaria-de-ingresos/bbdd/stata_esi/2020/esi-2020---personas.dta?sfvrsn=7a4b0e2b_4&download=true")
 
 
 # 2. Procesar datos -------------------------------------------------------
