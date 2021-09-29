@@ -97,3 +97,5 @@ extras <- select(data_proc,
 
 sjPlot::view_df(extras,
                 file = "output/tablas/extras.doc")
+
+#Prueba
