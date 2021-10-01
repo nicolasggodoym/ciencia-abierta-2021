@@ -41,7 +41,9 @@ data_proc <- data %>%
          horas = c2_1_3,
          sexo,
          edad,
-         educacion = cine)
+         educacion = cine,
+         id_personas = idrph,
+         id_hogares = id_identificacion)
 
 
 # a) Transformar datatype -------------------------------------------------
@@ -60,6 +62,25 @@ data_proc <- data_proc %>%
                                                 "$380.501 a $500.000",
                                                 "$500.001 a $779.787",
                                                 "$779.788 o más")))
+
+# b) Recodificar casos perdidos ----------------------------------------------
+
+data_proc$contrato <- recode(data_proc$contrato, "c(77, 88, 99)=NA")
+data_proc$contrato_duracion <- recode(data_proc$contrato_duracion, "c(88, 99)=NA")
+data_proc$contrato_sub <- recode(data_proc$contrato_sub, "c(99, 88)=NA")
+data_proc$cotiza_prev <- recode(data_proc$cotiza_prev, "c(77, 88, 99)=NA")
+data_proc$cotiza_salud <- recode(data_proc$cotiza_salud, "c(77, 88, 99)=NA")
+data_proc$cotiza_seguro <- recode(data_proc$cotiza_seguro, "c(77, 88, 99)=NA")
+data_proc$lugar_trab <- recode(data_proc$lugar_trab, "c(88, 99)=NA")
+data_proc$cond_vacaciones <- recode(data_proc$cond_vacaciones, "c(77, 88, 99)=NA")
+data_proc$cond_enfermedad <- recode(data_proc$cond_enfermedad, "c(77, 88, 99)=NA")
+data_proc$cond_maternidad <- recode(data_proc$cond_maternidad, "c(77, 88, 99)=NA")
+data_proc$cond_guarderia <- recode(data_proc$cond_guarderia, "c(77, 88, 99)=NA")
+data_proc$horas <- recode(data_proc$horas, "c(888, 999)=NA")
+data_proc$educacion <- recode(data_proc$educacion, "c(999)=NA")
+
+# c) Eliminar casos perdidos ----------------------------------------------
+
 
 
 # 3. Generar tablas descriptivas ------------------------------------------
@@ -99,3 +120,5 @@ sjPlot::view_df(extras,
                 file = "output/tablas/extras.doc")
 
 #Prueba
+
+
