@@ -8,7 +8,8 @@ pacman::p_load(tidyverse, #Muchas cosas
                sjPlot, #Crear tablas y gráficos
                sjmisc,#Explorar datos
                dplyr, #Manipular datos
-               sjlabelled) #Etiquetar datos
+               sjlabelled, #Etiquetar datos
+               car) #Recodificar
 
 
 # 1. Cargar datos ---------------------------------------------------------
@@ -65,8 +66,8 @@ data_proc <- data_proc %>%
 
 # b) Recodificar casos perdidos ----------------------------------------------
 
-data_proc$contrato <- recode(data_proc$contrato, "c(77, 88, 99)=NA")
-data_proc$contrato_duracion <- recode(data_proc$contrato_duracion, "c(88, 99)=NA")
+data_proc$contrato <- recode(data_proc$contrato, "c(77,88,99)=NA")
+data_proc$contrato_duracion <- recode(data_proc$contrato_duracion, "c(88,99)=NA")
 data_proc$contrato_sub <- recode(data_proc$contrato_sub, "c(99, 88)=NA")
 data_proc$cotiza_prev <- recode(data_proc$cotiza_prev, "c(77, 88, 99)=NA")
 data_proc$cotiza_salud <- recode(data_proc$cotiza_salud, "c(77, 88, 99)=NA")
@@ -79,14 +80,20 @@ data_proc$cond_guarderia <- recode(data_proc$cond_guarderia, "c(77, 88, 99)=NA")
 data_proc$horas <- recode(data_proc$horas, "c(888, 999)=NA")
 data_proc$educacion <- recode(data_proc$educacion, "c(999)=NA")
 
-# c) Eliminar casos perdidos ----------------------------------------------
 
+# c) Eliminar casos perdidos ----------------------------------------------
+sum(is.na(data_proc))
+dim(data_proc)
+
+data_proc <-na.omit(data_proc)
+dim(data_proc)
 
 
 # 3. Generar tablas descriptivas ------------------------------------------
 
 
-sjPlot::view_df(data_proc)  
+sjPlot::view_df(data_proc)
+
   
 sexo_educ <- select(data_proc, sexo, educacion)
 
@@ -119,6 +126,6 @@ extras <- select(data_proc,
 sjPlot::view_df(extras,
                 file = "output/tablas/extras.doc")
 
-#Prueba
+# 4. Exportar base de datos procesada -------------------------------------
 
-
+save(data_proc,file = "data_proc.RData")
