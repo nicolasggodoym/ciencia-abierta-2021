@@ -181,30 +181,47 @@ data_proc$educacion <- set_label(data_proc$educacion, 'Educacion')
 inestabilidad <- data_proc %>% 
   select(3:5)
 
+sjPlot::view_df(inestabilidad,
+                file = "output/tablas/inestabilidad.doc")
 # (In)seguridad
 
 inseguridad <- data_proc %>% 
   select(6:8)
+
+sjPlot::view_df(inseguridad,
+                file = "output/tablas/inseguridad.doc")
 
 # (In)suficiencia
 
 insuficiencia <- data_proc %>% 
   select(9)
 
+sjPlot::view_df(insuficiencia,
+                file = "output/tablas/insuficiencia.doc")
+
 # Condiciones de trabajo
 
 condiciones <- data_proc %>% 
   select(10:14)
+
+sjPlot::view_df(condiciones,
+                file = "output/tablas/condiciones.doc")
 
 # Cronopiedad
 
 cronopiedad <- data_proc %>% 
   select(15)
 
+sjPlot::view_df(cronopiedad,
+                file = "output/tablas/cronopiedad.doc")
+
 #Socio-demograficas
 
 demograficas <- data_proc %>% 
   select(16:18)
+
+sjPlot::view_df(demograficas,
+                file = "output/tablas/demograficas.doc")
 
 # Limpiar entorno
 

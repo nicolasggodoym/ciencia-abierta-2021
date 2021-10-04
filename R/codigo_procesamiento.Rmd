@@ -172,6 +172,9 @@ dim(data_proc)
 data_proc <-na.omit(data_proc)
 dim(data_proc)
 ```
+
+Una vez eliminados los casos perdidos, el objeto pasa a tener `r format(ncol(data_proc), decimal.mark="," , big.mark = ".")` columnas y `r format(nrow(data_proc), decimal.mark="," , big.mark = ".")` filas.
+
 # 4. Etiquetar variables
 
 Se asignan etiquetas a cada variable con la función `set_label()` de `sjlabelled`

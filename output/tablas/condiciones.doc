@@ -1,0 +1,42 @@
+<table style="border-collapse:collapse; border:none;">
+<caption>Data frame: condiciones</caption>
+<tr>
+<th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">ID</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Name</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Label</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Values</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Value Labels</th>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">1</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">lugar_trab</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">Lugar de trabajo</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">En instalaciones u oficina del cliente o empleador<br>En instalaciones u oficinas propias o arrendadas<br>En la calle o via publica<br>En la casa del empleador o cliente<br>En obras de construccion, mineras o similares<br>En otros lugares<br>En su propio hogar<br>En un predio agricola o espacio maritimo o aereo</td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">2</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">cond_vacaciones</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">Derecho a vacaciones</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">No<br>Si</td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">3</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">cond_enfermedad</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">Derecho a dias pagos por enfermedad</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">No<br>Si</td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">4</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">cond_maternidad</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">Derecho a dias pagos por pa/maternidad</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">No<br>Si</td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">5</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">cond_guarderia</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">Derecho a guarderia infantil</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">No<br>Si</td>
+</tr>
+
+</table>
