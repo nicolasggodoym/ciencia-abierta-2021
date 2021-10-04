@@ -1,9 +1,21 @@
+---
+title: "Procesamiento de datos"
+author: "Emilia Barrientos, Pablo Campos, Nicolás Godoy, Monserrat Greene y Gonzalo López"
+output: 
+  html_document: 
+    toc: yes
+    highlight: textmate
+    theme: paper
+---
+# Código de procesamiento de datos
 
-# Código de procesamiento  ------------------------------------------------
+Este código de procesamiento de datos tiene por objeto preparar los datos de la **Encuesta Suplementaria de Ingresos (2020)**, para poder realizar el análisis de clases latentes según la operacionalización de Blanco y Julián (2019) para las y los trabajadores del sector servicios.
 
+## 1. Cargar librerías
 
-# 1. Cargar librerías -----------------------------------------------------
+Se cargan las librerías necesarias para manipular los datos y presentar las tablas necesarias
 
+```{r library, echo=TRUE, warning=FALSE, message=FALSE}
 pacman::p_load(tidyverse, #Muchas cosas
                haven, #Cargar datos.dta
                sjPlot, #Crear tablas y gráficos
@@ -11,23 +23,34 @@ pacman::p_load(tidyverse, #Muchas cosas
                dplyr, #Manipular datos
                sjlabelled, #Etiquetar datos
                car) #Recodificar
+```
 
+## 2. Cargar datos
 
-# 2. Cargar datos ---------------------------------------------------------
+Los datos por trabajar son descargados directamente desde la [página web del Instituto Nacional de Estadísticas (INE)](https://www.ine.cl/estadisticas/sociales/ingresos-y-gastos/encuesta-suplementaria-de-ingresos), con la función `read_dta` de `haven`. 
 
+```{r read_dta, echo=TRUE, warning=FALSE, message=FALSE}
 data <- read_dta("https://www.ine.cl/docs/default-source/encuesta-suplementaria-de-ingresos/bbdd/stata_esi/2020/esi-2020---personas.dta?sfvrsn=7a4b0e2b_4&amp;download=true")
+```
 
+El objeto presenta `r format(ncol(data), decimal.mark="," , big.mark = ".")` columnas y `r format(nrow(data), decimal.mark="," , big.mark = ".")` filas. 
 
-# 3. Procesar datos -------------------------------------------------------
+## 3. Procesar datos
 
+Se crea un nuevo objeto llamado data_proc, en que se filtran aquellos trabajadores cuya empresa no se aboca a una actividad económica de servicios (todos aquellos cuyos valores en la columna b13_rev4cl_caenes son distintos a 1 (*Agricultura, ganadería, silvicultura y pesca*), 2 (*Explotación de minas y canteras*), 3 (*Industrias manufactureras*) y 6 (*Construcción*)). Se seleccionan variables de diseño muestral (exp), identificadores (id), demográficas (sexo, edad y educacion), y de cada una de las dimensiones:
 
-## a) Seleccionar columnas y filtrar filas ---------------------------------
+1. (In)estabilidad: variables contrato
+2. (In)seguridad: variables cotiza
+3. (In)suficiencia: variable ingresos
+4. Condiciones de trabajo: variables cond_
+5. Cronopiedad: variable horas
 
+```{r filter_select, echo=TRUE, warning=FALSE, message=FALSE}
 data_proc <- data %>% 
   filter(b13_rev4cl_caenes != 1 | 
-           b13_rev4cl_caenes != 2 |
-           b13_rev4cl_caenes != 3 |
-           b13_rev4cl_caenes != 6) %>% 
+         b13_rev4cl_caenes != 2 |
+         b13_rev4cl_caenes != 3 |
+         b13_rev4cl_caenes != 6) %>% 
   select(exp = fact_cal_esi,
          id = idrph,
          contrato = b8,
@@ -46,24 +69,32 @@ data_proc <- data %>%
          sexo,
          edad,
          educacion = cine)
+```
 
-## b) Recodificar datos ----------------------------------------------------
+Una vez filtrados los datos, data_proc presenta `r format(ncol(data_proc), decimal.mark="," , big.mark = ".")` columnas y `r format(nrow(data_proc), decimal.mark="," , big.mark = ".")` filas. 
 
-#Calcular cuantiles para recodificar ingresos
+### 3.1. Transformar *datatype*
+
+Las variables categóricas se transforman a tipo **factor**. Variables numéricas (ingresos y horas) son transformadas a tipo **factor** para poder incorporarlas en el modelo de clases latentes. Vale recalcar que, para el caso de la variable ingresos, esta se recodificó como *quintiles de ingreso*. Además, se recodifican los valores nulos como `NA`. Luego, se verifica la estructura de los datos con `str()`, para verificar los cambios. 
+
+```{r quantile, echo = T, warning=FALSE, message=F}
 quantile(data_proc$ingresos, c(.2,.4,.6,.8))
+```
 
+
+```{r mutate_recode, echo=TRUE, warning=FALSE, message=FALSE}
 data_proc <- data_proc %>% 
   mutate_at(vars(-c(exp, id, edad)), ~(as.numeric(.))) %>%  
   mutate(ingresos = case_when(ingresos <= 291974 ~ "$0 a $291.974",
-                              ingresos > 291974 & ingresos <= 380500 ~ "$291.975 a $380.500",
-                              ingresos > 380500 & ingresos <= 500000 ~ "$380.501 a $500.000",
-                              ingresos > 500000 & ingresos <= 779787 ~ "$500.001 a $779.787",
-                              ingresos > 779787 ~ "$779.788 o mas", 
-                              TRUE ~ NA_character_),
+         ingresos > 291974 & ingresos <= 380500 ~ "$291.975 a $380.500",
+         ingresos > 380500 & ingresos <= 500000 ~ "$380.501 a $500.000",
+         ingresos > 500000 & ingresos <= 779787 ~ "$500.001 a $779.787",
+         ingresos > 779787 ~ "$779.788 o mas", 
+         TRUE ~ NA_character_),
          horas = case_when(horas <= 30 ~ "Igual o menor a 30 horas semanales",
-                           horas > 30 & horas <= 45 ~ "Entre 31 y 45 horas semanales",
-                           horas > 45 ~ "Mayor a 45 horas semanales", 
-                           TRUE ~ NA_character_),
+         horas > 30 & horas <= 45 ~ "Entre 31 y 45 horas semanales",
+         horas > 45 ~ "Mayor a 45 horas semanales", 
+                TRUE ~ NA_character_),
          contrato = car::recode(.$contrato, recodes = c("1 = 'Si'; 2 = 'No'"), 
                                 as.factor = T, levels = c('Si', 'No')),
          contrato_duracion = car::recode(.$contrato_duracion, recodes = c("1 = 'Definido'; 2 = 'Indefinido'"),
@@ -94,9 +125,9 @@ data_proc <- data_proc %>%
                                                             'En obras de construccion, mineras o similares',
                                                             'En un predio agricola o espacio maritimo o aereo',
                                                             'En otros lugares')),
-         sexo = car::recode(.$sexo, recodes = c("1 = 'Hombre'; 2 = 'Mujer'"), as.factor = T,
-                            levels = c('Hombre', 'Mujer')),
-         educacion = car::recode(.$educacion, recodes = c("1 = 'Nunca estudio';
+              sexo = car::recode(.$sexo, recodes = c("1 = 'Hombre'; 2 = 'Mujer'"), as.factor = T,
+                                 levels = c('Hombre', 'Mujer')),
+              educacion = car::recode(.$educacion, recodes = c("1 = 'Nunca estudio';
                                                                2 = 'Educacion preescolar';
                                                                3 = 'Educacion primaria (nivel 1)';
                                                                4 = 'Educacion primaria (nivel 2)';
@@ -105,43 +136,47 @@ data_proc <- data_proc %>%
                                                                7 = 'Educacion universitaria';
                                                                8 = 'Postitulos y maestria';
                                                                9 = 'Doctorado'"),
-                                 as.factor = T,
-                                 levels = c('Nunca estudio',
-                                            'Educacion preescolar',
-                                            'Educacion primaria (nivel 1)',
-                                            'Educacion primaria (nivel 2)',
-                                            'Educacion secundaria',
-                                            'Educacion tecnica (superior no universitaria)',
-                                            'Educacion universitaria',
-                                            'Postitulos y maestria',
-                                            'Doctorado'))) %>% 
+                                      as.factor = T,
+                                      levels = c('Nunca estudio',
+                                                 'Educacion preescolar',
+                                                 'Educacion primaria (nivel 1)',
+                                                 'Educacion primaria (nivel 2)',
+                                                 'Educacion secundaria',
+                                                 'Educacion tecnica (superior no universitaria)',
+                                                 'Educacion universitaria',
+                                                 'Postitulos y maestria',
+                                                 'Doctorado'))) %>% 
   mutate_at(vars("cond_vacaciones", "cond_enfermedad", "cond_maternidad", "cond_guarderia", "cotiza_prev", "cotiza_salud", "cotiza_seguro"), ~(car::recode(., recodes = c("1 = 'Si'; 2 = 'No'"), as.factor = T))) %>%
   mutate(ingresos = factor(.$ingresos, levels = c("$0 a $291.974",
-                                                  "$291.975 a $380.500",
-                                                  "$380.501 a $500.000",
-                                                  "$500.001 a $779.787",
-                                                  "$779.788 o más")),
-         horas = factor(.$horas, levels = c("Igual o menor a 30 horas semanales",
-                                            "Entre 31 y 45 horas semanales",
-                                            "Mayor a 45 horas semanales"))) %>% 
+                                   "$291.975 a $380.500",
+                                   "$380.501 a $500.000",
+                                   "$500.001 a $779.787",
+                                   "$779.788 o más")),
+          horas = factor(.$horas, levels = c("Igual o menor a 30 horas semanales",
+                                   "Entre 31 y 45 horas semanales",
+                                   "Mayor a 45 horas semanales"))) %>% 
   mutate_at(vars("contrato", "contrato_duracion", "contrato_sub", "cotiza_prev", "cotiza_salud", "cotiza_seguro", "lugar_trab", "cond_vacaciones", "cond_enfermedad", "cond_maternidad", "cond_guarderia"), ~(car::recode(., recodes = "c(77, 88, 99) = NA"))) %>%
   mutate_at(vars(c("horas", "educacion")), ~(car::recode(., recodes = "c(888, 999) = NA"))) 
 
-# Revisar estructura
 str(data_proc)
+```
 
+### 3.2. Eliminar casos perdidos
 
-## c) Eliminar casos perdidos ----------------------------------------------
+Se eliminan los valores nulos, para poder realizar los cálculos posteriores de manera adecuada. 
 
+```{r na.omit, echo=TRUE, warning=FALSE, message=FALSE}
 sum(is.na(data_proc))
 dim(data_proc)
 
 data_proc <-na.omit(data_proc)
 dim(data_proc)
+```
+# 4. Etiquetar variables
 
+Se asignan etiquetas a cada variable con la función `set_label()` de `sjlabelled`
 
-# 4. Etiquetar variables --------------------------------------------------
-
+```{r set_label, echo=TRUE, warning=FALSE, message=FALSE}
 #(In)estabilidad
 data_proc$contrato = set_label(data_proc$contrato, "Existencia de contrato")
 data_proc$contrato_duracion = set_label(data_proc$contrato_duracion, "Duracion de contrato")
@@ -173,46 +208,64 @@ data_proc$id <- set_label(data_proc$id, 'Identificador')
 data_proc$sexo <- set_label(data_proc$sexo, 'Sexo')
 data_proc$edad <- set_label(data_proc$edad, 'Edad')
 data_proc$educacion <- set_label(data_proc$educacion, 'Educacion')
+```
 
 
-# 5. Crear y exportar tablas resumen --------------------------------------
+## 4. Generar tablas descriptivas
 
-# (In)estabilidad
+Una vez realizado el procesamiento anterior, se realizan tablas resumen para dar cuenta de las categorías de respuesta de cada una de las variables de componen cada dimensión:
+
+```{r inestabilidad, echo=TRUE, warning=FALSE, message=FALSE}
 inestabilidad <- data_proc %>% 
   select(3:5)
 
-# (In)seguridad
+sjPlot::view_df(inestabilidad)
+```
 
+```{r inseguridad, echo=TRUE, warning=FALSE, message=FALSE}
 inseguridad <- data_proc %>% 
   select(6:8)
 
-# (In)suficiencia
+sjPlot::view_df(inseguridad)
+```
 
+```{r insuficiencia, echo=TRUE, warning=FALSE, message=FALSE}
 insuficiencia <- data_proc %>% 
   select(9)
 
-# Condiciones de trabajo
+sjPlot::view_df(insuficiencia)
+```
 
+```{r condiciones, echo=TRUE, warning=FALSE, message=FALSE}
 condiciones <- data_proc %>% 
   select(10:14)
 
-# Cronopiedad
+sjPlot::view_df(condiciones)
+```
 
+```{r cronopiedad, echo=TRUE, warning=FALSE, message=FALSE}
 cronopiedad <- data_proc %>% 
   select(15)
 
-#Socio-demograficas
+sjPlot::view_df(cronopiedad)
+```
 
+```{r demograficas, echo=TRUE, warning=FALSE, message=FALSE}
 demograficas <- data_proc %>% 
   select(16:18)
 
-# Limpiar entorno
+sjPlot::view_df(demograficas)
+```
 
+```{r clean_env, include = F}
 rm(condiciones, cronopiedad, demograficas, inestabilidad, inseguridad, insuficiencia, data)
+```
 
 
-# 6. Exportar datos procesados --------------------------------------------
+## 5. Exportar datos procesados
 
-saveRDS(data_proc, file = "input/data/data_proc.rds")
+Se exportan los datos en formato .rds, para ahorrar espacio y proceder con el análisis. 
 
-
+```{r saveRDS, echo=TRUE, warning=FALSE, message=FALSE}
+saveRDS(data_proc, file = "../input/data/data_proc.rds")
+```
