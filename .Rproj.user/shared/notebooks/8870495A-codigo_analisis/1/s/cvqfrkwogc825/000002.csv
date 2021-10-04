@@ -1,0 +1,56 @@
+"0","library(pacman)"
+"0","pacman::p_load(summarytools,"
+"0","               poLCA,"
+"0","               xtable,"
+"0","               xlsx)"
+"2","Installing package into ‘C:/Users/emili/OneDrive/Documentos/R/win-library/4.1’
+(as ‘lib’ is unspecified)
+"
+"2","also installing the dependencies ‘rJava’, ‘xlsxjars’
+
+"
+"2","Warning:"
+"2"," unable to access index for repository http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.1:
+  cannot open URL 'http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.1/PACKAGES'
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/rJava_1.0-5.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 1513151 bytes (1.4 MB)
+"
+"2","downloaded 1.4 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/xlsxjars_0.6.1.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 9485688 bytes (9.0 MB)
+"
+"2","downloaded 9.0 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/xlsx_0.6.5.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 375374 bytes (366 KB)
+"
+"2","downloaded 366 KB
+
+"
+"1","package ‘rJava’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘xlsxjars’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘xlsx’ successfully unpacked and MD5 sums checked
+"
+"1","
+"
+"1",""
+"1","The downloaded binary packages are in
+	C:\Users\emili\AppData\Local\Temp\RtmpIrZVrf\downloaded_packages"
+"1",""
+"1","
+"
+"2","
+xlsx installed
+"

@@ -1,0 +1,438 @@
+# ---- 0.Codigo de Preparacion, Analisis de Clases latentes, Emilia Barrientos, 27-11-2020 ----
+
+# Configurar el directorio 
+
+setwd("C:/Users/Dafne/Downloads/ene")
+
+#Preparar el espacio de trabajo
+
+rm(list = ls()) #Borrar todos los objetos del espacio de trabajo
+(scipen=999) #Desactivar notacion cientifica
+
+#1.Cargar librerias
+
+pacman::p_load(dplyr,
+               sjmisc,
+               sjlabelled,
+               car,
+               stargazer,
+               MASS,
+               scatterplot3d, 
+               poLCA, 
+               summarytools,
+               psych,
+               ggplot2, 
+               reshape,
+               writexl,
+               tidyr)
+
+# ---- 2.Cargar base de datos ----
+
+base2019 <-read.csv2("ene2019.csv",sep="," )
+base2020 <-read.csv2("ene2020.csv")
+
+#3.Seleccion de variables a utilizar
+
+proc_base2019 <- base2019 %>% dplyr::select(ano_trimestre,#Año y trimestre bbdd
+                                            region, # región donde vive el encuestado,
+                                            b13_rev4cl_caenes, #Rama de actividad económica de la empresa que le paga al ocupado, basado en la CIIU
+                                            b12, # contratado o subcontratado
+                                            b9, #duracion del contrato, indefinido o fijo
+                                            b10, #extension del contrato REVISAR 
+                                            b8, # contrato escrito u oral
+                                            b7a_1, #cotiza en el sistema previsional
+                                            b7a_2, # cotiza en el sistema de salud,
+                                            b7a_3, #seguro cesantia
+                                            b16, #lugar realizacion tareas 
+                                            c2_1_3, # horas semanales trabajadas habitualmente
+                                            sexo,#Señala el sexo de cada uno de las personas encuestadas
+                                            tramo_edad,
+                                            fact, #factor de expansión
+                                            cine) #Clasificación Internacional de Nivel Educacional
+
+
+proc_base2020 <- base2020 %>% dplyr::select(ano_trimestre,#Año y trimestre bbdd
+                                            region, # región donde vive el encuestado,
+                                            b13_rev4cl_caenes, #Rama de actividad económica de la empresa que le paga al ocupado, basado en la CIIU
+                                            b12, # contratado o subcontratado
+                                            b9, #duracion del contrato, indefinido o fijo
+                                            b10, #extension del contrato REVISAR 
+                                            b8, # contrato escrito u oral
+                                            b7a_1, #cotiza en el sistema previsional
+                                            b7a_2, # cotiza en el sistema de salud,
+                                            b7a_3, # seguro cesantia
+                                            b16, #lugar realizacion tareas 
+                                            c2_1_3, # horas semanales trabajadas habitualmente
+                                            sexo,#Señala el sexo de cada uno de las personas encuestadas
+                                            tramo_edad,
+                                            fact_cal,
+                                            cine) #Clasificación Internacional de Nivel Educacional
+
+
+# ---- 4. preparacion ----
+
+#---- 4.1. Renombrar variables----
+
+proc_base2019 <- proc_base2019 %>% dplyr::rename("ciiu" = b13_rev4cl_caenes, 
+                                                 "subcontrato" = b12,
+                                                 "duracion_contrato" = b9,
+                                                 "extension_contrato" = b10,#sacar
+                                                 "formato_contrato" = b8,
+                                                 "cotiza_pension" = b7a_1,
+                                                 "cotiza_salud" = b7a_2,
+                                                 "lugar_trabajo" = b16,
+                                                 "seguro_cesantia" = b7a_3,
+                                                 "horas_semana" = c2_1_3)
+
+proc_base2020 <- proc_base2020 %>% dplyr::rename("ciiu" = b13_rev4cl_caenes, 
+                                                 "subcontrato" = b12,
+                                                 "duracion_contrato" = b9,   
+                                                 "extension_contrato" = b10, #sacar
+                                                 "formato_contrato" = b8,    
+                                                 "cotiza_pension" = b7a_1,   
+                                                 "cotiza_salud" = b7a_2,     
+                                                 "lugar_trabajo" = b16,   
+                                                 "seguro_cesantia" = b7a_3,
+                                                 "horas_semana" = c2_1_3)    
+# 4.2.Filtrar por sector servicios
+
+#2019
+
+proc_base2019$ciiu <- recode(proc_base2019$ciiu,"c(1, 2, 3, 6)=NA")
+proc_base2019 <- proc_base2019[!is.na(proc_base2019$ciiu),]
+
+
+#2020
+
+proc_base2020$ciiu <- recode(proc_base2020$ciiu,"c(1, 2, 3, 6)=NA")
+proc_base2020 <- proc_base2020[!is.na(proc_base2020$ciiu),]
+
+
+#4.4 Filtrar por subcontrato
+
+proc_base2019 <- filter(proc_base2019, subcontrato %in% c(2, 3, 4))
+proc_base2020 <- filter(proc_base2020, subcontrato %in% c(2, 3, 4))
+
+
+#4.4. Recodificar horas semanales
+
+proc_base2019$horas_semana <- car::recode(proc_base2019$horas_semana,"c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+                                          27, 28, 29, 30)=1; c(31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44)=2; c(45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58,
+                                          59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 80, 84, 88, 98)=3")
+
+proc_base2020$horas_semana <- car::recode(proc_base2020$horas_semana,"c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+                                          27, 28, 29, 30)=1; c(31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44)=2; c(45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58,
+                                          59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 80, 84, 96, 98, 101)=3")
+freq(proc_base2019$horas_semana)  
+freq(proc_base2020$horas_semana) 
+
+#4.5. Recodificar lugar trabajo
+
+
+#variable trabajo 
+
+proc_base2019$lugar_trabajo <-car::recode(proc_base2019$lugar_trabajo,"c(1,2)=1; c(3,4,5)=2; c(6)=3; c(7, 8)=4")
+proc_base2020$lugar_trabajo <-car::recode(proc_base2020$lugar_trabajo,"c(1,2)=1; c(3,4,5)=2; c(6)=3; c(7, 8)=4")
+
+#4.6 recodificar variable duración contrato
+
+#proc_base2019$duracion_contrato <- car::recode(proc_base2019$duracion_contrato, "1=NA; 2=2")
+#proc_base2019$extension_contrato <- car::recode(proc_base2019$extension_contrato, "c(1, 2, 3, 5)=3; 4=4")
+#duracion_cont <- unite(proc_base2019, duracion_contrato,c(duracion_contrato:extension_contrato),  sep = "; ", remove = TRUE)
+#duracion_cont <- duracion_cont[!is.na(duracion_cont$duracion_contrato),]
+
+
+#5. Exploracion de variables
+
+#Var complementarias
+#educacion
+proc_base2019$cine <-car::recode(proc_base2019$cine,"c(1)=1; c(2, 3, 4)=2; c(5)=3; c(6, 7)=4; c(9, 8); c(999)=NA")
+freq(proc_base2019$cine) 
+proc_base2020$cine <-car::recode(proc_base2020$cine,"c(1)=1; c(2, 3, 4)=2; c(5)=3; c(6, 7)=4; c(9, 8); c(999)=NA")
+freq(proc_base2020$cine)
+
+#edad
+proc_base2019$tramo_edad <-car::recode(proc_base2019$tramo_edad,"c(1)=1; c(2, 3)=2; c(4, 5, 6, 7)=3; c(8, 9, 19)=4; c(11, 12)=5")
+freq(proc_base2019$tramo_edad)
+proc_base2020$tramo_edad <-car::recode(proc_base2020$tramo_edad,"c(1)=1; c(2, 3)=2; c(4, 5, 6, 7)=3; c(8, 9, 19)=4; c(11, 12)=5")
+freq(proc_base2020$tramo_edad)
+
+
+#Duracion del contrato, indefinido o fijo (X1)
+
+freq(proc_base2019$duracion_contrato)  #bajó el fijo, probablemente no recontrataron
+freq(proc_base2020$duracion_contrato) 
+
+#Formato contrato(X2)
+
+freq(proc_base2019$formato_contrato) 
+freq(proc_base2020$formato_contrato) #bajó el contrato oral, quizás por la misma razón. La variación es mínima
+
+#Cotiza pension (X3)
+
+freq(proc_base2019$cotiza_pension) 
+freq(proc_base2020$cotiza_pension) 
+
+#Cotiza cesantia (X4)
+
+freq(proc_base2019$seguro_cesantia)  #bajó el fijo, probablemente no recontrataron
+freq(proc_base2020$seguro_cesantia) 
+
+#Lugar trabajo (X5)
+
+freq(proc_base2019$lugar_trabajo) 
+freq(proc_base2020$lugar_trabajo) 
+
+#Horas semana (x6)
+
+freq(proc_base2019$horas_semana) 
+freq(proc_base2020$horas_semana)
+
+
+#6. Recodificar
+
+proc_base2019<-mutate(proc_base2019, x1=car::recode(proc_base2019$duracion_contrato, "1=1; 2=2"))
+proc_base2020<-mutate(proc_base2020, x1=car::recode(proc_base2020$duracion_contrato, "1=1; 2=2; 88=NA; 99=NA"))
+
+proc_base2019<-mutate(proc_base2019, x2=car::recode(proc_base2019$formato_contrato, "1=1; 2=2"))
+proc_base2020<-mutate(proc_base2020, x2=car::recode(proc_base2020$formato_contrato, "1=1; 2=2;88=NA; 99=NA"))
+
+proc_base2019<-mutate(proc_base2019, x3=car::recode(proc_base2019$cotiza_pension, "1=1; 2=2; 88=NA"))
+proc_base2020<-mutate(proc_base2020, x3=car::recode(proc_base2020$cotiza_pension, "1=1; 2=2; 77=NA; 88=NA; 99=NA"))
+
+proc_base2019<-mutate(proc_base2019, x4=car::recode(proc_base2019$seguro_cesantia, "1=1; 2=2; 88=NA"))
+proc_base2020<-mutate(proc_base2020, x4=car::recode(proc_base2020$seguro_cesantia, "1=1; 2=2; 77=NA; 88=NA"))
+
+proc_base2019<-mutate(proc_base2019, x5=car::recode(proc_base2019$lugar_trabajo, "1=1; 2=2; 9=NA"))
+proc_base2020<-mutate(proc_base2020, x5=car::recode(proc_base2020$lugar_trabajo, "1=1; 2=2; 9=NA; 88=NA; 99=NA"))
+
+proc_base2019<-mutate(proc_base2019, x6=car::recode(proc_base2019$horas_semana, "1=1; 2=2"))
+proc_base2020<-mutate(proc_base2020, x6=car::recode(proc_base2020$horas_semana, "1=1; 2=2; 888=NA; 999=NA"))
+
+
+#---- 7. ACL ----
+
+#2019
+
+x1_2019<-proc_base2019$x1
+x2_2019<-proc_base2019$x2
+x3_2019<-proc_base2019$x3
+x4_2019<-proc_base2019$x4
+x5_2019<-proc_base2019$x5
+x6_2019<-proc_base2019$x6
+
+
+# Seleccionar una matriz de datos
+
+tetrachoric(data.frame(x1_2019, x2_2019, x3_2019, x4_2019, x5_2019, 
+                       x6_2019), na.rm = TRUE)
+
+# Creo el set de datos y la funcion para el modelamiento de clases latentes
+
+precariedad_2019<-data.frame(x1_2019, x2_2019, x3_2019, x4_2019, x5_2019, 
+                           x6_2019)
+
+f_2019 <-cbind(x1_2019, x2_2019, x3_2019, x4_2019, x5_2019,
+               x6_2019)~1
+
+
+#2020
+
+x1_2020<-proc_base2020$x1
+x2_2020<-proc_base2020$x2
+x3_2020<-proc_base2020$x3
+x4_2020<-proc_base2020$x4
+x5_2020<-proc_base2020$x5
+x6_2020<-proc_base2020$x6
+
+
+# Seleccionar una matriz de datos
+
+tetrachoric(data.frame(x1_2020, x2_2020, x3_2020, x4_2020, x5_2020,
+                       x6_2020), na.rm = TRUE)
+
+# Creo el set de datos y la funcion para el modelamiento de clases latentes
+
+precariedad_2020<-data.frame(x1_2020, x2_2020, x3_2020, x4_2020, x5_2020, 
+                           x6_2020)
+
+f_2020 <-cbind(x1_2020, x2_2020, x3_2020, x4_2020, x5_2020, 
+               x6_2020)~1
+
+
+# ---- 8. Modelos de Clase Latente ---- 
+
+#2019
+
+#Modelo Nulo en que la variabilidad no es explicada por una variable de clase latente
+
+M1_2019<-poLCA(formula = f_2019, data = precariedad_2019, nclass = 1, maxiter = 2000, nrep = 1, na.rm = TRUE)
+
+#Modelos de 2 o más clases latentes
+
+# Se espera que cada clase latente de la variable latente sea homogénea internamente
+# Y sea heterogénea en relación con las otras clases
+
+M2_2019<-poLCA(formula = f_2019, data = precariedad_2019, nclass = 2, maxiter = 2000, nrep = 1, na.rm = TRUE)
+M3_2019<-poLCA(formula = f_2019, data = precariedad_2019, nclass = 3, maxiter = 3000, nrep = 2, na.rm = TRUE)
+M4_2019<-poLCA(formula = f_2019, data = precariedad_2019, nclass = 4, maxiter = 5000, nrep = 3, na.rm = TRUE)
+M5_2019<-poLCA(formula = f_2019, data = precariedad_2019, nclass = 5, maxiter = 5000, nrep = 3, na.rm = TRUE)
+M6_2019<-poLCA(formula = f_2019, data = precariedad_2019, nclass = 6, maxiter = 5000, nrep = 3, na.rm = TRUE)
+
+
+M1_2019$predcell
+M2_2019$predcell
+M3_2019$predcell
+M4_2019$predcell
+M5_2019$predcell
+M6_2019$predcell
+
+M1_2019$predclass
+M2_2019$predclass
+M3_2019$predclass
+M4_2019$predclass
+M5_2019$predclass
+M6_2019$predclass
+
+#Calcular el p valor del chi cuadrado
+
+p1<- 1-pchisq(M1_2019$Chisq, M1_2019$resid.df)
+p2<- 1-pchisq(M2_2019$Chisq, M2_2019$resid.df)
+p3<- 1-pchisq(M3_2019$Chisq, M3_2019$resid.df)
+p4<- 1-pchisq(M4_2019$Chisq, M4_2019$resid.df)
+p5<- 1-pchisq(M5_2019$Chisq, M5_2019$resid.df)
+p6<- 1-pchisq(M6_2019$Chisq, M6_2019$resid.df)
+
+
+# ----- tablas 2019 ----
+
+AjusteM1_2019<-data.frame(c("M1_2019", "M2", "M3", "M4", "M5", "M6"),
+                     c(M1_2019$llik, M2_2019$llik, M3_2019$llik, M4_2019$llik, M5_2019$llik, M6_2019$llik),
+                     c(M1_2019$Chisq, M2_2019$Chisq, M3_2019$Chisq, M4_2019$Chisq, M5_2019$Chisq, M6_2019$Chisq),
+                     c(M1_2019$Gsq, M2_2019$Gsq, M3_2019$Gsq, M4_2019$Gsq, M5_2019$Gsq, M6_2019$Gsq),
+                     c(M1_2019$npar, M2_2019$npar, M3_2019$npar, M4_2019$npar, M5_2019$npar, M6_2019$npar),
+                     c(M1_2019$aic, M2_2019$aic, M3_2019$aic, M4_2019$aic, M5_2019$aic, M6_2019$aic),
+                     c(M1_2019$bic, M2_2019$bic, M3_2019$bic, M4_2019$bic, M5_2019$bic,  M6_2019$bic),
+                     c(p1, p2, p3, p4, p5, p6))
+
+
+
+colnames(AjusteM1_2019)<-c("Modelo", "Loglike", "X2", "G2", "DF", "AIC", "BIC", "P-value")
+
+View(AjusteM1_2019)
+
+plotdata <- melt(M4_2019$probs) # función de reshape que me permite 'dar vuelta' una tabla
+plotdata <- plotdata[plotdata$X2=="Pr(1)",]
+
+ggplot(plotdata, aes(x=L1, y = value, group = X1, colour = X1)) +
+  geom_point() + geom_line()
+
+# Acá trabajo con la predicción de clase, por lo que los % varían para
+# al utilizar la clase 1-5 predicha
+
+base2<-data.frame(proc_base2019$sexo, proc_base2019$tramo_edad, proc_base2019$cine, proc_base2019$x1, proc_base2019$x2,
+                  proc_base2019$x3,proc_base2019$x4,proc_base2019$x5,proc_base2019$x6)
+base2<-na.omit(base2)
+colnames(base2)<-c("sexo", "edad", "educacion", "x1", "x2", "x3", "x4", "x5", "x6")
+
+
+base2<-cbind(base2, M4_2019$predclass, M5_2019$predclass)
+
+freq(base2$`M5_2019$predclass`)
+
+ctable(base2$sexo, base2$`M4_2019$predclass`)
+ctable(base2$educacion, base2$`M4_2019$predclass`)
+
+
+write_xlsx(data.frame(melt(M4_2019$probs)), "M4_2019.xlsx", col_names = TRUE, format_headers = TRUE)
+
+
+# ---- CAL 2020---- 
+
+# El criterio 1 es ver si un modelo distinto al nulo mejora considerablemente la variabilidad de las variables observadas
+# Me quedo con el modelo que a) tenga capacidad explicativa, b) que ajuste razonablemente en términos estadístico, c) que sea parsimonioso (pocas clases en relación a las variables observadas). <- 
+
+
+#2020
+
+#Modelo Nulo en que la variabilidad no es explicada por una variable de clase latente
+
+M1_2020<-poLCA(formula = f_2020, data = precariedad_2020, nclass = 1, maxiter = 2000, nrep = 1, na.rm = TRUE)
+
+#Modelos de 2 o más clases latentes
+
+# Se espera que cada clase latente de la variable latente sea homogénea internamente
+# Y sea heterogénea en relación con las otras clases
+
+M2_2020<-poLCA(formula = f_2020, data = precariedad_2020, nclass = 2, maxiter = 2000, nrep = 1, na.rm = TRUE)
+M3_2020<-poLCA(formula = f_2020, data = precariedad_2020, nclass = 3, maxiter = 3000, nrep = 2, na.rm = TRUE)
+M4_2020<-poLCA(formula = f_2020, data = precariedad_2020, nclass = 4, maxiter = 5000, nrep = 3, na.rm = TRUE)
+M5_2020<-poLCA(formula = f_2020, data = precariedad_2020, nclass = 5, maxiter = 5000, nrep = 3, na.rm = TRUE)
+M6_2020<-poLCA(formula = f_2020, data = precariedad_2020, nclass = 6, maxiter = 5000, nrep = 3, na.rm = TRUE)
+
+# El criterio 1 es ver si un modelo distinto al nulo mejora considerablemente la variabilidad de las variables observadas
+# Me quedo con el modelo que a) tenga capacidad explicativa, b) que ajuste razonablemente en términos estadístico, c) que sea parsimonioso (pocas clases en relación a las variables observadas). <- 
+
+M1_2020$predcell
+M2_2020$predcell
+M3_2020$predcell
+M4_2020$predcell
+M5_2020$predcell
+M6_2020$predcell
+
+M1_2020$predclass
+M2_2020$predclass
+M3_2020$predclass
+M4_2020$predclass
+M5_2020$predclass
+M6_2020$predclass
+
+#Calcular el p valor del chi cuadrado
+
+p1_20<- 1-pchisq(M1_2020$Chisq, M1_2020$resid.df)
+p2_20<- 1-pchisq(M2_2020$Chisq, M2_2020$resid.df)
+p3_20<- 1-pchisq(M3_2020$Chisq, M3_2020$resid.df)
+p4_20<- 1-pchisq(M4_2020$Chisq, M4_2020$resid.df)
+p5_20<- 1-pchisq(M5_2020$Chisq, M5_2020$resid.df)
+p6_20<- 1-pchisq(M6_2020$Chisq, M6_2020$resid.df)
+
+# ----- tablas 2020 ----
+
+AjusteM1_2020<-data.frame(c("M1", "M2", "M3", "M4", "M5", "M6"),
+                          c(M1_2020$llik, M2_2020$llik, M3_2020$llik, M4_2020$llik, M5_2020$llik, M6_2020$llik),
+                          c(M1_2020$Chisq, M2_2020$Chisq, M3_2020$Chisq, M4_2020$Chisq, M5_2020$Chisq, M6_2020$Chisq),
+                          c(M1_2020$Gsq, M2_2020$Gsq, M3_2020$Gsq, M4_2020$Gsq, M5_2020$Gsq, M6_2020$Gsq),
+                          c(M1_2020$npar, M2_2020$npar, M3_2020$npar, M4_2020$npar, M5_2020$npar, M6_2020$npar),
+                          c(M1_2020$aic, M2_2020$aic, M3_2020$aic, M4_2020$aic, M5_2020$aic, M6_2020$aic),
+                          c(M1_2020$bic, M2_2020$bic, M3_2020$bic, M4_2020$bic, M5_2020$bic,  M6_2020$bic),
+                          c(p1_20, p2_20, p3_20, p4_20, p5_20, p6_20))
+
+colnames(AjusteM1_2020)<-c("Modelo", "Loglike", "X2", "G2", "DF", "AIC", "BIC", "P-value")
+
+View(AjusteM1_2020)
+
+plotdata <- melt(M4_2020$probs) # función de reshape que me permite 'dar vuelta' una tabla
+plotdata <- plotdata[plotdata$X2=="Pr(1)",]
+
+ggplot(plotdata, aes(x=L1, y = value, group = X1, colour = X1)) +
+  geom_point() + geom_line()
+
+# Acá trabajo con la predicción de clase, por lo que los % varían para
+# al utilizar la clase 1-5 predicha
+
+base2<-data.frame(proc_base2020$sexo, proc_base2020$tramo_edad, proc_base2020$cine, proc_base2020$x1, proc_base2020$x2,
+                  proc_base2020$x3,proc_base2020$x4,proc_base2020$x5,proc_base2020$x6)
+
+base2<-na.omit(base2)
+
+colnames(base2)<-c("sexo", "edad", "educacion", "x1", "x2", "x3", "x4", "x5", "x6")
+
+base2<-cbind(base2, M4_2020$predclass, M5_2020$predclass)
+
+freq(base2$`M5_2020$predclass`)
+
+
+write_xlsx(data.frame(melt(M4_2020$probs)), "M4_2020.xlsx", col_names = TRUE, format_headers = TRUE)
+
+
+
