@@ -1,0 +1,10 @@
+---
+title: "Informe"
+author: "Emilia Barrientos, Pablo Campos, Nicolás Godoy, Monserrat Greene y Gonzalo López"
+date: "04-10-2021"
+output: 
+  html_document: 
+    toc: yes
+    highlight: textmate
+    theme: paper
+---

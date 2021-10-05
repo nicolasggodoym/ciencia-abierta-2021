@@ -1,0 +1,1 @@
+{"frames":[{"func":"pchisq(lc2@Chisq, lc2@resid.df)","file":"","line_number":0,"end_line_number":0,"character_number":0,"end_character_number":0}],"message":"Error in pchisq(lc2@Chisq, lc2@resid.df) : \n  trying to get slot \"Chisq\" from an object (class \"poLCA\") that is not an S4 object \n"}

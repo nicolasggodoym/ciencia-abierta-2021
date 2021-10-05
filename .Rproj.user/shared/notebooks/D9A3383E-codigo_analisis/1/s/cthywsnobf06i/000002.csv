@@ -1,0 +1,5 @@
+"0","p2<-1-pchisq(lc2@Chisq, lc2@resid.df)
+"
+"2","Error in pchisq(lc2@Chisq, lc2@resid.df) : 
+  trying to get slot ""Chisq"" from an object (class ""poLCA"") that is not an S4 object 
+"
