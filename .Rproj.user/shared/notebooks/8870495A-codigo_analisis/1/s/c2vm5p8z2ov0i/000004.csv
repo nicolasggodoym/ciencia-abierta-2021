@@ -1,4 +1,0 @@
-"0","base_proc <- readRDS(""data_proc.rds"")
-"
-"2","Error in gzfile(file, ""rb"") : cannot open the connection
-"
