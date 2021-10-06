@@ -86,15 +86,15 @@ quantile(data_proc$ingresos, c(.2,.4,.6,.8))
 data_proc <- data_proc %>% 
   mutate_at(vars(-c(exp, id, edad)), ~(as.numeric(.))) %>%  
   mutate(ingresos = case_when(ingresos <= 291974 ~ "$0 a $291.974",
-         ingresos > 291974 & ingresos <= 380500 ~ "$291.975 a $380.500",
-         ingresos > 380500 & ingresos <= 500000 ~ "$380.501 a $500.000",
-         ingresos > 500000 & ingresos <= 779787 ~ "$500.001 a $779.787",
-         ingresos > 779787 ~ "$779.788 o mas", 
-         TRUE ~ NA_character_),
+                              ingresos > 291974 & ingresos <= 380500 ~ "$291.975 a $380.500",
+                              ingresos > 380500 & ingresos <= 500000 ~ "$380.501 a $500.000",
+                              ingresos > 500000 & ingresos <= 779787 ~ "$500.001 a $779.787",
+                              ingresos > 779787 ~ "$779.788 o mas", 
+                              TRUE ~ NA_character_),
          horas = case_when(horas <= 30 ~ "Igual o menor a 30 horas semanales",
-         horas > 30 & horas <= 45 ~ "Entre 31 y 45 horas semanales",
-         horas > 45 ~ "Mayor a 45 horas semanales", 
-                TRUE ~ NA_character_),
+                           horas > 30 & horas <= 45 ~ "Entre 31 y 45 horas semanales",
+                           horas > 45 ~ "Mayor a 45 horas semanales", 
+                           TRUE ~ NA_character_),
          contrato = car::recode(.$contrato, recodes = c("1 = 'Si'; 2 = 'No'"), 
                                 as.factor = T, levels = c('Si', 'No')),
          contrato_duracion = car::recode(.$contrato_duracion, recodes = c("1 = 'Definido'; 2 = 'Indefinido'"),
@@ -107,27 +107,17 @@ data_proc <- data_proc %>%
                                                               'Con un contratista o subcontratista de bienes y servicios', 
                                                               'Con una empresa de servicios temporales o suministradora de trabajadores', 
                                                               'Con un enganchador (contratista agrícola)')),
-         lugar_trab = car::recode(.$lugar_trab, recodes = c("1 = 'En instalaciones u oficina del cliente o empleador';
-                                                            2 = 'En la casa del empleador o cliente';
-                                                            3 = 'En instalaciones u oficinas propias o arrendadas';
-                                                            4 = 'En la oficina, local, taller o fabrica, anexo a su hogar (en el mismo predio)';
-                                                            5 = 'En su propio hogar';
-                                                            6 = 'En la calle o via publica';
-                                                            7 = 'En obras de construccion, mineras o similares';
-                                                            8 = 'En un predio agricola o espacio maritimo o aereo';
-                                                            9 = 'En otros lugares'"),
-                                  as.factor = T, levels = c('En instalaciones u oficina del cliente o empleador',
-                                                            'En la casa del empleador o cliente', 
-                                                            'En instalaciones u oficinas propias o arrendadas', 
-                                                            'En la oficina, local, taller o fabrica, anexo a su hogar (en el mismo predio)', 
-                                                            'En su propio hogar',
-                                                            'En la calle o via publica',
-                                                            'En obras de construccion, mineras o similares',
-                                                            'En un predio agricola o espacio maritimo o aereo',
-                                                            'En otros lugares')),
-              sexo = car::recode(.$sexo, recodes = c("1 = 'Hombre'; 2 = 'Mujer'"), as.factor = T,
-                                 levels = c('Hombre', 'Mujer')),
-              educacion = car::recode(.$educacion, recodes = c("1 = 'Nunca estudio';
+         lugar_trab = car::recode(.$lugar_trab, recodes = c("c(1,2) = 'En instalaciones, oficina o casa del cliente o empleador';
+                                                            c(3,4,5) = 'En instalaciones u oficinas propias o arrendadas, en hogar propio o anexos';
+                                                            c(6,9) = 'En la calle o via publica, u otro';
+                                                            c(7,8) = 'En obras de construccion, mineras, predios agricolas o similares'"),
+                                  as.factor = T, levels = c('En instalaciones, oficina o casa del cliente o empleador',
+                                                            'En instalaciones u oficinas propias o arrendadas, en hogar propio o anexos', 
+                                                            'En la calle o via publica, u otro', 
+                                                            'En obras de construccion, mineras, predios agricolas o similares')),
+         sexo = car::recode(.$sexo, recodes = c("1 = 'Hombre'; 2 = 'Mujer'"), as.factor = T,
+                            levels = c('Hombre', 'Mujer')),
+         educacion = car::recode(.$educacion, recodes = c("1 = 'Nunca estudio';
                                                                2 = 'Educacion preescolar';
                                                                3 = 'Educacion primaria (nivel 1)';
                                                                4 = 'Educacion primaria (nivel 2)';
@@ -136,25 +126,25 @@ data_proc <- data_proc %>%
                                                                7 = 'Educacion universitaria';
                                                                8 = 'Postitulos y maestria';
                                                                9 = 'Doctorado'"),
-                                      as.factor = T,
-                                      levels = c('Nunca estudio',
-                                                 'Educacion preescolar',
-                                                 'Educacion primaria (nivel 1)',
-                                                 'Educacion primaria (nivel 2)',
-                                                 'Educacion secundaria',
-                                                 'Educacion tecnica (superior no universitaria)',
-                                                 'Educacion universitaria',
-                                                 'Postitulos y maestria',
-                                                 'Doctorado'))) %>% 
+                                 as.factor = T,
+                                 levels = c('Nunca estudio',
+                                            'Educacion preescolar',
+                                            'Educacion primaria (nivel 1)',
+                                            'Educacion primaria (nivel 2)',
+                                            'Educacion secundaria',
+                                            'Educacion tecnica (superior no universitaria)',
+                                            'Educacion universitaria',
+                                            'Postitulos y maestria',
+                                            'Doctorado'))) %>% 
   mutate_at(vars("cond_vacaciones", "cond_enfermedad", "cond_maternidad", "cond_guarderia", "cotiza_prev", "cotiza_salud", "cotiza_seguro"), ~(car::recode(., recodes = c("1 = 'Si'; 2 = 'No'"), as.factor = T))) %>%
   mutate(ingresos = factor(.$ingresos, levels = c("$0 a $291.974",
-                                   "$291.975 a $380.500",
-                                   "$380.501 a $500.000",
-                                   "$500.001 a $779.787",
-                                   "$779.788 o más")),
-          horas = factor(.$horas, levels = c("Igual o menor a 30 horas semanales",
-                                   "Entre 31 y 45 horas semanales",
-                                   "Mayor a 45 horas semanales"))) %>% 
+                                                  "$291.975 a $380.500",
+                                                  "$380.501 a $500.000",
+                                                  "$500.001 a $779.787",
+                                                  "$779.788 o más")),
+         horas = factor(.$horas, levels = c("Igual o menor a 30 horas semanales",
+                                            "Entre 31 y 45 horas semanales",
+                                            "Mayor a 45 horas semanales"))) %>% 
   mutate_at(vars("contrato", "contrato_duracion", "contrato_sub", "cotiza_prev", "cotiza_salud", "cotiza_seguro", "lugar_trab", "cond_vacaciones", "cond_enfermedad", "cond_maternidad", "cond_guarderia"), ~(car::recode(., recodes = "c(77, 88, 99) = NA"))) %>%
   mutate_at(vars(c("horas", "educacion")), ~(car::recode(., recodes = "c(888, 999) = NA"))) 
 

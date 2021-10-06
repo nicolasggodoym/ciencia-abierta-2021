@@ -2,6 +2,8 @@
 title: "Análisis de datos"
 author: "Emilia Barrientos, Pablo Campos, Nicolás Godoy, Monserrat Greene y Gonzalo López"
 date: "04-10-2021"
+bibliography: referencias_ciencia_abierta.bib
+csl: apa.csl
 output: 
   html_document: 
     toc: yes
@@ -92,6 +94,60 @@ Siguiendo los planteamientos de McCutcheon (2002), en aras de encontrar el model
 Aquí hay que hacer una elección entre opción 1 y opción 2:
 
 **Opción 1 para medidas de ajuste**
+
+```{r medidas_profecastillo}
+##  Estadísticos de ajuste
+
+AIC.2 <-as.numeric(lc2$aic)
+AIC.3 <-as.numeric(lc3$aic)
+AIC.4 <-as.numeric(lc4$aic)
+AIC.5 <-as.numeric(lc5$aic)
+AIC.6 <-as.numeric(lc6$aic)
+
+BIC.2 <-as.numeric(lc2$bic)
+BIC.3 <-as.numeric(lc3$bic)
+BIC.4 <-as.numeric(lc4$bic)
+BIC.5 <-as.numeric(lc5$bic)
+BIC.6 <-as.numeric(lc6$bic)
+
+llik.2 <-as.numeric(lc2$llik)
+llik.3 <-as.numeric(lc3$llik)
+llik.4 <-as.numeric(lc4$llik)
+llik.5 <-as.numeric(lc5$llik)
+llik.6 <-as.numeric(lc6$llik)
+
+chisq.2 <- as.numeric(lc2$Chisq)
+chisq.3 <- as.numeric(lc3$Chisq)
+chisq.4 <- as.numeric(lc4$Chisq)
+chisq.5 <- as.numeric(lc5$Chisq)
+chisq.6 <- as.numeric(lc6$Chisq)
+
+G.2 <- as.numeric(lc2$Gsq)
+G.3 <- as.numeric(lc3$Gsq)
+G.4 <- as.numeric(lc4$Gsq)
+G.5 <- as.numeric(lc5$Gsq)
+G.6 <- as.numeric(lc6$Gsq)
+
+n.obs2 <- as.numeric(lc2$Nobs)
+n.obs3 <- as.numeric(lc3$Nobs)
+n.obs4 <- as.numeric(lc4$Nobs)
+n.obs5 <- as.numeric(lc5$Nobs)
+n.obs6 <- as.numeric(lc6$Nobs)
+
+#Creación de Vectores para TABLA DE COMPARACIÓN
+AIC <- c(AIC.2,AIC.3,AIC.4,AIC.5, AIC.6)
+BIC <- c(BIC.2,BIC.3,BIC.4,BIC.5, BIC.6)
+llik <- c(llik.2,llik.3,llik.4,llik.5, llik.6)
+chi.cuadrado <- c(chisq.2,chisq.3,chisq.4,chisq.5, chisq.6)
+G2 <- c(G.2,G.3,G.4,G.5, G.6)
+N <- c(n.obs2,n.obs3,n.obs4,n.obs5, n.obs6)
+Modelos <- c("2 clases", "3 clases", "4 clases", "5 clases", "6 clases")
+
+#CREACIÓN TABLA ESTADÍSTICOS DE AJUSTE MODELOS TODAS LAS VARIABLES
+fit.indices <- data.frame(Modelos,AIC,BIC,llik,chi.cuadrado,G2,N)
+fit.indices
+```
+
 
 ```{r library, echo=TRUE, warning=FALSE, message=FALSE}
 

@@ -76,24 +76,14 @@ data_proc <- data_proc %>%
                                                               'Con un contratista o subcontratista de bienes y servicios', 
                                                               'Con una empresa de servicios temporales o suministradora de trabajadores', 
                                                               'Con un enganchador (contratista agrícola)')),
-         lugar_trab = car::recode(.$lugar_trab, recodes = c("1 = 'En instalaciones u oficina del cliente o empleador';
-                                                            2 = 'En la casa del empleador o cliente';
-                                                            3 = 'En instalaciones u oficinas propias o arrendadas';
-                                                            4 = 'En la oficina, local, taller o fabrica, anexo a su hogar (en el mismo predio)';
-                                                            5 = 'En su propio hogar';
-                                                            6 = 'En la calle o via publica';
-                                                            7 = 'En obras de construccion, mineras o similares';
-                                                            8 = 'En un predio agricola o espacio maritimo o aereo';
-                                                            9 = 'En otros lugares'"),
-                                  as.factor = T, levels = c('En instalaciones u oficina del cliente o empleador',
-                                                            'En la casa del empleador o cliente', 
-                                                            'En instalaciones u oficinas propias o arrendadas', 
-                                                            'En la oficina, local, taller o fabrica, anexo a su hogar (en el mismo predio)', 
-                                                            'En su propio hogar',
-                                                            'En la calle o via publica',
-                                                            'En obras de construccion, mineras o similares',
-                                                            'En un predio agricola o espacio maritimo o aereo',
-                                                            'En otros lugares')),
+         lugar_trab = car::recode(.$lugar_trab, recodes = c("c(1,2) = 'En instalaciones, oficina o casa del cliente o empleador';
+                                                            c(3,4,5) = 'En instalaciones u oficinas propias o arrendadas, en hogar propio o anexos';
+                                                            c(6,9) = 'En la calle o via publica, u otro';
+                                                            c(7,8) = 'En obras de construccion, mineras, predios agricolas o similares'"),
+                                  as.factor = T, levels = c('En instalaciones, oficina o casa del cliente o empleador',
+                                                            'En instalaciones u oficinas propias o arrendadas, en hogar propio o anexos', 
+                                                            'En la calle o via publica, u otro', 
+                                                            'En obras de construccion, mineras, predios agricolas o similares')),
          sexo = car::recode(.$sexo, recodes = c("1 = 'Hombre'; 2 = 'Mujer'"), as.factor = T,
                             levels = c('Hombre', 'Mujer')),
          educacion = car::recode(.$educacion, recodes = c("1 = 'Nunca estudio';
