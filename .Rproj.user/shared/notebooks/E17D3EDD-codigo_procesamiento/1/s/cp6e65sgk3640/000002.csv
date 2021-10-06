@@ -1,0 +1,4 @@
+"0","cronopiedad <- data_proc %>% "
+"0","  select(15)"
+"0",""
+"0","sjPlot::view_df(cronopiedad)"

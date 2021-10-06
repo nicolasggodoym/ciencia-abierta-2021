@@ -1,0 +1,4 @@
+"0","demograficas <- data_proc %>% "
+"0","  select(16:18)"
+"0",""
+"0","sjPlot::view_df(demograficas)"
