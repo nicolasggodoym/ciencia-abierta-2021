@@ -1,4 +1,0 @@
-"0","condiciones <- data_proc %>% "
-"0","  select(10:14)"
-"0",""
-"0","sjPlot::view_df(condiciones)"

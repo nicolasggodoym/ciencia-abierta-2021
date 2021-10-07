@@ -1,4 +1,0 @@
-"0","inseguridad <- data_proc %>% "
-"0","  select(6:8)"
-"0",""
-"0","sjPlot::view_df(inseguridad)"

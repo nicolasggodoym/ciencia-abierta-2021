@@ -1,7 +1,0 @@
-"0","pacman::p_load(tidyverse, #Muchas cosas"
-"0","               haven, #Cargar datos.dta"
-"0","               sjPlot, #Crear tablas y gráficos"
-"0","               sjmisc,#Explorar datos"
-"0","               dplyr, #Manipular datos"
-"0","               sjlabelled, #Etiquetar datos"
-"0","               car) #Recodificar"

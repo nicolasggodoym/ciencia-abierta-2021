@@ -1,4 +1,0 @@
-"0","insuficiencia <- data_proc %>% "
-"0","  select(9)"
-"0",""
-"0","sjPlot::view_df(insuficiencia)"

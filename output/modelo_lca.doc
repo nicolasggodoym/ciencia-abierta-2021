@@ -1,0 +1,120 @@
+<table style="border-collapse:collapse; border:none;">
+<tr>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; text-align:left; ">Modelos</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; ">AIC</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; ">BIC</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; ">llik</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; ">chi.cuadrado</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; ">G2</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; col7">N</th>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">1 clase</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">39256.12</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">39367.01</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">-19609.06</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">274796.52</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">11175.47</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">2531</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">2 clases</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">33620.56</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">33848.18</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">-16771.28</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">274796.52</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">5499.91</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">2531</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">3 clases</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">31889.88</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">32234.22</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">-15885.94</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">185154.38</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">3729.22</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">2531</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">4 clases</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">31287.84</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">31748.91</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">-15564.92</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">223813.74</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">3087.19</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">2531</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">5 clases</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">31072.33</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">31650.13</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">-15437.16</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">213431.13</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">2831.67</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">2531</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">6 clases</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">30907.97</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">31602.50</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">-15334.98</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">302025.51</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">2627.31</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">2531</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">7 clases</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">30762.57</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">31573.82</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">-15242.28</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">69313.61</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">2441.91</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">2531</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">8 clases</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">30649.46</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">31577.45</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">-15165.73</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">48666.09</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">2288.81</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">2531</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">9 clases</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">30568.51</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">31613.22</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">-15105.26</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">65604.74</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">2167.86</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">2531</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">10 clases</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">30515.05</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">31676.48</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">-15058.52</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">40641.07</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">2074.39</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">2531</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">11 clases</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">30479.78</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">31757.94</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">-15020.89</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">55218.82</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">1999.12</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">2531</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; border-bottom: double; ">12 clases</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; ">30423.32</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; ">31818.21</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; ">-14972.66</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; ">44613.99</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; ">1902.66</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; col7">2531</td>
+</tr>
+</table>
+

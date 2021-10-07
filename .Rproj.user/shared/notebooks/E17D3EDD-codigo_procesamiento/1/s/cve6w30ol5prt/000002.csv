@@ -1,4 +1,0 @@
-"0","inestabilidad <- data_proc %>% "
-"0","  select(3:5)"
-"0",""
-"0","sjPlot::view_df(inestabilidad)"
