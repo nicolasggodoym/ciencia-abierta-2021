@@ -22,7 +22,6 @@ En primer lugar, se procede a cargar las librerías que serán utilizadas en los
 pacman::p_load(summarytools,
                poLCA,
                xtable,
-               writexl,
                sjPlot,
                reshape2,
                ggplot2)
@@ -49,7 +48,7 @@ view(summarytools::dfSummary(base_proc, headings=FALSE))
 
 Se estimará el modelo de clases latentes. Para ello, se genera un objeto **f** que consiste en un vector que indica el modelo. 
 
-```{r LCA_vector, echo=TRUE, warning=FALSE, message=FALSE}
+```{r lca_vector, echo=TRUE, warning=FALSE, message=FALSE}
 f<-cbind(contrato,
          contrato_duracion,
          contrato_sub,
@@ -67,7 +66,7 @@ f<-cbind(contrato,
 
 A continuación, con el paquete poLCA se estiman 11 diferentes modelos de clases latentes, contemplando de dos a doce clases.
 
-```{r LCA_models, echo=TRUE, message=FALSE, warning=FALSE}
+```{r lca_models, echo=TRUE, message=FALSE, warning=FALSE}
 lc1=poLCA(f, base_proc, nclass=1, graphs = F, nrep = 3, maxiter = 5000)
 
 set.seed(123741) # para mantener el mismo orden de las clases
@@ -190,7 +189,11 @@ Modelos <- c("1 clase","2 clases", "3 clases", "4 clases", "5 clases", "6 clases
 #CREACIÓN TABLA ESTADÍSTICOS DE AJUSTE MODELOS TODAS LAS VARIABLES
 fit.indices <- data.frame(Modelos,AIC,BIC,llik,chi.cuadrado,G2,N)
 
-sjPlot::tab_df(fit.indices)
+sjPlot::tab_df(fit.indices,
+               title = "Medidas de ajuste para modelos de clase latente",
+               footnote = "Elaboracion propia en base a ESI (2021)",
+               col.header = c("Modelos", "AIC", "BIC", "Log-likelihood", "Chi^2", "G2", "N"),
+               show.footnote = T)
 ```
 
 ###3.4. Gráfico del modelo elegido
