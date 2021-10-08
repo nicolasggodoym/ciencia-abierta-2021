@@ -30,7 +30,7 @@ pacman::p_load(tidyverse, #Muchas cosas
 Los datos por trabajar son descargados directamente desde la [página web del Instituto Nacional de Estadísticas (INE)](https://www.ine.cl/estadisticas/sociales/ingresos-y-gastos/encuesta-suplementaria-de-ingresos), con la función `read_dta` de `haven`. 
 
 ```{r read_dta, echo=TRUE, warning=FALSE, message=FALSE}
-data <- read_dta("https://www.ine.cl/docs/default-source/encuesta-suplementaria-de-ingresos/bbdd/stata_esi/2020/esi-2020---personas.dta?sfvrsn=7a4b0e2b_4&amp;download=true")
+data <- read_dta("https://www.ine.cl/docs/default-source/encuesta-suplementaria-de-ingresos/bbdd/stata_esi/2020/esi-2020---personas.dta?sfvrsn=7a4b0e2b_4&download=true")
 ```
 
 El objeto presenta `r format(ncol(data), decimal.mark="," , big.mark = ".")` columnas y `r format(nrow(data), decimal.mark="," , big.mark = ".")` filas. 
@@ -67,7 +67,7 @@ data_proc <- data %>%
          cond_guarderia = b7b_4,
          horas = c2_1_3,
          sexo,
-         edad,
+         tramo_edad,
          educacion = cine)
 ```
 
@@ -75,7 +75,11 @@ Una vez filtrados los datos, data_proc presenta `r format(ncol(data_proc), decim
 
 ### 3.1. Transformar *datatype*
 
-Las variables categóricas se transforman a tipo **factor**. Variables numéricas (ingresos y horas) son transformadas a tipo **factor** para poder incorporarlas en el modelo de clases latentes. Vale recalcar que, para el caso de la variable ingresos, esta se recodificó como *quintiles de ingreso*. Además, se recodifican los valores nulos como `NA`. Luego, se verifica la estructura de los datos con `str()`, para verificar los cambios. Se recodificó la variable *lugar de trabajo*, colapsando las categorías de respuesta. Primero, se unieron las categorías  _En instalaciones u oficinas del cliente o empleado_ y _En la casa del empleador o cliente_, resultando en _En instalaciones, oficina o casa del cliente o empleador_. Segundo, se colapsaron las categorías _En instalaciones u oficinas propias o arrendadas_, _En la oficina, local, taller o fábrica, anexo a su hogar (en el mismo predio)_ y _En su propio hogar_, formando _En instalaciones, oficinas o casas propias o arrendadas_. Tercero, _En la calle o vía pública_ se fusionó con la categoría _En otros lugares_, resultando en _En la calle, vía pública, u otros_. Finalmente, se colapsó _En obras de construcción, mineras o similares_ con _En predio agrícola o espacio marítimo o aéreo_ para formar la nueva categoría _En obras de construcción, mineras, predio agrícola o similares_.
+Las variables categóricas se transforman a tipo **factor**. Variables numéricas (ingresos y horas) son transformadas a tipo **factor** para poder incorporarlas en el modelo de clases latentes. Vale recalcar que, para el caso de la variable ingresos, esta se recodificó como *quintiles de ingreso*. Además, se recodifican los valores nulos como `NA`. Luego, se verifica la estructura de los datos con `str()`, para verificar los cambios. 
+
+Se recodificó la variable *lugar de trabajo*, colapsando las categorías de respuesta. Primero, se unieron las categorías  _En instalaciones u oficinas del cliente o empleado_ y _En la casa del empleador o cliente_, resultando en _En instalaciones, oficina o casa del cliente o empleador_. Segundo, se colapsaron las categorías _En instalaciones u oficinas propias o arrendadas_, _En la oficina, local, taller o fábrica, anexo a su hogar (en el mismo predio)_ y _En su propio hogar_, formando _En instalaciones, oficinas o casas propias o arrendadas_. Tercero, _En la calle o vía pública_ se fusionó con la categoría _En otros lugares_, resultando en _En la calle, vía pública, u otros_. Finalmente, se colapsó _En obras de construcción, mineras o similares_ con _En predio agrícola o espacio marítimo o aéreo_ para formar la nueva categoría _En obras de construcción, mineras, predio agrícola o similares_.
+
+Asimismo, se recodificó la variable *tramo_edad*, formando las categorías _15 a 19 años_, _20 a 29 años_, _25 a 49 años_, _50 a 64 años_ y _65 años o mas_.
 
 ```{r quantile, echo = T, warning=FALSE, message=F}
 quantile(data_proc$ingresos, c(.2,.4,.6,.8))
@@ -84,13 +88,14 @@ quantile(data_proc$ingresos, c(.2,.4,.6,.8))
 
 ```{r mutate_recode, echo=TRUE, warning=FALSE, message=FALSE}
 data_proc <- data_proc %>% 
-  mutate_at(vars(-c(exp, id, edad)), ~(as.numeric(.))) %>%  
+  mutate_at(vars(-c(exp, id)), ~(as.numeric(.))) %>%  
   mutate(ingresos = case_when(ingresos <= 291974 ~ "$0 a $291.974",
                               ingresos > 291974 & ingresos <= 380500 ~ "$291.975 a $380.500",
                               ingresos > 380500 & ingresos <= 500000 ~ "$380.501 a $500.000",
                               ingresos > 500000 & ingresos <= 779787 ~ "$500.001 a $779.787",
                               ingresos > 779787 ~ "$779.788 o mas", 
                               TRUE ~ NA_character_),
+         edad = car::recode(.$tramo_edad, recodes = "(1) = '15 a 19 años'; c(2, 3) = '20 a 29 años'; c(4, 5, 6, 7) = '25 a 49 años'; c(8, 9, 10) = '50 a 64 años'; c(11, 12) = '65 años o mas'"),
          horas = case_when(horas <= 30 ~ "Igual o menor a 30 horas semanales",
                            horas > 30 & horas <= 45 ~ "Entre 31 y 45 horas semanales",
                            horas > 45 ~ "Mayor a 45 horas semanales", 
@@ -146,7 +151,8 @@ data_proc <- data_proc %>%
                                             "Entre 31 y 45 horas semanales",
                                             "Mayor a 45 horas semanales"))) %>% 
   mutate_at(vars("contrato", "contrato_duracion", "contrato_sub", "cotiza_prev", "cotiza_salud", "cotiza_seguro", "lugar_trab", "cond_vacaciones", "cond_enfermedad", "cond_maternidad", "cond_guarderia"), ~(car::recode(., recodes = "c(77, 88, 99) = NA"))) %>%
-  mutate_at(vars(c("horas", "educacion")), ~(car::recode(., recodes = "c(888, 999) = NA"))) 
+  mutate_at(vars(c("horas", "educacion")), ~(car::recode(., recodes = "c(888, 999) = NA"))) %>%
+  select(-tramo_edad)
 
 str(data_proc)
 ```
