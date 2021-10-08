@@ -314,6 +314,7 @@ sjt.xtab(base_proc$Clase, base_proc$educacion,
 
 sjt.xtab(base_proc$Clase, base_proc$edad,
          title = "Tabla cruzada por clase y edad",
-         show.cell.prc = T)
+         show.cell.prc = T,
+         encoding = 'UTF-8')
 
 ```

@@ -1,0 +1,2 @@
+"0",""
+"0","ggsave(""../output/lca4.jpg"", plot = lca4_graph, height=4, width=10, units=""in"", dpi=350)"

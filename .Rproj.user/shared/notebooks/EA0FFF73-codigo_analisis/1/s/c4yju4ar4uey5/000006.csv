@@ -1,20 +1,21 @@
-"0","frq(base_proc$Clase)
-"
-"1","
-"
-"1","[31mx[39m"
-"1","[34m <integer>
-[39m"
-"1","[34m# total N=2531  valid N=2531  mean=2.90  sd=1.01
-
-[39m"
-"1","Value |    N | Raw % | Valid % | Cum. %
----------------------------------------
-    1 |  415 | 16.40 |   16.40 |  16.40
-    2 |  176 |  6.95 |    6.95 |  23.35
-    3 | 1180 | 46.62 |   46.62 |  69.97
-    4 |  760 | 30.03 |   30.03 | 100.00
- <NA> |    0 |  0.00 |    <NA> |   <NA>
-"
-"1","
-"
+"0",""
+"0","#Asginar la clase de precariedad a cada sujeto"
+"0","base_proc <- cbind(base_proc, lc4$predclass) "
+"0",""
+"0","#Renombrar la variable de clase de precariedad"
+"0","base_proc <- base_proc %>% rename(Clase=`lc4$predclass`)"
+"0",""
+"0","#Creación de tablas cruzadas"
+"0","sjt.xtab(base_proc$Clase, base_proc$sexo,"
+"0","         title = ""Tabla cruzada por clase y sexo"","
+"0","         show.cell.prc = T)"
+"0",""
+"0","sjt.xtab(base_proc$Clase, base_proc$educacion,"
+"0","         title = ""Tabla cruzada por clase y nivel educacional"","
+"0","         show.cell.prc = T)"
+"0",""
+"0","sjt.xtab(base_proc$Clase, base_proc$edad,"
+"0","         title = ""Tabla cruzada por clase y edad"","
+"0","         show.cell.prc = T,"
+"0","         encoding = 'latino9')"
+"0",""
