@@ -1,0 +1,14 @@
+"0","sjPlot::tab_df(modelo,
+               title = 'Modelo de clases latentes de precariedad laboral',
+               footnote = 'Elaboracion propia en base a ESI (2021)',
+               show.footnote = T,
+               file = ""output/modelo.png"")
+"
+"2","Warning in file(file, ifelse(append, ""a"", ""w"")) :"
+"2","
+ "
+"2"," cannot open file 'output/modelo.png': No such file or directory
+"
+"2","Error in file(file, ifelse(append, ""a"", ""w"")) : 
+  cannot open the connection
+"
