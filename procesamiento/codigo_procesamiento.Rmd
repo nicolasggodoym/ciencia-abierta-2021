@@ -51,9 +51,7 @@ data_proc <- data %>%
          b13_rev4cl_caenes != 2 |
          b13_rev4cl_caenes != 3 |
          b13_rev4cl_caenes != 6) %>% 
-  select(exp = fact_cal_esi,
-         id = idrph,
-         contrato = b8,
+  select(contrato = b8,
          contrato_duracion = b9,
          contrato_sub = b12,
          cotiza_prev = b7a_1,
@@ -88,14 +86,18 @@ quantile(data_proc$ingresos, c(.2,.4,.6,.8))
 
 ```{r mutate_recode, echo=TRUE, warning=FALSE, message=FALSE}
 data_proc <- data_proc %>% 
-  mutate_at(vars(-c(exp, id)), ~(as.numeric(.))) %>%  
+  mutate_all (~(as.numeric(.))) %>%  
   mutate(ingresos = case_when(ingresos <= 291974 ~ "$0 a $291.974",
                               ingresos > 291974 & ingresos <= 380500 ~ "$291.975 a $380.500",
                               ingresos > 380500 & ingresos <= 500000 ~ "$380.501 a $500.000",
                               ingresos > 500000 & ingresos <= 779787 ~ "$500.001 a $779.787",
                               ingresos > 779787 ~ "$779.788 o mas", 
                               TRUE ~ NA_character_),
-         edad = car::recode(.$tramo_edad, recodes = "(1) = '15 a 19 años'; c(2, 3) = '20 a 29 años'; c(4, 5, 6, 7) = '25 a 49 años'; c(8, 9, 10) = '50 a 64 años'; c(11, 12) = '65 años o mas'"),
+         edad = car::recode(.$tramo_edad, recodes = "(1) = '15 a 19 anos';
+                            c(2, 3) = '20 a 29 anos';
+                            c(4, 5, 6, 7) = '25 a 49 anos';
+                            c(8, 9, 10) = '50 a 64 anos';
+                            c(11, 12) = '65 anos o mas'"),
          horas = case_when(horas <= 30 ~ "Igual o menor a 30 horas semanales",
                            horas > 30 & horas <= 45 ~ "Entre 31 y 45 horas semanales",
                            horas > 45 ~ "Mayor a 45 horas semanales", 
@@ -216,42 +218,42 @@ Una vez realizado el procesamiento anterior, se realizan tablas resumen para dar
 
 ```{r inestabilidad, echo=TRUE, warning=FALSE, message=FALSE}
 inestabilidad <- data_proc %>% 
-  select(3:5)
+  select(1:3)
 
 sjPlot::view_df(inestabilidad)
 ```
 
 ```{r inseguridad, echo=TRUE, warning=FALSE, message=FALSE}
 inseguridad <- data_proc %>% 
-  select(6:8)
+  select(4:6)
 
 sjPlot::view_df(inseguridad)
 ```
 
 ```{r insuficiencia, echo=TRUE, warning=FALSE, message=FALSE}
 insuficiencia <- data_proc %>% 
-  select(9)
+  select(7)
 
 sjPlot::view_df(insuficiencia)
 ```
 
 ```{r condiciones, echo=TRUE, warning=FALSE, message=FALSE}
 condiciones <- data_proc %>% 
-  select(10:14)
+  select(8:12)
 
 sjPlot::view_df(condiciones)
 ```
 
 ```{r cronopiedad, echo=TRUE, warning=FALSE, message=FALSE}
 cronopiedad <- data_proc %>% 
-  select(15)
+  select(13)
 
 sjPlot::view_df(cronopiedad)
 ```
 
 ```{r demograficas, echo=TRUE, warning=FALSE, message=FALSE}
 demograficas <- data_proc %>% 
-  select(16:18)
+  select(14:16)
 
 sjPlot::view_df(demograficas)
 ```

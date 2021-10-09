@@ -6,6 +6,7 @@ bibliography: ../input/bib/referencias_ciencia_abierta.bib
 csl: ../input/bib/apa_csl.csl
 output: 
   html_document: 
+    code_folding: hide
     toc: yes
     highlight: textmate
     theme: paper
@@ -19,15 +20,13 @@ En base a la operacionalización de Blanco y Julián (2019), el presente código
 En primer lugar, se procede a cargar las librerías que serán utilizadas en los análisis, a partir de la función `p_load` de la librería `pacman`.
 
 ```{r library, echo=TRUE, warning=FALSE, message=FALSE}
-pacman::p_load(summarytools,
-               poLCA,
-               xtable,
-               sjPlot,
-               sjmisc,
-               dplyr,
-               tidyr,
-               reshape2,
-               ggplot2)
+pacman::p_load(summarytools, #para estadísticos descriptivos
+               poLCA, #para estimar los modelos LCA
+               sjPlot, #para realizar las tablas
+               dplyr, #para manipular datos
+               tidyr, #para cambiar estructura de los datos
+               reshape2, #para crear tabla de modelos LCA
+               ggplot2) #para crear graficos
 options(scipen = 999)
 ```
 
@@ -45,8 +44,8 @@ base_proc <- readRDS("../input/data/data_proc.rds")
 
 Se realizó una tabla descriptiva de las variables  que serán incluidas en el modelo de clases latentes, con la función dfSummary del paquete summarytools. A partir de ella es posible señalar que ... 
 
-```{r table, echo=TRUE, warning=FALSE, message=FALSE}
-view(summarytools::dfSummary(base_proc, headings=FALSE))
+```{r table, echo=TRUE, warning=FALSE, message=FALSE, results='asis' }
+print(summarytools::dfSummary(base_proc, headings=FALSE, plain.ascii = FALSE), method = 'render')
 ```
 ###3.2. Modelo de clases latentes
 
@@ -70,7 +69,7 @@ f<-cbind(contrato,
 
 A continuación, con el paquete poLCA se estiman 11 diferentes modelos de clases latentes, contemplando de dos a doce clases.
 
-```{r lca_models, echo=TRUE, message=FALSE, warning=FALSE}
+```{r lca_models, message=FALSE, warning=FALSE, include=FALSE}
 lc1=poLCA(f, base_proc, nclass=1, graphs = F, nrep = 3, maxiter = 5000)
 
 set.seed(123741) # para mantener el mismo orden de las clases
@@ -100,7 +99,7 @@ lc12=poLCA(f, base_proc, nclass=12, graphs = F, maxiter = 5000, nrep = 3, tol=0.
 
 ###3.3. Medidas de ajuste de los modelos
 Siguiendo los planteamientos de McCutcheon (2002), en aras de encontrar el modelo más parsimonioso, con la menor cantidad de clases y que tenga un ajuste aceptable, se considerará el chi-cuadrado de Pearson (X2) con su p-valor (P.value), chi-cuadrado de razón de verosimilitud (G2), criterio de información de Akaike (AIC) y criterio de información bayesiano (BIC). En virtud de este objetivo, se estiman las medidas de ajuste de los once modelos. 
-```{r measures_of_goodness_of_fit}
+```{r measures_of_goodness_of_fit, echo=TRUE, message=FALSE, warning=FALSE}
 ##  Estadísticos de ajuste
 
 AIC.1 <-as.numeric(lc1$aic)
@@ -194,14 +193,15 @@ Modelos <- c("1 clase","2 clases", "3 clases", "4 clases", "5 clases", "6 clases
 fit.indices <- data.frame(Modelos,AIC,BIC,llik,chi.cuadrado,G2,N)
 
 sjPlot::tab_df(fit.indices,
-               title = "Medidas de ajuste para modelos de clase latente",
-               footnote = "Elaboracion propia en base a ESI (2021)",
+               title = "Tabla 2.
+               Medidas de ajuste para modelos de clases latentes",
+               footnote = "Elaboracion propia en base a ESI (2020)",
                col.header = c("Modelos", "AIC", "BIC", "Log-likelihood", "Chi^2", "G2", "N"),
                show.footnote = T)
 ```
 
 ###3.4. Gráfico del modelo elegido
-```{r, model_graph}
+```{r model_graph, echo=TRUE, message=FALSE, warning=FALSE}
 
 lca4_probs=as.data.frame(lc4$probs)
 datlca_tot_par=lca4_probs[c(1,3,5,8,10,12,14,20,22,24,26,28,32)] #dejar la categoria mas precaria
@@ -217,18 +217,19 @@ datlca_tot_parl$class=factor(datlca_tot_parl$class,labels=c("Clase 1 (17.9%)", "
 
 lca4_graph <-ggplot(data = datlca_tot_parl, aes(x=variable, y=value, group=class, shape=class)) + 
       geom_line(aes(linetype=class)) + geom_point(size = 2) +
-      labs(title = "Clases Latentes de Precariedad Laboral en Sector Servicios",
-           caption = "Elaboracion propia en base a ESI (2021)") + 
-      xlab("Indicadores Precariedad") + 
+      labs(title = "Grafico 1.", 
+           subtitle = "Clases latentes de precariedad laboral en sector servicios",
+           caption = "Elaboracion propia en base a ESI (2020)") + 
+      xlab("Indicadores precariedad") + 
       ylab("Probabilidades condicionales") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
     
 lca4_graph
 
-ggsave("../output/lca4.jpg", plot = lca4_graph, height=4, width=10, units="in", dpi=350)
 ```
 
-```{r tabla_modelo}
+
+```{r tabla_modelo, echo=TRUE, message=FALSE, warning=FALSE}
 lcmodel <- reshape2::melt(lc4$probs, level=2)
 
 modelo <- lcmodel %>% 
@@ -287,15 +288,16 @@ modelo <- lcmodel %>%
          clase4 = (round(.$clase4, digits = 3))*100)
 
 sjPlot::tab_df(modelo,
-               title = 'Modelo de clases latentes de precariedad laboral',
-               footnote = 'Elaboracion propia en base a ESI (2021)',
+               title = 'Tabla 3.
+               Modelo de clases latentes de precariedad laboral',
+               footnote = 'Elaboracion propia en base a ESI (2020)',
                show.footnote = T)
 
 ```
 
 
 ###3.5 Tablas cruzadas
-```{r, cross_tables, warning=F}
+```{r cross_table_sex, echo=TRUE, message=FALSE, warning=FALSE}
 
 #Asginar la clase de precariedad a cada sujeto
 base_proc <- cbind(base_proc, lc4$predclass) 
@@ -303,18 +305,28 @@ base_proc <- cbind(base_proc, lc4$predclass)
 #Renombrar la variable de clase de precariedad
 base_proc <- base_proc %>% rename(Clase=`lc4$predclass`)
 
-#Creación de tablas cruzadas
+#Creación de tabla cruzada para variable sexo
 sjt.xtab(base_proc$Clase, base_proc$sexo,
-         title = "Tabla cruzada por clase y sexo",
+         title = "Tabla 4.
+         Proporciones por clase de precariedad y sexo",
          show.cell.prc = T)
-
-sjt.xtab(base_proc$Clase, base_proc$educacion,
-         title = "Tabla cruzada por clase y nivel educacional",
-         show.cell.prc = T)
-
-sjt.xtab(base_proc$Clase, base_proc$edad,
-         title = "Tabla cruzada por clase y edad",
-         show.cell.prc = T,
-         encoding = 'UTF-8')
 
 ```
+
+```{r cross_table_education, echo=TRUE, message=FALSE, warning=FALSE}
+#Creación de tabla cruzada para variable educación
+sjt.xtab(base_proc$Clase, base_proc$educacion,
+         title = "Tabla 5.
+         Proporciones por clase de precariedad y nivel educacional",
+         show.cell.prc = T)
+```
+
+```{r cross_table_age, echo=TRUE, message=FALSE, warning=FALSE}
+#Creación de tabla cruzada para variable edad
+sjt.xtab(base_proc$Clase, base_proc$edad,
+         title = "Tabla 6.
+         Proporciones por clase de precariedad y edad",
+         show.cell.prc = T,
+         encoding = 'UTF-8')
+```
+
