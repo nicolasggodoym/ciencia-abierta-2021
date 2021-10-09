@@ -224,9 +224,7 @@ pre code {
          b13_rev4cl_caenes != 2 |
          b13_rev4cl_caenes != 3 |
          b13_rev4cl_caenes != 6) %&gt;% 
-  select(exp = fact_cal_esi,
-         id = idrph,
-         contrato = b8,
+  select(contrato = b8,
          contrato_duracion = b9,
          contrato_sub = b12,
          cotiza_prev = b7a_1,
@@ -242,7 +240,7 @@ pre code {
          sexo,
          tramo_edad,
          educacion = cine)</code></pre>
-<p>Una vez filtrados los datos, data_proc presenta 18 columnas y 3.756 filas.</p>
+<p>Una vez filtrados los datos, data_proc presenta 16 columnas y 3.756 filas.</p>
 <div id="transformar-datatype" class="section level3">
 <h3>3.1. Transformar <em>datatype</em></h3>
 <p>Las variables categóricas se transforman a tipo <strong>factor</strong>. Variables numéricas (ingresos y horas) son transformadas a tipo <strong>factor</strong> para poder incorporarlas en el modelo de clases latentes. Vale recalcar que, para el caso de la variable ingresos, esta se recodificó como <em>quintiles de ingreso</em>. Además, se recodifican los valores nulos como <code>NA</code>. Luego, se verifica la estructura de los datos con <code>str()</code>, para verificar los cambios.</p>
@@ -252,14 +250,18 @@ pre code {
 <pre><code>##      20%      40%      60%      80% 
 ## 291973.5 380500.1 500000.0 779786.8</code></pre>
 <pre class="r"><code>data_proc &lt;- data_proc %&gt;% 
-  mutate_at(vars(-c(exp, id)), ~(as.numeric(.))) %&gt;%  
+  mutate_all (~(as.numeric(.))) %&gt;%  
   mutate(ingresos = case_when(ingresos &lt;= 291974 ~ &quot;$0 a $291.974&quot;,
                               ingresos &gt; 291974 &amp; ingresos &lt;= 380500 ~ &quot;$291.975 a $380.500&quot;,
                               ingresos &gt; 380500 &amp; ingresos &lt;= 500000 ~ &quot;$380.501 a $500.000&quot;,
                               ingresos &gt; 500000 &amp; ingresos &lt;= 779787 ~ &quot;$500.001 a $779.787&quot;,
                               ingresos &gt; 779787 ~ &quot;$779.788 o mas&quot;, 
                               TRUE ~ NA_character_),
-         edad = car::recode(.$tramo_edad, recodes = &quot;(1) = &#39;15 a 19 años&#39;; c(2, 3) = &#39;20 a 29 años&#39;; c(4, 5, 6, 7) = &#39;25 a 49 años&#39;; c(8, 9, 10) = &#39;50 a 64 años&#39;; c(11, 12) = &#39;65 años o mas&#39;&quot;),
+         edad = car::recode(.$tramo_edad, recodes = &quot;(1) = &#39;15 a 19 anos&#39;;
+                            c(2, 3) = &#39;20 a 29 anos&#39;;
+                            c(4, 5, 6, 7) = &#39;25 a 49 anos&#39;;
+                            c(8, 9, 10) = &#39;50 a 64 anos&#39;;
+                            c(11, 12) = &#39;65 anos o mas&#39;&quot;),
          horas = case_when(horas &lt;= 30 ~ &quot;Igual o menor a 30 horas semanales&quot;,
                            horas &gt; 30 &amp; horas &lt;= 45 ~ &quot;Entre 31 y 45 horas semanales&quot;,
                            horas &gt; 45 ~ &quot;Mayor a 45 horas semanales&quot;, 
@@ -319,13 +321,7 @@ pre code {
   select(-tramo_edad)
 
 str(data_proc)</code></pre>
-<pre><code>## tibble [3,756 x 18] (S3: tbl_df/tbl/data.frame)
-##  $ exp              : num [1:3756] 154.4 44 363 64.1 349.7 ...
-##   ..- attr(*, &quot;label&quot;)= chr &quot;Factor de expansión ESI con nueva calibración, proyecciones de población&quot;
-##   ..- attr(*, &quot;format.stata&quot;)= chr &quot;%10.0g&quot;
-##  $ id               : num [1:3756] 478028 583105 1280894 1349715 1590348 ...
-##   ..- attr(*, &quot;label&quot;)= chr &quot;Identificador único de personas&quot;
-##   ..- attr(*, &quot;format.stata&quot;)= chr &quot;%12.0g&quot;
+<pre><code>## tibble [3,756 x 16] (S3: tbl_df/tbl/data.frame)
 ##  $ contrato         : Factor w/ 2 levels &quot;No&quot;,&quot;Si&quot;: 2 2 2 2 2 2 2 2 2 2 ...
 ##  $ contrato_duracion: Factor w/ 2 levels &quot;Definido&quot;,&quot;Indefinido&quot;: 1 2 2 2 1 1 1 2 2 1 ...
 ##  $ contrato_sub     : Factor w/ 3 levels &quot;Con un contratista o subcontratista de bienes y servicios&quot;,..: 2 1 1 1 1 1 1 1 1 3 ...
@@ -341,7 +337,7 @@ str(data_proc)</code></pre>
 ##  $ horas            : Factor w/ 3 levels &quot;Entre 31 y 45 horas semanales&quot;,..: 1 1 1 1 2 1 2 1 1 1 ...
 ##  $ sexo             : Factor w/ 2 levels &quot;Hombre&quot;,&quot;Mujer&quot;: 1 1 1 2 1 1 2 2 1 2 ...
 ##  $ educacion        : Factor w/ 8 levels &quot;Doctorado&quot;,&quot;Educacion primaria (nivel 1)&quot;,..: 3 4 4 4 6 4 2 5 4 6 ...
-##  $ edad             : chr [1:3756] &quot;25 a 49 años&quot; &quot;15 a 19 años&quot; &quot;25 a 49 años&quot; &quot;25 a 49 años&quot; ...</code></pre>
+##  $ edad             : chr [1:3756] &quot;25 a 49 anos&quot; &quot;15 a 19 anos&quot; &quot;25 a 49 anos&quot; &quot;25 a 49 anos&quot; ...</code></pre>
 </div>
 <div id="eliminar-casos-perdidos" class="section level3">
 <h3>3.2. Eliminar casos perdidos</h3>
@@ -349,11 +345,11 @@ str(data_proc)</code></pre>
 <pre class="r"><code>sum(is.na(data_proc))</code></pre>
 <pre><code>## [1] 2342</code></pre>
 <pre class="r"><code>dim(data_proc)</code></pre>
-<pre><code>## [1] 3756   18</code></pre>
+<pre><code>## [1] 3756   16</code></pre>
 <pre class="r"><code>data_proc &lt;-na.omit(data_proc)
 dim(data_proc)</code></pre>
-<pre><code>## [1] 2531   18</code></pre>
-<p>Una vez eliminados los casos perdidos, el objeto pasa a tener 18 columnas y 2.531 filas.</p>
+<pre><code>## [1] 2531   16</code></pre>
+<p>Una vez eliminados los casos perdidos, el objeto pasa a tener 16 columnas y 2.531 filas.</p>
 </div>
 </div>
 </div>
@@ -395,7 +391,7 @@ data_proc$educacion &lt;- set_label(data_proc$educacion, &#39;Educacion&#39;)</c
 <h2>4. Generar tablas descriptivas</h2>
 <p>Una vez realizado el procesamiento anterior, se realizan tablas resumen para dar cuenta de las categorías de respuesta de cada una de las variables de componen cada dimensión:</p>
 <pre class="r"><code>inestabilidad &lt;- data_proc %&gt;% 
-  select(3:5)
+  select(1:3)
 
 sjPlot::view_df(inestabilidad)</code></pre>
 <table style="border-collapse:collapse; border:none;">
@@ -469,7 +465,7 @@ Con un contratista o subcontratista de bienes y servicios<br>Con un enganchador 
 </tr>
 </table>
 <pre class="r"><code>inseguridad &lt;- data_proc %&gt;% 
-  select(6:8)
+  select(4:6)
 
 sjPlot::view_df(inseguridad)</code></pre>
 <table style="border-collapse:collapse; border:none;">
@@ -543,7 +539,7 @@ No<br>Si
 </tr>
 </table>
 <pre class="r"><code>insuficiencia &lt;- data_proc %&gt;% 
-  select(9)
+  select(7)
 
 sjPlot::view_df(insuficiencia)</code></pre>
 <table style="border-collapse:collapse; border:none;">
@@ -585,7 +581,7 @@ $0 a $291.974<br>$291.975 a $380.500<br>$380.501 a $500.000<br>$500.001 a $779.7
 </tr>
 </table>
 <pre class="r"><code>condiciones &lt;- data_proc %&gt;% 
-  select(10:14)
+  select(8:12)
 
 sjPlot::view_df(condiciones)</code></pre>
 <table style="border-collapse:collapse; border:none;">
@@ -691,7 +687,7 @@ No<br>Si
 </tr>
 </table>
 <pre class="r"><code>cronopiedad &lt;- data_proc %&gt;% 
-  select(15)
+  select(13)
 
 sjPlot::view_df(cronopiedad)</code></pre>
 <table style="border-collapse:collapse; border:none;">
@@ -733,7 +729,7 @@ Entre 31 y 45 horas semanales<br>Igual o menor a 30 horas semanales<br>Mayor a 4
 </tr>
 </table>
 <pre class="r"><code>demograficas &lt;- data_proc %&gt;% 
-  select(16:18)
+  select(14:16)
 
 sjPlot::view_df(demograficas)</code></pre>
 <table style="border-collapse:collapse; border:none;">
