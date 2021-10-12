@@ -1,4 +1,0 @@
-"0","lcmodel <- reshape2::melt(lc4$probs, level=2)
-"
-"2","Error in reshape2::melt(lc4$probs, level = 2) : object 'lc4' not found
-"

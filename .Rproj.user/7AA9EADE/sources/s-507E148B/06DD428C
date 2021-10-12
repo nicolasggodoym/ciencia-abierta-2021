@@ -3,7 +3,7 @@
     "path": "~/GitHub/ciencia-abierta-2021/procesamiento/codigo_analisis.Rmd",
     "project_path": "procesamiento/codigo_analisis.Rmd",
     "type": "r_markdown",
-    "hash": "2183259241",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1633442039452.0,
@@ -16,11 +16,11 @@
         "scrollLine": "294"
     },
     "folds": "",
-    "lastKnownWriteTime": 1633732308,
+    "lastKnownWriteTime": 1634053061,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1633732308922,
+    "last_content_update": 1634053061,
     "read_only": false,
     "read_only_alternatives": []
 }

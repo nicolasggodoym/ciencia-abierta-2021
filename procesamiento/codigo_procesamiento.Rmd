@@ -37,7 +37,7 @@ El objeto presenta `r format(ncol(data), decimal.mark="," , big.mark = ".")` col
 
 ## 3. Procesar datos
 
-Se crea un nuevo objeto llamado data_proc, en que se filtran aquellos trabajadores cuya empresa no se aboca a una actividad económica de servicios (todos aquellos cuyos valores en la columna b13_rev4cl_caenes son distintos a 1 (*Agricultura, ganadería, silvicultura y pesca*), 2 (*Explotación de minas y canteras*), 3 (*Industrias manufactureras*) y 6 (*Construcción*)). Se seleccionan variables de diseño muestral (exp), identificadores (id), demográficas (sexo, edad y educacion), y de cada una de las dimensiones:
+Se crea un nuevo objeto llamado data_proc, en que se filtran aquellos trabajadores cuya empresa no se aboca a una actividad económica de servicios (todos aquellos cuyos valores en la columna b13_rev4cl_caenes son distintos a 1 (*Agricultura, ganadería, silvicultura y pesca*), 2 (*Explotación de minas y canteras*), 3 (*Industrias manufactureras*) y 6 (*Construcción*)). Se seleccionan variables demográficas (sexo, edad y educacion), y de cada una de las dimensiones:
 
 1. (In)estabilidad: variables contrato
 2. (In)seguridad: variables cotiza
