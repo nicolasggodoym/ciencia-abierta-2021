@@ -1,0 +1,8 @@
+"0","pacman::p_load(summarytools, #para estadísticos descriptivos"
+"0","               poLCA, #para estimar los modelos LCA"
+"0","               sjPlot, #para realizar las tablas"
+"0","               dplyr, #para manipular datos"
+"0","               tidyr, #para cambiar estructura de los datos"
+"0","               reshape2, #para crear tabla de modelos LCA"
+"0","               ggplot2) #para crear graficos"
+"0","options(scipen = 999)"

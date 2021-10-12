@@ -338,12 +338,1903 @@ div.tocify {
 </div>
 <div id="metodología" class="section level1">
 <h1>Metodología</h1>
+<pre class="r"><code>pacman::p_load(summarytools, #para estadísticos descriptivos
+               poLCA, #para estimar los modelos LCA
+               sjPlot, #para realizar las tablas
+               dplyr, #para manipular datos
+               tidyr, #para cambiar estructura de los datos
+               reshape2, #para crear tabla de modelos LCA
+               ggplot2) #para crear graficos
+options(scipen = 999)</code></pre>
+<pre class="r"><code>base_proc &lt;- readRDS(&quot;../input/data/data_proc.rds&quot;)</code></pre>
+<pre class="r"><code>print(summarytools::dfSummary(base_proc, headings=FALSE, plain.ascii = FALSE), method = &#39;render&#39;)</code></pre>
+<div class="container st-container">
+<table class="table table-striped table-bordered st-table st-table-striped st-table-bordered st-multiline ">
+  <thead>
+    <tr>
+      <th align="center" class="st-protect-top-border"><strong>No</strong></th>
+      <th align="center" class="st-protect-top-border"><strong>Variable</strong></th>
+      <th align="center" class="st-protect-top-border"><strong>Label</strong></th>
+      <th align="center" class="st-protect-top-border"><strong>Stats / Values</strong></th>
+      <th align="center" class="st-protect-top-border"><strong>Freqs (% of Valid)</strong></th>
+      <th align="center" class="st-protect-top-border"><strong>Graph</strong></th>
+      <th align="center" class="st-protect-top-border"><strong>Valid</strong></th>
+      <th align="center" class="st-protect-top-border"><strong>Missing</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">1</td>
+      <td align="left">contrato
+[factor]</td>
+      <td align="left">Existencia de contrato</td>
+      <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. No</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. Si</td></tr></table></td>
+      <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">173</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">6.8%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">2358</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">93.2%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
+      <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAJgAAAA3BAMAAAACpp4pAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAD1BMVEX////9/v2mpqbw8PD///+xh0SBAAAAAnRSTlMAAHaTzTgAAAABYktHRACIBR1IAAAAB3RJTUUH5QoMDhonlYLlMgAAAEtJREFUWMPt1TERACAMBMFYQALBAfj3FpihoIWkyXAnYJsvXoRe0lUtzjbWxgwMDAwM7Ess9FC8TBJMQzrX9NbBwMDAwDJioYdCdxmUWKqEz5cbZAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0xMC0xMlQxNDoyNjozOSswMDowMG0G1wIAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMTAtMTJUMTQ6MjY6MzkrMDA6MDAcW2++AAAAAElFTkSuQmCC"></td>
+      <td align="center">2531
+(100.0%)</td>
+      <td align="center">0
+(0.0%)</td>
+    </tr>
+    <tr>
+      <td align="center">2</td>
+      <td align="left">contrato_duracion
+[factor]</td>
+      <td align="left">Duracion de contrato</td>
+      <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. Definido</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. Indefinido</td></tr></table></td>
+      <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1074</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">42.4%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1457</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">57.6%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
+      <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAGMAAAA3BAMAAADqCulHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAD1BMVEX////9/v2mpqbw8PD///+xh0SBAAAAAnRSTlMAAHaTzTgAAAABYktHRACIBR1IAAAAB3RJTUUH5QoMDhonlYLlMgAAAEJJREFUSMdjYBheQIkAEEQAAagWZWO8wGhUy6iWUS3DUwsZxYUg8YC+Wgj5BQkoEBdiyGBUy6iWUS3DSAsZxcVwAQA1slkvvLHOYwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0xMC0xMlQxNDoyNjozOSswMDowMG0G1wIAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMTAtMTJUMTQ6MjY6MzkrMDA6MDAcW2++AAAAAElFTkSuQmCC"></td>
+      <td align="center">2531
+(100.0%)</td>
+      <td align="center">0
+(0.0%)</td>
+    </tr>
+    <tr>
+      <td align="center">3</td>
+      <td align="left">contrato_sub
+[factor]</td>
+      <td align="left">Acuerdo de trabajo</td>
+      <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. Con un contratista o subc</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. Con un enganchador (contr</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">3. Con una empresa de servic</td></tr></table></td>
+      <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1563</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">61.8%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">94</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">3.7%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">874</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">34.5%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
+      <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAGkAAABOBAMAAADRBSWHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAD1BMVEX////9/v2mpqbw8PD///+xh0SBAAAAAnRSTlMAAHaTzTgAAAABYktHRACIBR1IAAAAB3RJTUUH5QoMDhonlYLlMgAAAFVJREFUWMPt1aENACAMRFFGgA0I3QD23w0EtiSt4/K/f6LmWopuI1S/ylYkFAqlpXK70ULVb9Q5MaFsTRQKJaByCxAgXyn/E7yU+4kmCoXSV7ndUGwDa0CewX+ydCMAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjEtMTAtMTJUMTQ6MjY6MzkrMDA6MDBtBtcCAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIxLTEwLTEyVDE0OjI2OjM5KzAwOjAwHFtvvgAAAABJRU5ErkJggg=="></td>
+      <td align="center">2531
+(100.0%)</td>
+      <td align="center">0
+(0.0%)</td>
+    </tr>
+    <tr>
+      <td align="center">4</td>
+      <td align="left">cotiza_prev
+[factor]</td>
+      <td align="left">Cotizacion en prevision</td>
+      <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. No</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. Si</td></tr></table></td>
+      <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">225</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">8.9%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">2306</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">91.1%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
+      <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAJUAAAA3BAMAAAD3WBWZAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAD1BMVEX////9/v2mpqbw8PD///+xh0SBAAAAAnRSTlMAAHaTzTgAAAABYktHRACIBR1IAAAAB3RJTUUH5QoMDhonlYLlMgAAAE1JREFUWMPt1cENABAQRNEtgQ5kdUD/vYlwcSO7B+T/At5lDiNCp+koWgrTyrVXsLCwsLA+tzy/w4Q8YqlDadnRFhYWFhbW/Zbnd9B+Dc+Epzab5RU8AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTEwLTEyVDE0OjI2OjM5KzAwOjAwbQbXAgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0xMC0xMlQxNDoyNjozOSswMDowMBxbb74AAAAASUVORK5CYII="></td>
+      <td align="center">2531
+(100.0%)</td>
+      <td align="center">0
+(0.0%)</td>
+    </tr>
+    <tr>
+      <td align="center">5</td>
+      <td align="left">cotiza_salud
+[factor]</td>
+      <td align="left">Cotizacion en salud</td>
+      <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. No</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. Si</td></tr></table></td>
+      <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">177</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">7.0%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">2354</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">93.0%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
+      <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAJgAAAA3BAMAAAACpp4pAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAD1BMVEX////9/v2mpqbw8PD///+xh0SBAAAAAnRSTlMAAHaTzTgAAAABYktHRACIBR1IAAAAB3RJTUUH5QoMDhonlYLlMgAAAEtJREFUWMPt1TERACAMBMFYQALBAfj3FpihoIWkyXAnYJsvXoRe0lUtzjbWxgwMDAwM7Ess9FC8TBJMQzrX9NbBwMDAwDJioYdCdxmUWKqEz5cbZAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0xMC0xMlQxNDoyNjozOSswMDowMG0G1wIAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMTAtMTJUMTQ6MjY6MzkrMDA6MDAcW2++AAAAAElFTkSuQmCC"></td>
+      <td align="center">2531
+(100.0%)</td>
+      <td align="center">0
+(0.0%)</td>
+    </tr>
+    <tr>
+      <td align="center">6</td>
+      <td align="left">cotiza_seguro
+[factor]</td>
+      <td align="left">Cotizacion en seguro de desempleo</td>
+      <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. No</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. Si</td></tr></table></td>
+      <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">529</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">20.9%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">2002</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">79.1%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
+      <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAIMAAAA3BAMAAADd6OQ2AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAD1BMVEX////9/v2mpqbw8PD///+xh0SBAAAAAnRSTlMAAHaTzTgAAAABYktHRACIBR1IAAAAB3RJTUUH5QoMDhonlYLlMgAAAEtJREFUSMdjYBgFyEAJDQgSDwSgRigbowCjUSNGjRg1YtSIUSMIG0GF4pcELYPbCCXygQL2GCEFjBoxasSoEaNGjFgjqFD8jgIIAACVTYsfcnrkcQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0xMC0xMlQxNDoyNjozOSswMDowMG0G1wIAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMTAtMTJUMTQ6MjY6MzkrMDA6MDAcW2++AAAAAElFTkSuQmCC"></td>
+      <td align="center">2531
+(100.0%)</td>
+      <td align="center">0
+(0.0%)</td>
+    </tr>
+    <tr>
+      <td align="center">7</td>
+      <td align="left">ingresos
+[factor]</td>
+      <td align="left">Quintiles de ingreso</td>
+      <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. $0 a $291.974</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. $291.975 a $380.500</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">3. $380.501 a $500.000</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">4. $500.001 a $779.787</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">5. $779.788 o más</td></tr></table></td>
+      <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">625</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">24.7%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">625</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">24.7%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">671</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">26.5%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">610</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">24.1%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">0</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">0.0%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
+      <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAADQAAAB9BAMAAAAfAV18AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAD1BMVEX////9/v2mpqbw8PD///+xh0SBAAAAAnRSTlMAAHaTzTgAAAABYktHRACIBR1IAAAAB3RJTUUH5QoMDhonlYLlMgAAAFNJREFUSMdjYKAvUMIEglApZWN0YDQqNZKk8KQNQSyAIqnRdDgqhUtqgNOhEk4XGhuNSo0gKTxpgw7pUBF3ThmVGlFSeNIG1dOh4qjUqBTpUvQCABcvYvtLopkBAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTEwLTEyVDE0OjI2OjM5KzAwOjAwbQbXAgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0xMC0xMlQxNDoyNjozOSswMDowMBxbb74AAAAASUVORK5CYII="></td>
+      <td align="center">2531
+(100.0%)</td>
+      <td align="center">0
+(0.0%)</td>
+    </tr>
+    <tr>
+      <td align="center">8</td>
+      <td align="left">lugar_trab
+[factor]</td>
+      <td align="left">Lugar de trabajo</td>
+      <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. En instalaciones u oficin</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. En instalaciones, oficina</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">3. En la calle o via publica</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">4. En obras de construccion,</td></tr></table></td>
+      <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">192</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">7.6%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1498</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">59.2%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">265</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">10.5%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">576</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">22.8%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
+      <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAGUAAABmBAMAAAAgxkJSAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAD1BMVEX////9/v2mpqbw8PD///+xh0SBAAAAAnRSTlMAAHaTzTgAAAABYktHRACIBR1IAAAAB3RJTUUH5QoMDhonlYLlMgAAAG5JREFUWMPt1cENgCAQRFFK0A4UO9D+e9MYEki4zK4HZPP/mXfZw5BSvPLbKrUUc1xPJwaDiWY8e6C9HmOyoa29mxgGg5nHePbgz/v2ZRMtptxa+k0wGMw8xrMHyttRphvyXb5bDYPBhDCePYjUDfWx3YqEZgoIAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTEwLTEyVDE0OjI2OjM5KzAwOjAwbQbXAgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0xMC0xMlQxNDoyNjozOSswMDowMBxbb74AAAAASUVORK5CYII="></td>
+      <td align="center">2531
+(100.0%)</td>
+      <td align="center">0
+(0.0%)</td>
+    </tr>
+    <tr>
+      <td align="center">9</td>
+      <td align="left">cond_vacaciones
+[factor]</td>
+      <td align="left">Derecho a vacaciones</td>
+      <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. No</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. Si</td></tr></table></td>
+      <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">551</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">21.8%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1980</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">78.2%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
+      <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAIIAAAA3BAMAAAAyKo8IAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAD1BMVEX////9/v2mpqbw8PD///+xh0SBAAAAAnRSTlMAAHaTzTgAAAABYktHRACIBR1IAAAAB3RJTUUH5QoMDhonlYLlMgAAAEpJREFUSMdjYBgFMKCEBhQFiQZQE5SNUcGoCaMmjJowasKoCagmUF7SEq9hMJugRD7AERfEA6NRE0ZNGDVh1IQRYQLlJe0oYGAAAGqfiC9Ulaw9AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTEwLTEyVDE0OjI2OjM5KzAwOjAwbQbXAgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0xMC0xMlQxNDoyNjozOSswMDowMBxbb74AAAAASUVORK5CYII="></td>
+      <td align="center">2531
+(100.0%)</td>
+      <td align="center">0
+(0.0%)</td>
+    </tr>
+    <tr>
+      <td align="center">10</td>
+      <td align="left">cond_enfermedad
+[factor]</td>
+      <td align="left">Derecho a dias pagos por enfermedad</td>
+      <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. No</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. Si</td></tr></table></td>
+      <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">256</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">10.1%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">2275</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">89.9%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
+      <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAJMAAAA3BAMAAAD6RmXeAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAD1BMVEX////9/v2mpqbw8PD///+xh0SBAAAAAnRSTlMAAHaTzTgAAAABYktHRACIBR1IAAAAB3RJTUUH5QoMDhonlYLlMgAAAE1JREFUWMPt1cENABAQRFEl0IGsDui/N4nsxQ27B+T/At5lDhMC7SRaOi8qVdqoQkFBQUH9QznehIF4gxJ7eV7QEhQUFBTUZZTjTdBaHUIYpBd+YHAJAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTEwLTEyVDE0OjI2OjM5KzAwOjAwbQbXAgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0xMC0xMlQxNDoyNjozOSswMDowMBxbb74AAAAASUVORK5CYII="></td>
+      <td align="center">2531
+(100.0%)</td>
+      <td align="center">0
+(0.0%)</td>
+    </tr>
+    <tr>
+      <td align="center">11</td>
+      <td align="left">cond_maternidad
+[factor]</td>
+      <td align="left">Derecho a dias pagos por pa/maternidad</td>
+      <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. No</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. Si</td></tr></table></td>
+      <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">399</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">15.8%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">2132</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">84.2%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
+      <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAIsAAAA3BAMAAADOP6TCAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAD1BMVEX////9/v2mpqbw8PD///+xh0SBAAAAAnRSTlMAAHaTzTgAAAABYktHRACIBR1IAAAAB3RJTUUH5QoMDhooBT34owAAAE1JREFUSMdjYBgF+IASEhAkHQhAjVE2hgOjUWNGjRk1ZtSYUWMGxhgqFelkaB38xihRBhQwY4ocMGrMqDGjxowaM2oMFYyhUpE+CrADABajl5sMApTnAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTEwLTEyVDE0OjI2OjQwKzAwOjAw8lubyAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0xMC0xMlQxNDoyNjo0MCswMDowMIMGI3QAAAAASUVORK5CYII="></td>
+      <td align="center">2531
+(100.0%)</td>
+      <td align="center">0
+(0.0%)</td>
+    </tr>
+    <tr>
+      <td align="center">12</td>
+      <td align="left">cond_guarderia
+[factor]</td>
+      <td align="left">Derecho a guarderia infantil</td>
+      <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. No</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. Si</td></tr></table></td>
+      <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1769</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">69.9%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">762</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">30.1%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
+      <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAHUAAAA3BAMAAADAuhjoAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAD1BMVEX////9/v2mpqbw8PD///+xh0SBAAAAAnRSTlMAAHaTzTgAAAABYktHRACIBR1IAAAAB3RJTUUH5QoMDhooBT34owAAAENJREFUSMdjYBh5QIkMoADVq2xMOhjVO6p3VO+o3oHQS0lZJ0gGEBhgvTi8RJRe7OFsNKp3VO+o3lG9g04vJWXdSAIAAK11RmzOFY4AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjEtMTAtMTJUMTQ6MjY6NDArMDA6MDDyW5vIAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIxLTEwLTEyVDE0OjI2OjQwKzAwOjAwgwYjdAAAAABJRU5ErkJggg=="></td>
+      <td align="center">2531
+(100.0%)</td>
+      <td align="center">0
+(0.0%)</td>
+    </tr>
+    <tr>
+      <td align="center">13</td>
+      <td align="left">horas
+[factor]</td>
+      <td align="left">Total horas semanales habituales en
+actividad principal</td>
+      <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. Entre 31 y 45 horas seman</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. Igual o menor a 30 horas </td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">3. Mayor a 45 horas semanale</td></tr></table></td>
+      <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">2069</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">81.7%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">194</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">7.7%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">268</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">10.6%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
+      <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAIcAAABOBAMAAAD4LhhFAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAD1BMVEX////9/v2mpqbw8PD///+xh0SBAAAAAnRSTlMAAHaTzTgAAAABYktHRACIBR1IAAAAB3RJTUUH5QoMDhooBT34owAAAGFJREFUWMPt1rENwCAMBVGPABsQ2CDsv1ukAIWlVPmurLueVxjJYEZfdaW2kTGFQEBAQPIiITu2KpWcyJqQiLxXfIOAgIBkQkLW48/jqZHzNl8Kcr4WICAgICAOCdmx5HsAWa3leC11mskAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjEtMTAtMTJUMTQ6MjY6NDArMDA6MDDyW5vIAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIxLTEwLTEyVDE0OjI2OjQwKzAwOjAwgwYjdAAAAABJRU5ErkJggg=="></td>
+      <td align="center">2531
+(100.0%)</td>
+      <td align="center">0
+(0.0%)</td>
+    </tr>
+    <tr>
+      <td align="center">14</td>
+      <td align="left">sexo
+[factor]</td>
+      <td align="left">Sexo</td>
+      <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. Hombre</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. Mujer</td></tr></table></td>
+      <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1349</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">53.3%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1182</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">46.7%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
+      <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAFwAAAA3BAMAAABz8jDyAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAD1BMVEX////9/v2mpqbw8PD///+xh0SBAAAAAnRSTlMAAHaTzTgAAAABYktHRACIBR1IAAAAB3RJTUUH5QoMDhooBT34owAAAD5JREFUSMdjYBjaQIlIAFWubEwUMBpVPqp8VPnAKicxawsSCeiinAhnKyIpJyJkRpWPKh9VPgiUk5i1hyoAACM2TOJiMF9qAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTEwLTEyVDE0OjI2OjQwKzAwOjAw8lubyAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0xMC0xMlQxNDoyNjo0MCswMDowMIMGI3QAAAAASUVORK5CYII="></td>
+      <td align="center">2531
+(100.0%)</td>
+      <td align="center">0
+(0.0%)</td>
+    </tr>
+    <tr>
+      <td align="center">15</td>
+      <td align="left">educacion
+[factor]</td>
+      <td align="left">Educacion</td>
+      <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. Doctorado</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. Educacion primaria (nivel</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">3. Educacion primaria (nivel</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">4. Educacion secundaria</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">5. Educacion tecnica (superi</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">6. Educacion universitaria</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">7. Nunca estudio</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">8. Postitulos y maestria</td></tr></table></td>
+      <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">0</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">0.0%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">158</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">6.2%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">290</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">11.5%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1391</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">55.0%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">431</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">17.0%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">242</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">9.6%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">8</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">0.3%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">11</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">0.4%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
+      <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAF8AAADEBAMAAAALw+BGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAD1BMVEX////9/v2mpqbw8PD///+xh0SBAAAAAnRSTlMAAHaTzTgAAAABYktHRACIBR1IAAAAB3RJTUUH5QoMDhooBT34owAAAJlJREFUaN7t1NEJgDAMhOGOYDfQukGz/24iKIgvvaCGWv57vg/aQJLSGFmymAkAAAwJ1H4gKHs8YDWzCgAAegXunVa6waCc8UzJlEkBAIAXgHtFW70/gKJmvo21GQAA8AJwr2iHZ+bZXVLAdawVAAB8DNwrmtV0DI7vLjI4xgoAAEKAe0WbxXjQfjwAABgaqH3uEgAAiAJ/zwYc+sowXpth6wAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0xMC0xMlQxNDoyNjo0MCswMDowMPJbm8gAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMTAtMTJUMTQ6MjY6NDArMDA6MDCDBiN0AAAAAElFTkSuQmCC"></td>
+      <td align="center">2531
+(100.0%)</td>
+      <td align="center">0
+(0.0%)</td>
+    </tr>
+    <tr>
+      <td align="center">16</td>
+      <td align="left">edad
+[character]</td>
+      <td align="left">Edad</td>
+      <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. 15 a 19 anos</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. 20 a 29 anos</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">3. 25 a 49 anos</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">4. 50 a 64 anos</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">5. 65 anos o mas</td></tr></table></td>
+      <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">31</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">1.2%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">436</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">17.2%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1153</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">45.6%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">805</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">31.8%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">106</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">4.2%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
+      <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAFEAAAB9BAMAAAAoz5JIAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAD1BMVEX////9/v2mpqbw8PD///+xh0SBAAAAAnRSTlMAAHaTzTgAAAABYktHRACIBR1IAAAAB3RJTUUH5QoMDhooBT34owAAAHBJREFUWMPt1sENgCAQRFFKcDsQ6ED7782LiRwWd2KCkfj/+V32MISU5qlkC1pOWZFIZEfqO4rcWFna8p2sexMSibQnO7Kw1/butnq3uyGRf5X6jr659+Ctu9qQSKS+oxEr1mXv9+HejkQiXanvaIYOzxHV/030+dkAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjEtMTAtMTJUMTQ6MjY6NDArMDA6MDDyW5vIAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIxLTEwLTEyVDE0OjI2OjQwKzAwOjAwgwYjdAAAAABJRU5ErkJggg=="></td>
+      <td align="center">2531
+(100.0%)</td>
+      <td align="center">0
+(0.0%)</td>
+    </tr>
+  </tbody>
+</table>
+<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.0 (<a href="https://www.r-project.org/">R</a> version 4.1.1)<br />2021-10-12</p>
+</div>
 </div>
 <div id="análisis" class="section level1">
 <h1>Análisis</h1>
+<pre class="r"><code>f&lt;-cbind(contrato,
+         contrato_duracion,
+         contrato_sub,
+         cotiza_prev,
+         cotiza_salud,
+         cotiza_seguro,
+         ingresos,
+         lugar_trab,
+         cond_vacaciones,
+         cond_enfermedad,
+         cond_maternidad,
+         cond_guarderia,
+         horas) ~ 1 # model</code></pre>
+<pre class="r"><code>##  Estadísticos de ajuste
+
+AIC.1 &lt;-as.numeric(lc1$aic)
+AIC.2 &lt;-as.numeric(lc2$aic)
+AIC.3 &lt;-as.numeric(lc3$aic)
+AIC.4 &lt;-as.numeric(lc4$aic)
+AIC.5 &lt;-as.numeric(lc5$aic)
+AIC.6 &lt;-as.numeric(lc6$aic)
+AIC.7 &lt;-as.numeric(lc7$aic)
+AIC.8 &lt;-as.numeric(lc8$aic)
+AIC.9 &lt;-as.numeric(lc9$aic)
+AIC.10 &lt;-as.numeric(lc10$aic)
+AIC.11 &lt;-as.numeric(lc11$aic)
+AIC.12 &lt;-as.numeric(lc12$aic)
+
+BIC.1 &lt;-as.numeric(lc1$bic)
+BIC.2 &lt;-as.numeric(lc2$bic)
+BIC.3 &lt;-as.numeric(lc3$bic)
+BIC.4 &lt;-as.numeric(lc4$bic)
+BIC.5 &lt;-as.numeric(lc5$bic)
+BIC.6 &lt;-as.numeric(lc6$bic)
+BIC.7 &lt;-as.numeric(lc7$bic)
+BIC.8 &lt;-as.numeric(lc8$bic)
+BIC.9 &lt;-as.numeric(lc9$bic)
+BIC.10 &lt;-as.numeric(lc10$bic)
+BIC.11 &lt;-as.numeric(lc11$bic)
+BIC.12 &lt;-as.numeric(lc12$bic)
+
+llik.1 &lt;-as.numeric(lc1$llik)
+llik.2 &lt;-as.numeric(lc2$llik)
+llik.3 &lt;-as.numeric(lc3$llik)
+llik.4 &lt;-as.numeric(lc4$llik)
+llik.5 &lt;-as.numeric(lc5$llik)
+llik.6 &lt;-as.numeric(lc6$llik)
+llik.7 &lt;-as.numeric(lc7$llik)
+llik.8 &lt;-as.numeric(lc8$llik)
+llik.9 &lt;-as.numeric(lc9$llik)
+llik.10 &lt;-as.numeric(lc10$llik)
+llik.11 &lt;-as.numeric(lc11$llik)
+llik.12 &lt;-as.numeric(lc12$llik)
+
+chisq.1 &lt;- as.numeric(lc2$Chisq)
+chisq.2 &lt;- as.numeric(lc2$Chisq)
+chisq.3 &lt;- as.numeric(lc3$Chisq)
+chisq.4 &lt;- as.numeric(lc4$Chisq)
+chisq.5 &lt;- as.numeric(lc5$Chisq)
+chisq.6 &lt;- as.numeric(lc6$Chisq)
+chisq.7 &lt;- as.numeric(lc7$Chisq)
+chisq.8 &lt;- as.numeric(lc8$Chisq)
+chisq.9 &lt;- as.numeric(lc9$Chisq)
+chisq.10 &lt;- as.numeric(lc10$Chisq)
+chisq.11 &lt;- as.numeric(lc11$Chisq)
+chisq.12 &lt;- as.numeric(lc12$Chisq)
+
+G.1 &lt;- as.numeric(lc1$Gsq)
+G.2 &lt;- as.numeric(lc2$Gsq)
+G.3 &lt;- as.numeric(lc3$Gsq)
+G.4 &lt;- as.numeric(lc4$Gsq)
+G.5 &lt;- as.numeric(lc5$Gsq)
+G.6 &lt;- as.numeric(lc6$Gsq)
+G.7 &lt;- as.numeric(lc7$Gsq)
+G.8 &lt;- as.numeric(lc8$Gsq)
+G.9 &lt;- as.numeric(lc9$Gsq)
+G.10 &lt;- as.numeric(lc10$Gsq)
+G.11 &lt;- as.numeric(lc11$Gsq)
+G.12 &lt;- as.numeric(lc12$Gsq)
+
+n.obs1 &lt;- as.numeric(lc1$Nobs)
+n.obs2 &lt;- as.numeric(lc2$Nobs)
+n.obs3 &lt;- as.numeric(lc3$Nobs)
+n.obs4 &lt;- as.numeric(lc4$Nobs)
+n.obs5 &lt;- as.numeric(lc5$Nobs)
+n.obs6 &lt;- as.numeric(lc6$Nobs)
+n.obs7 &lt;- as.numeric(lc7$Nobs)
+n.obs8 &lt;- as.numeric(lc8$Nobs)
+n.obs9 &lt;- as.numeric(lc9$Nobs)
+n.obs10 &lt;- as.numeric(lc10$Nobs)
+n.obs11 &lt;- as.numeric(lc11$Nobs)
+n.obs12 &lt;- as.numeric(lc12$Nobs)
+
+#Creación de Vectores para TABLA DE COMPARACIÓN
+AIC &lt;- c(AIC.1, AIC.2,AIC.3,AIC.4,AIC.5, AIC.6, AIC.7, AIC.8, AIC.9, AIC.10, AIC.11, AIC.12)
+BIC &lt;- c(BIC.1, BIC.2,BIC.3,BIC.4,BIC.5, BIC.6, BIC.7, BIC.8, BIC.9, BIC.10, BIC.11, BIC.12)
+llik &lt;- c(llik.1, llik.2,llik.3,llik.4,llik.5, llik.6, llik.7, llik.8, llik.9, llik.10, llik.11, llik.12)
+chi.cuadrado &lt;- c(chisq.1, chisq.2,chisq.3,chisq.4,chisq.5, chisq.6, chisq.7, chisq.8, chisq.9, chisq.10, chisq.11, chisq.12)
+G2 &lt;- c(G.1, G.2,G.3,G.4,G.5, G.6, G.7, G.8, G.9, G.10, G.11, G.12)
+N &lt;- c(n.obs1, n.obs2,n.obs3,n.obs4,n.obs5, n.obs6, n.obs7, n.obs8, n.obs9, n.obs10, n.obs11, n.obs12)
+Modelos &lt;- c(&quot;1 clase&quot;,&quot;2 clases&quot;, &quot;3 clases&quot;, &quot;4 clases&quot;, &quot;5 clases&quot;, &quot;6 clases&quot;, &quot;7 clases&quot;, &quot;8 clases&quot;, &quot;9 clases&quot;, &quot;10 clases&quot;, &quot;11 clases&quot;, &quot;12 clases&quot;) 
+
+#CREACIÓN TABLA ESTADÍSTICOS DE AJUSTE MODELOS TODAS LAS VARIABLES
+fit.indices &lt;- data.frame(Modelos,AIC,BIC,llik,chi.cuadrado,G2,N)
+
+sjPlot::tab_df(fit.indices,
+               title = &quot;Tabla 2.
+               Medidas de ajuste para modelos de clases latentes&quot;,
+               footnote = &quot;Elaboracion propia en base a ESI (2020)&quot;,
+               col.header = c(&quot;Modelos&quot;, &quot;AIC&quot;, &quot;BIC&quot;, &quot;Log-likelihood&quot;, &quot;Chi^2&quot;, &quot;G2&quot;, &quot;N&quot;),
+               show.footnote = T)</code></pre>
+<table style="border-collapse:collapse; border:none;">
+<caption style="font-weight: bold; text-align:left;">
+Tabla 2. Medidas de ajuste para modelos de clases latentes
+</caption>
+<tr>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; text-align:left; ">
+Modelos
+</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; ">
+AIC
+</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; ">
+BIC
+</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; ">
+Log-likelihood
+</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; ">
+Chi^2
+</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; ">
+G2
+</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; col7">
+N
+</th>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+1 clase
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+39256.12
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+39367.01
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+-19609.06
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+274796.52
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+11175.47
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">
+2531
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+2 clases
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+33620.56
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+33848.18
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+-16771.28
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+274796.52
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+5499.91
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">
+2531
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+3 clases
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+31889.88
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+32234.22
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+-15885.94
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+185154.38
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+3729.22
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">
+2531
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+4 clases
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+31287.84
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+31748.91
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+-15564.92
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+223813.74
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+3087.19
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">
+2531
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+5 clases
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+31072.33
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+31650.13
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+-15437.16
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+213431.13
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+2831.67
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">
+2531
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+6 clases
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+30907.97
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+31602.50
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+-15334.98
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+302025.51
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+2627.31
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">
+2531
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+7 clases
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+30762.57
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+31573.82
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+-15242.28
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+69313.61
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+2441.91
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">
+2531
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+8 clases
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+30649.46
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+31577.45
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+-15165.73
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+48666.09
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+2288.81
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">
+2531
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+9 clases
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+30568.51
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+31613.22
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+-15105.26
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+65604.74
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+2167.86
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">
+2531
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+10 clases
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+30515.05
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+31676.48
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+-15058.52
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+40641.07
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+2074.39
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">
+2531
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+11 clases
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+30479.78
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+31757.94
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+-15020.89
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+55218.82
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+1999.12
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; col7">
+2531
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; border-bottom: double; ">
+12 clases
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; ">
+30423.32
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; ">
+31818.21
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; ">
+-14972.66
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; ">
+44613.99
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; ">
+1902.66
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; col7">
+2531
+</td>
+</tr>
+<tr>
+<td colspan="8" style="font-style:italic; border-top:double black; text-align:right;">
+Elaboracion propia en base a ESI (2020)
+</td>
+</tr>
+</table>
+<pre class="r"><code>lcmodel &lt;- reshape2::melt(lc4$probs, level=2)
+
+modelo &lt;- lcmodel %&gt;% 
+  pivot_wider(names_from = &quot;Var1&quot;,
+              values_from = &quot;value&quot;) %&gt;% 
+  select(Variable = L2, Categoria = Var2, clase1 = &quot;class 1: &quot;, clase2 = &quot;class 2: &quot;, clase3 = &quot;class 3: &quot;, clase4 = &quot;class 4: &quot;) %&gt;% 
+  mutate(Variable = car::recode(.$Variable, recodes = c(&quot;&#39;contrato&#39; = &#39;Contrato&#39;;
+                                                        &#39;contrato_duracion&#39; = &#39;Duracion de contrato&#39;;
+                                                        &#39;contrato_sub&#39; = &#39;Subcontrato&#39;;
+                                                        &#39;horas&#39; = &#39;Horas&#39;;
+                                                        &#39;ingresos&#39; = &#39;Quintil de ingresos&#39;;
+                                                        &#39;lugar_trab&#39; = &#39;Lugar de trabajo&#39;;
+                                                        &#39;cotiza_prev&#39; = &#39;Cotizacion previsional&#39;;
+                                                        &#39;cotiza_salud&#39; = &#39;Cotizacion de salud&#39;;
+                                                        &#39;cotiza_seguro&#39; = &#39;Cotizacion seguro de desempleo&#39;;
+                                                        &#39;cond_enfermedad&#39; = &#39;Dias pagos por enfermedad&#39;;
+                                                        &#39;cond_guarderia&#39; = &#39;Derecho a guarderia&#39;;
+                                                        &#39;cond_maternidad&#39; = &#39;Dias pagos por maternidad&#39;;
+                                                        &#39;cond_vacaciones&#39; = &#39;Vacaciones pagadas&#39;&quot;), as.factor = T),
+         Categoria = case_when(Variable == &#39;Contrato&#39; &amp; Categoria == &#39;Pr(1)&#39; ~ &#39;No&#39;,
+         Variable == &#39;Contrato&#39; &amp; Categoria == &#39;Pr(2)&#39; ~ &#39;Si&#39;,
+         Variable == &#39;Horas&#39; &amp; Categoria == &#39;Pr(1)&#39; ~ &#39;Entre 31 y 45 horas semanales&#39;,
+         Variable == &#39;Horas&#39; &amp; Categoria == &#39;Pr(2)&#39; ~ &#39;Igual o menor a 30 horas semanales&#39;,
+         Variable == &#39;Horas&#39; &amp; Categoria == &#39;Pr(3)&#39; ~ &#39;Mayor a 45 horas semanales&#39;,
+         Variable == &#39;Lugar de trabajo&#39; &amp; Categoria ==&#39;Pr(1)&#39; ~ &#39;En instalaciones u oficinas propias o arrendadas, en hogar propio o anexos&#39;,
+         Variable == &#39;Lugar de trabajo&#39; &amp; Categoria == &#39;Pr(2)&#39; ~ &#39;En instalaciones, oficina o casa del cliente o empleador&#39;,
+         Variable == &#39;Lugar de trabajo&#39; &amp; Categoria == &#39;Pr(3)&#39; ~ &#39;En la calle o via publica, u otro&#39;,
+         Variable == &#39;Lugar de trabajo&#39; &amp; Categoria == &#39;Pr(4)&#39; ~ &#39;En obras de construccion, mineras, predio agricola o similares&#39;,
+         Variable == &#39;Quintil de ingresos&#39; &amp; Categoria == &#39;Pr(1)&#39; ~ &#39;$0 a $291.974&#39;,
+         Variable == &#39;Quintil de ingresos&#39; &amp; Categoria == &#39;Pr(2)&#39; ~ &#39;$291.975 a $380.500&#39;,
+         Variable == &#39;Quintil de ingresos&#39; &amp; Categoria == &#39;Pr(3)&#39; ~ &#39;$380.501 a $500.000&#39;,
+         Variable == &#39;Quintil de ingresos&#39; &amp; Categoria == &#39;Pr(4)&#39; ~ &#39;$500.001 a $779.787&#39;,
+         Variable == &#39;Subcontrato&#39; &amp; Categoria == &#39;Pr(1)&#39; ~ &#39;Con un contratista o subcontratista de bienes y servicios&#39;,
+         Variable == &#39;Subcontrato&#39; &amp; Categoria == &#39;Pr(2)&#39; ~ &#39;Con un enganchador (contratista agricola)&#39;,
+         Variable == &#39;Subcontrato&#39; &amp; Categoria == &#39;Pr(3)&#39; ~ &#39;Con una empresa de servicios temporales o suministradora de trabajadores&#39;, 
+         Variable == &#39;Cotizacion de salud&#39; &amp; Categoria == &#39;Pr(1)&#39; ~ &#39;No&#39;, 
+         Variable == &#39;Cotizacion de salud&#39; &amp; Categoria == &#39;Pr(2)&#39; ~ &#39;Si&#39;,
+         Variable == &#39;Cotizacion previsional&#39; &amp; Categoria == &#39;Pr(1)&#39; ~ &#39;No&#39;,
+         Variable == &#39;Cotizacion previsional&#39; &amp; Categoria == &#39;Pr(2)&#39; ~ &#39;Si&#39;,
+         Variable == &#39;Cotizacion seguro de desempleo&#39; &amp; Categoria == &#39;Pr(1)&#39; ~ &#39;No&#39;,
+         Variable == &#39;Cotizacion seguro de desempleo&#39; &amp; Categoria == &#39;Pr(2)&#39; ~ &#39;Si&#39;,
+         Variable == &#39;Derecho a guarderia&#39;&amp; Categoria == &#39;Pr(1)&#39; ~&#39;No&#39;,
+         Variable == &#39;Derecho a guarderia&#39;&amp; Categoria == &#39;Pr(2)&#39; ~ &#39;Si&#39;,
+         Variable == &#39;Dias pagos por enfermedad&#39; &amp; Categoria == &#39;Pr(1)&#39; ~ &#39;No&#39;,
+         Variable == &#39;Dias pagos por enfermedad&#39; &amp; Categoria == &#39;Pr(2)&#39; ~ &#39;Si&#39;,
+         Variable == &#39;Vacaciones pagadas&#39;&amp; Categoria == &#39;Pr(1)&#39; ~ &#39;No&#39;,
+         Variable == &#39;Vacaciones pagadas&#39;&amp; Categoria == &#39;Pr(2)&#39; ~ &#39;Si&#39;,
+         Variable == &#39;Dias pagos por maternidad&#39;&amp; Categoria == &#39;Pr(1)&#39; ~ &#39;No&#39;,
+         Variable == &#39;Dias pagos por maternidad&#39;&amp; Categoria == &#39;Pr(2)&#39; ~ &#39;Si&#39;,
+         Variable == &#39;Duracion de contrato&#39;&amp; Categoria == &#39;Pr(1)&#39; ~ &#39;Definido&#39;,
+         Variable == &#39;Duracion de contrato&#39;&amp; Categoria == &#39;Pr(2)&#39; ~ &#39;Indefinido&#39;,
+         TRUE ~ NA_character_),
+         clase1 = (round(.$clase1, digits = 3))*100,
+         clase2 = (round(.$clase2, digits = 3))*100,
+         clase3 = (round(.$clase3, digits = 3))*100,
+         clase4 = (round(.$clase4, digits = 3))*100)
+
+sjPlot::tab_df(modelo,
+               title = &#39;Tabla 3.
+               Modelo de clases latentes de precariedad laboral&#39;,
+               footnote = &#39;Elaboracion propia en base a ESI (2020)&#39;,
+               show.footnote = T)</code></pre>
+<table style="border-collapse:collapse; border:none;">
+<caption style="font-weight: bold; text-align:left;">
+Tabla 3. Modelo de clases latentes de precariedad laboral
+</caption>
+<tr>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; text-align:left; ">
+Variable
+</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; ">
+Categoria
+</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; ">
+clase1
+</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; ">
+clase2
+</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; ">
+clase3
+</th>
+<th style="border-top: double; text-align:center; font-style:italic; font-weight:normal; padding:0.2cm; border-bottom:1px solid black; ">
+clase4
+</th>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Contrato
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+No
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+1.80
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+92.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.30
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Contrato
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+Si
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+98.20
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+8.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+100.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+99.70
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Duracion de contrato
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+Definido
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+96.20
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+87.50
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+25.10
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+26.00
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Duracion de contrato
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+Indefinido
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+3.80
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+12.50
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+74.90
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+74.00
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Subcontrato
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+Con un contratista o subcontratista de bienes y servicios
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+70.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+53.30
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+83.30
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+27.30
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Subcontrato
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+Con un enganchador (contratista agricola)
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+7.50
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+33.50
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.10
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.00
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Subcontrato
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+Con una empresa de servicios temporales o suministradora de trabajadores
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+22.40
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+13.20
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+16.60
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+72.70
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Cotizacion previsional
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+No
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+2.10
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+96.60
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.90
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+4.50
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Cotizacion previsional
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+Si
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+97.90
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+3.40
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+99.10
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+95.50
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Cotizacion de salud
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+No
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.70
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+96.50
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.50
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Cotizacion de salud
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+Si
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+99.30
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+3.50
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+100.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+99.50
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Cotizacion seguro de desempleo
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+No
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+8.80
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+99.40
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.40
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+40.00
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Cotizacion seguro de desempleo
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+Si
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+91.20
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.60
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+99.60
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+60.00
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Quintil de ingresos
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+$0 a $291.974
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+44.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+73.10
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+17.90
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+12.20
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Quintil de ingresos
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+$291.975 a $380.500
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+24.90
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+13.60
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+26.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+25.30
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Quintil de ingresos
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+$380.501 a $500.000
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+18.50
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+10.50
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+29.90
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+29.90
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Quintil de ingresos
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+$500.001 a $779.787
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+12.70
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+2.80
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+26.20
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+32.60
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Lugar de trabajo
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+En instalaciones u oficinas propias o arrendadas, en hogar propio o anexos
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+1.30
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+1.10
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+2.30
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+20.50
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Lugar de trabajo
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+En instalaciones, oficina o casa del cliente o empleador
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+45.50
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+28.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+58.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+76.10
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Lugar de trabajo
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+En la calle o via publica, u otro
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+9.30
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+6.20
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+16.40
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+3.40
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Lugar de trabajo
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+En obras de construccion, mineras, predio agricola o similares
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+43.90
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+64.60
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+23.30
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.00
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Vacaciones pagadas
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+No
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+81.10
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+99.40
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.20
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.90
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Vacaciones pagadas
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+Si
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+18.90
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.60
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+99.80
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+99.10
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Dias pagos por enfermedad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+No
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+14.90
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+100.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.60
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.80
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Dias pagos por enfermedad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+Si
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+85.10
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+99.40
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+99.20
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Dias pagos por maternidad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+No
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+35.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+99.40
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+4.60
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+1.70
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Dias pagos por maternidad
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+Si
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+65.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.60
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+95.40
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+98.30
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Derecho a guarderia
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+No
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+96.90
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+100.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+77.20
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+36.60
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Derecho a guarderia
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+Si
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+3.10
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+0.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+22.80
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+63.40
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Horas
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+Entre 31 y 45 horas semanales
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+78.20
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+66.90
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+84.40
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+83.30
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+Horas
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+Igual o menor a 30 horas semanales
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+10.10
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+23.80
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+3.00
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; ">
+9.30
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; border-bottom: double; ">
+Horas
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; ">
+Mayor a 45 horas semanales
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; ">
+11.70
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; ">
+9.30
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; ">
+12.50
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center; border-bottom: double; ">
+7.40
+</td>
+</tr>
+<tr>
+<td colspan="7" style="font-style:italic; border-top:double black; text-align:right;">
+Elaboracion propia en base a ESI (2020)
+</td>
+</tr>
+</table>
+<pre class="r"><code>lca4_probs=as.data.frame(lc4$probs)
+datlca_tot_par=lca4_probs[c(1,3,5,8,10,12,14,20,22,24,26,28,31)] #dejar la categoria mas precaria
+  datlca_tot_par$class=c(1:4) #añadir número de clase
+  datlca_tot_parl=melt(datlca_tot_par, id=c(&quot;class&quot;) )
+  
+# Relabel factors
+    datlca_tot_parl$variable=factor(datlca_tot_parl$variable, labels=c(&quot;Ausencia de contrato&quot;, &quot;Duración de contrato&quot;, &quot;Acuerdo de trabajo&quot;, &quot;Cotización en previsión&quot;, &quot;Cotización en salud&quot;, &quot;Cotización en seguro de desempleo&quot;,&quot;Quintiles de ingreso&quot;, &quot;Lugar de trabajo&quot;, &quot;Derecho a vacaciones&quot;, &quot;Derecho a días pago por enfermedad&quot;, &quot;Derecho a días pagos por pa/maternidad&quot;, &quot;Derecho a guardería infantil&quot;, &quot;Total horas semanales habituales en actividad principal&quot;))
+
+lc4$P # class size</code></pre>
+<pre><code>## [1] 0.17914126 0.06957047 0.44609460 0.30519367</code></pre>
+<pre class="r"><code>datlca_tot_parl$class=factor(datlca_tot_parl$class,labels=c(&quot;Clase 1 (17.9%)&quot;, &quot;Clase 2 (6.9%)&quot;, &quot;Clase 3 (44.6%)&quot;, &quot;Clase 4 (30.5%)&quot;))
+
+lca4_graph &lt;-ggplot(data = datlca_tot_parl, aes(x=variable, y=value, group=class, shape=class)) + 
+      geom_line(aes(linetype=class)) + geom_point(size = 2) +
+      labs(title = &quot;Grafico 1.&quot;, 
+           subtitle = &quot;Clases latentes de precariedad laboral en sector servicios&quot;,
+           caption = &quot;Elaboracion propia en base a ESI (2020)&quot;) + 
+      xlab(&quot;Indicadores precariedad&quot;) + 
+      ylab(&quot;Probabilidades condicionales&quot;) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    
+lca4_graph</code></pre>
+<p><img src="data:image/png;base64,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" width="672" /></p>
+<pre class="r"><code>#Asginar la clase de precariedad a cada sujeto
+base_proc &lt;- cbind(base_proc, lc4$predclass) 
+
+#Renombrar la variable de clase de precariedad
+base_proc &lt;- base_proc %&gt;% rename(Clase=`lc4$predclass`)
+
+#Creación de tabla cruzada para variable sexo
+sjt.xtab(base_proc$Clase, base_proc$sexo,
+         title = &quot;Tabla 4.
+         Proporciones por clase de precariedad y sexo&quot;,
+         show.cell.prc = T)</code></pre>
+<table style="border-collapse:collapse; border:none;">
+<caption style="font-weight: bold; text-align:left;">
+Tabla 4. Proporciones por clase de precariedad y sexo
+</caption>
+<tr>
+<th style="border-top:double; text-align:center; font-style:italic; font-weight:normal; border-bottom:1px solid;" rowspan="2">
+Clase
+</th>
+<th style="border-top:double; text-align:center; font-style:italic; font-weight:normal;" colspan="2">
+Sexo
+</th>
+<th style="border-top:double; text-align:center; font-style:italic; font-weight:normal; font-weight:bolder; font-style:italic; border-bottom:1px solid; " rowspan="2">
+Total
+</th>
+</tr>
+<tr>
+<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
+Hombre
+</td>
+<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
+Mujer
+</td>
+</tr>
+<tr>
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">
+1
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">280</span><br><span style="color:#993333;">11.1 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">135</span><br><span style="color:#993333;">5.3 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;  ">
+<span style="color:black;">415</span><br><span style="color:#993333;">16.4 %</span>
+</td>
+</tr>
+<tr>
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">
+2
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">134</span><br><span style="color:#993333;">5.3 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">42</span><br><span style="color:#993333;">1.7 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;  ">
+<span style="color:black;">176</span><br><span style="color:#993333;">7 %</span>
+</td>
+</tr>
+<tr>
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">
+3
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">758</span><br><span style="color:#993333;">29.9 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">422</span><br><span style="color:#993333;">16.7 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;  ">
+<span style="color:black;">1180</span><br><span style="color:#993333;">46.6 %</span>
+</td>
+</tr>
+<tr>
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">
+4
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">177</span><br><span style="color:#993333;">7 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">583</span><br><span style="color:#993333;">23 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;  ">
+<span style="color:black;">760</span><br><span style="color:#993333;">30 %</span>
+</td>
+</tr>
+<tr>
+<td style="padding:0.2cm;  border-bottom:double; font-weight:bolder; font-style:italic; text-align:left; vertical-align:middle;">
+Total
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">1349</span><br><span style="color:#993333;">53.3 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">1182</span><br><span style="color:#993333;">46.7 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">2531</span><br><span style="color:#993333;">100 %</span>
+</td>
+</tr>
+<td style="text-align:right; font-size:0.9em; font-style:italic; padding:0.2cm;" colspan="4">
+χ<sup>2</sup>=402.049 · df=3 · Cramer’s V=0.399 · p=0.000
+</td>
+</tr>
+</table>
+<pre class="r"><code>#Creación de tabla cruzada para variable educación
+sjt.xtab(base_proc$Clase, base_proc$educacion,
+         title = &quot;Tabla 5.
+         Proporciones por clase de precariedad y nivel educacional&quot;,
+         show.cell.prc = T)</code></pre>
+<table style="border-collapse:collapse; border:none;">
+<caption style="font-weight: bold; text-align:left;">
+Tabla 5. Proporciones por clase de precariedad y nivel educacional
+</caption>
+<tr>
+<th style="border-top:double; text-align:center; font-style:italic; font-weight:normal; border-bottom:1px solid;" rowspan="2">
+Clase
+</th>
+<th style="border-top:double; text-align:center; font-style:italic; font-weight:normal;" colspan="8">
+Educacion
+</th>
+<th style="border-top:double; text-align:center; font-style:italic; font-weight:normal; font-weight:bolder; font-style:italic; border-bottom:1px solid; " rowspan="2">
+Total
+</th>
+</tr>
+<tr>
+<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
+Doctorado
+</td>
+<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
+Educacion primaria<br>(nivel 1)
+</td>
+<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
+Educacion primaria<br>(nivel 2)
+</td>
+<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
+Educacion secundaria
+</td>
+<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
+Educacion tecnica<br>(superior no<br>universitaria)
+</td>
+<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
+Educacion<br>universitaria
+</td>
+<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
+Nunca estudio
+</td>
+<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
+Postitulos y<br>maestria
+</td>
+</tr>
+<tr>
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">
+1
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">0</span><br><span style="color:#993333;">0 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">33</span><br><span style="color:#993333;">1.3 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">61</span><br><span style="color:#993333;">2.4 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">234</span><br><span style="color:#993333;">9.2 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">54</span><br><span style="color:#993333;">2.1 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">30</span><br><span style="color:#993333;">1.2 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">3</span><br><span style="color:#993333;">0.1 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">0</span><br><span style="color:#993333;">0 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;  ">
+<span style="color:black;">415</span><br><span style="color:#993333;">16.3 %</span>
+</td>
+</tr>
+<tr>
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">
+2
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">0</span><br><span style="color:#993333;">0 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">24</span><br><span style="color:#993333;">0.9 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">48</span><br><span style="color:#993333;">1.9 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">90</span><br><span style="color:#993333;">3.6 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">6</span><br><span style="color:#993333;">0.2 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">8</span><br><span style="color:#993333;">0.3 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">0</span><br><span style="color:#993333;">0 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">0</span><br><span style="color:#993333;">0 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;  ">
+<span style="color:black;">176</span><br><span style="color:#993333;">6.9 %</span>
+</td>
+</tr>
+<tr>
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">
+3
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">0</span><br><span style="color:#993333;">0 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">75</span><br><span style="color:#993333;">3 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">140</span><br><span style="color:#993333;">5.5 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">742</span><br><span style="color:#993333;">29.3 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">140</span><br><span style="color:#993333;">5.5 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">78</span><br><span style="color:#993333;">3.1 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">4</span><br><span style="color:#993333;">0.2 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">1</span><br><span style="color:#993333;">0 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;  ">
+<span style="color:black;">1180</span><br><span style="color:#993333;">46.6 %</span>
+</td>
+</tr>
+<tr>
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">
+4
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">0</span><br><span style="color:#993333;">0 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">26</span><br><span style="color:#993333;">1 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">41</span><br><span style="color:#993333;">1.6 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">325</span><br><span style="color:#993333;">12.8 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">231</span><br><span style="color:#993333;">9.1 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">126</span><br><span style="color:#993333;">5 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">1</span><br><span style="color:#993333;">0 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">10</span><br><span style="color:#993333;">0.4 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;  ">
+<span style="color:black;">760</span><br><span style="color:#993333;">29.9 %</span>
+</td>
+</tr>
+<tr>
+<td style="padding:0.2cm;  border-bottom:double; font-weight:bolder; font-style:italic; text-align:left; vertical-align:middle;">
+Total
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">0</span><br><span style="color:#993333;">0 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">158</span><br><span style="color:#993333;">6.2 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">290</span><br><span style="color:#993333;">11.5 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">1391</span><br><span style="color:#993333;">55 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">431</span><br><span style="color:#993333;">17 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">242</span><br><span style="color:#993333;">9.6 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">8</span><br><span style="color:#993333;">0.3 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">11</span><br><span style="color:#993333;">0.4 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">2531</span><br><span style="color:#993333;">100 %</span>
+</td>
+</tr>
+<td style="text-align:right; font-size:0.9em; font-style:italic; padding:0.2cm;" colspan="10">
+χ<sup>2</sup>=NaN · df=21 · Cramer’s V=NaN · Fisher’s p=0.000
+</td>
+</tr>
+</table>
+<pre class="r"><code>#Creación de tabla cruzada para variable edad
+sjt.xtab(base_proc$Clase, base_proc$edad,
+         title = &quot;Tabla 6.
+         Proporciones por clase de precariedad y edad&quot;,
+         show.cell.prc = T,
+         encoding = &#39;UTF-8&#39;)</code></pre>
+<table style="border-collapse:collapse; border:none;">
+<caption style="font-weight: bold; text-align:left;">
+Tabla 6. Proporciones por clase de precariedad y edad
+</caption>
+<tr>
+<th style="border-top:double; text-align:center; font-style:italic; font-weight:normal; border-bottom:1px solid;" rowspan="2">
+Clase
+</th>
+<th style="border-top:double; text-align:center; font-style:italic; font-weight:normal;" colspan="5">
+Edad
+</th>
+<th style="border-top:double; text-align:center; font-style:italic; font-weight:normal; font-weight:bolder; font-style:italic; border-bottom:1px solid; " rowspan="2">
+Total
+</th>
+</tr>
+<tr>
+<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
+15 a 19 anos
+</td>
+<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
+20 a 29 anos
+</td>
+<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
+25 a 49 anos
+</td>
+<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
+50 a 64 anos
+</td>
+<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
+65 anos o mas
+</td>
+</tr>
+<tr>
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">
+1
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">14</span><br><span style="color:#993333;">0.6 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">101</span><br><span style="color:#993333;">4 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">201</span><br><span style="color:#993333;">7.9 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">85</span><br><span style="color:#993333;">3.4 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">14</span><br><span style="color:#993333;">0.6 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;  ">
+<span style="color:black;">415</span><br><span style="color:#993333;">16.5 %</span>
+</td>
+</tr>
+<tr>
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">
+2
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">3</span><br><span style="color:#993333;">0.1 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">34</span><br><span style="color:#993333;">1.3 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">75</span><br><span style="color:#993333;">3 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">55</span><br><span style="color:#993333;">2.2 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">9</span><br><span style="color:#993333;">0.4 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;  ">
+<span style="color:black;">176</span><br><span style="color:#993333;">7 %</span>
+</td>
+</tr>
+<tr>
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">
+3
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">12</span><br><span style="color:#993333;">0.5 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">203</span><br><span style="color:#993333;">8 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">508</span><br><span style="color:#993333;">20.1 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">409</span><br><span style="color:#993333;">16.2 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">48</span><br><span style="color:#993333;">1.9 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;  ">
+<span style="color:black;">1180</span><br><span style="color:#993333;">46.7 %</span>
+</td>
+</tr>
+<tr>
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">
+4
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">2</span><br><span style="color:#993333;">0.1 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">98</span><br><span style="color:#993333;">3.9 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">369</span><br><span style="color:#993333;">14.6 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">256</span><br><span style="color:#993333;">10.1 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center; ">
+<span style="color:black;">35</span><br><span style="color:#993333;">1.4 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;  ">
+<span style="color:black;">760</span><br><span style="color:#993333;">30.1 %</span>
+</td>
+</tr>
+<tr>
+<td style="padding:0.2cm;  border-bottom:double; font-weight:bolder; font-style:italic; text-align:left; vertical-align:middle;">
+Total
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">31</span><br><span style="color:#993333;">1.2 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">436</span><br><span style="color:#993333;">17.2 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">1153</span><br><span style="color:#993333;">45.6 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">805</span><br><span style="color:#993333;">31.8 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">106</span><br><span style="color:#993333;">4.2 %</span>
+</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
+<span style="color:black;">2531</span><br><span style="color:#993333;">100 %</span>
+</td>
+</tr>
+<td style="text-align:right; font-size:0.9em; font-style:italic; padding:0.2cm;" colspan="7">
+χ<sup>2</sup>=69.238 · df=12 · Cramer’s V=0.095 · Fisher’s p=0.000
+</td>
+</tr>
+</table>
 </div>
-<div id="conclusión" class="section level1">
-<h1>Conclusión</h1>
+<div id="conclusiones" class="section level1">
+<h1>Conclusiones</h1>
 </div>
 <div id="referencias" class="section level1 unnumbered">
 <h1 class="unnumbered">Referencias</h1>

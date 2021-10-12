@@ -3,7 +3,7 @@
     "path": "~/GitHub/ciencia-abierta-2021/procesamiento/informe.Rmd",
     "project_path": "procesamiento/informe.Rmd",
     "type": "r_markdown",
-    "hash": "1739632827",
+    "hash": "2068122438",
     "contents": "",
     "dirty": false,
     "created": 1633718705821.0,
@@ -12,17 +12,20 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "94,286",
-        "scrollLine": "89",
+        "cursorPosition": "288,83",
+        "scrollLine": "275",
         "docOutlineVisible": "0",
-        "last_setup_crc32": "5ACEC24Ce1675bb0"
+        "last_setup_crc32": "0E23B7A1e1675bb0",
+        "rmdVisualMode": "false",
+        "rmdVisualModeLocation": "15674:4555.2001953125",
+        "rmdVisualWrapConfigured": "true"
     },
     "folds": "",
-    "lastKnownWriteTime": 1633802857,
+    "lastKnownWriteTime": 1634049436,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1633802857838,
+    "last_content_update": 1634049565618,
     "read_only": false,
     "read_only_alternatives": []
 }

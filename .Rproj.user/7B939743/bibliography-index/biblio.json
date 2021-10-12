@@ -1,0 +1,917 @@
+{
+    "sources": [
+        {
+            "author": [
+                {
+                    "family": "Aguiar",
+                    "given": "Santiago"
+                }
+            ],
+            "container-title": "Tesis Magister Ciencias Sociales",
+            "id": "aguiar_grado_2010",
+            "issued": {
+                "date-parts": [
+                    [
+                        2010
+                    ]
+                ]
+            },
+            "title": "El grado de flexiprecariedad en el trabajo. El proceso de innovación y la relación capital-trabajo",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Aldo Guadagni",
+                    "given": "Alieto"
+                }
+            ],
+            "container-title": "Journal of Inter-American Studies",
+            "id": "aldoguadagniEstructuraOcupacionalDesarrollo1964",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        1964
+                    ]
+                ]
+            },
+            "page": "187-201",
+            "title": "La Estructura Ocupacional y el Desarrollo Economico de Chile",
+            "type": "article-journal",
+            "volume": "6"
+        },
+        {
+            "author": [
+                {
+                    "family": "Antunes",
+                    "given": "Ricardo"
+                }
+            ],
+            "id": "antunes_sentidos_2005",
+            "issued": {
+                "date-parts": [
+                    [
+                        2005
+                    ]
+                ]
+            },
+            "publisher": "Herramienta",
+            "publisher-place": "Buenos Aires, Argentina",
+            "title": "Los sentidos del trabajo: Ensayo sobre la afirmación y la negación del trabajo",
+            "title-short": "Los sentidos del trabajo",
+            "type": "book"
+        },
+        {
+            "DOI": "10.7765/9781526125972.00025",
+            "ISBN": "978-1-5261-2597-2",
+            "author": [
+                {
+                    "family": "Anxo",
+                    "given": "Dominique"
+                },
+                {
+                    "family": "Baird",
+                    "given": "Marian"
+                },
+                {
+                    "family": "Erhel",
+                    "given": "Christine"
+                }
+            ],
+            "container-title": "Making work more equal",
+            "editor": [
+                {
+                    "family": "Grimshaw",
+                    "given": "Damian"
+                },
+                {
+                    "family": "Fagan",
+                    "given": "Colette"
+                },
+                {
+                    "family": "Hebson",
+                    "given": "Gail"
+                },
+                {
+                    "family": "Tavora",
+                    "given": "Isabel"
+                }
+            ],
+            "id": "anxo_work_2017",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017,
+                        9
+                    ]
+                ]
+            },
+            "publisher": "Manchester University Press",
+            "title": "Work and care regimes and women’s employment outcomes",
+            "type": "chapter"
+        },
+        {
+            "author": [
+                {
+                    "family": "Arriagada",
+                    "given": "Irma"
+                }
+            ],
+            "id": "arriagada_abriendo_2007",
+            "issued": {
+                "date-parts": [
+                    [
+                        2007
+                    ]
+                ]
+            },
+            "publisher": "CLACSO",
+            "publisher-place": "Buenos Aires, Argentina",
+            "title": "Abriendo la caja negra del sector servicios en Chile y Uruguay",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Blanco",
+                    "given": "Osvaldo"
+                },
+                {
+                    "family": "Julian",
+                    "given": "Dasten"
+                }
+            ],
+            "id": "blancoTipologiaPrecariedadLaboral2019",
+            "issue": "129",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "title": "Una tipología de precariedad laboral para Chile: La precariedad como fenómeno transclasista",
+            "title-short": "Una tipología de precariedad laboral para Chile",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Boccardo",
+                    "given": "Giorgio"
+                }
+            ],
+            "collection-title": "7th series",
+            "id": "boccardoTRABAJARTIEMPOSPANDEMIA2020",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020
+                    ]
+                ]
+            },
+            "title": "TRABAJAR EN TIEMPOS DE PANDEMIA: ANTESALA DE NUESTRO FUTURO LABORAL?",
+            "title-short": "TRABAJAR EN TIEMPOS DE PANDEMIA",
+            "type": "article-journal",
+            "volume": "17"
+        },
+        {
+            "DOI": "10.13140/RG.2.2.33046.14401",
+            "author": [
+                {
+                    "family": "Boccardo",
+                    "given": "Giorgio"
+                },
+                {
+                    "family": "Moya",
+                    "given": "Cristobal"
+                },
+                {
+                    "family": "Ratto",
+                    "given": "Nicolás"
+                },
+                {
+                    "family": "Ruiz",
+                    "given": "Felipe"
+                }
+            ],
+            "id": "boccardoTrabajoSubcontratadoArea2016",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016
+                    ]
+                ]
+            },
+            "publisher": "Unpublished",
+            "title": "Trabajo subcontratado en el área de aseo en la Pontificia Universidad Católica de Chile. Informe de Resultados.",
+            "type": "article-journal"
+        },
+        {
+            "DOI": "10.1515/jbnst-2017-0100",
+            "ISSN": "2366-049X, 0021-4027",
+            "abstract": "Abstract This paper estimates size and impact factors of the gender pay gap in Europe. It adds to the literature in three aspects. First, we update existing figures on the gender pay gaps in the EU based on the Structure of Earnings Survey 2010 (SES). Second, we enrich the literature by undertaking comprehensive country comparisons of the gap components based on an Oaxaca-Blinder decomposition. Overall, we analyse 21 EU countries plus Norway, which clearly exceeds the scope of existing microdata studies. Third, we examine the sources of the unexplained gap. We find that about one third of the gap can be traced back to the role of the explanatory factors included in our analysis. Human capital related factors are of minor importance. Instead, the sectoral segregation of genders is identified as the most important barrier to gender pay equality in European countries. In addition, the fact that part-time positions are more frequent among women notably contributes to the gap. Furthermore, sector premiums are generally to men’s advantage, this might point to a less advanta-geous within-sector positional sorting for women compared to men. We conclude that policies aiming at closing the gender pay gap should focus more on the sector level than on the aggregate economy.",
+            "author": [
+                {
+                    "family": "Boll",
+                    "given": "Christina"
+                },
+                {
+                    "family": "Rossen",
+                    "given": "Anja"
+                },
+                {
+                    "family": "Wolf",
+                    "given": "André"
+                }
+            ],
+            "container-title": "Jahrbücher für Nationalökonomie und Statistik",
+            "id": "bollEUGenderEarnings2017",
+            "issue": "5",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017,
+                        11
+                    ]
+                ]
+            },
+            "language": "en-US",
+            "page": "407-452",
+            "title": "The EU Gender Earnings Gap: Job Segregation and Working Time as Driving Factors",
+            "title-short": "The EU Gender Earnings Gap",
+            "type": "article-journal",
+            "volume": "237"
+        },
+        {
+            "ISSN": "0377-8231",
+            "PMID": "7185413",
+            "author": [
+                {
+                    "family": "Brod",
+                    "given": "J."
+                }
+            ],
+            "container-title": "Bulletin Et Memoires De l’Academie Royale De Medecine De Belgique",
+            "id": "brod_hemodynamic_1982",
+            "issue": "11",
+            "issued": {
+                "date-parts": [
+                    [
+                        1982
+                    ]
+                ]
+            },
+            "keyword": "Hemodynamics,Humans,Hypertension,Hypertension; Renal",
+            "language": "fr-FR",
+            "page": "680-698",
+            "title": "[Hemodynamic basis of hypertension in non-uremic kidney patients. Conclusions which can be drawn with respect to the pathogenesis of hypertension in general]",
+            "type": "article-journal",
+            "volume": "137"
+        },
+        {
+            "author": [
+                {
+                    "family": "CEPAL"
+                }
+            ],
+            "id": "cepalSectoresEmpresasFrente2020",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020
+                    ]
+                ]
+            },
+            "title": "Sectores y empresas frente al COVID-19: Emergencia y reactivación",
+            "title-short": "Sectores y empresas frente al COVID-19",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "family": "Downey Rivera",
+                    "given": "Miguel"
+                },
+                {
+                    "family": "Portiño Cerda",
+                    "given": "José Ignacio"
+                }
+            ],
+            "id": "downeyrivera_analisis_2017",
+            "issue": "16",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017
+                    ]
+                ]
+            },
+            "page": "81-100",
+            "title": "Análisis del subcontrato en las universidades chilenas, especialmente en el caso de las universidades estatales, y las vías jurídicas para su término",
+            "type": "article-journal",
+            "volume": "8"
+        },
+        {
+            "author": [
+                {
+                    "family": "Echeverría Tortello",
+                    "given": "Magdalena"
+                },
+                {
+                    "family": "López",
+                    "given": "Diego"
+                }
+            ],
+            "id": "echeverriatortello_flexibilidad_2004",
+            "issued": {
+                "date-parts": [
+                    [
+                        2004
+                    ]
+                ]
+            },
+            "publisher": "Departamento de Estudios Dirección del Trabajo",
+            "title": "Flexibilidad Laboral en Chile: Las Empresas y las Personas",
+            "title-short": "Flexibilidad Laboral en Chile",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "family": "Echeverría Tortello",
+                    "given": "Magdalena"
+                }
+            ],
+            "id": "echeverriatortelloHistoriaInconclusaSubcontratacion2010",
+            "issued": {
+                "date-parts": [
+                    [
+                        2010
+                    ]
+                ]
+            },
+            "publisher-place": "Santiago, Chile",
+            "title": "La historia inconclusa de la subcontratación y el relato de los trabajadores",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Espino",
+                    "given": "Alma"
+                },
+                {
+                    "family": "De los Santos",
+                    "given": "Daniela"
+                }
+            ],
+            "id": "espinoSegregacionHorizontalGenero2019",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "publisher": "CIEDUR",
+            "title": "La segregación horizontal de género en los mercados laborales de ocho países de América Latina: Implicancias para las desigualdades de género",
+            "title-short": "La segregación horizontal de género en los mercados laborales de ocho países de América Latina",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "family": "Fernández Huerga",
+                    "given": "Eduardo"
+                }
+            ],
+            "id": "fernandezhuergaTeoriaSegmentacionMercado2010",
+            "issued": {
+                "date-parts": [
+                    [
+                        2010
+                    ]
+                ]
+            },
+            "page": "115-150",
+            "title": "La teoría de la segmentación del mercado de trabajo: Enfoques, situación actual y perspectivas de futuro",
+            "title-short": "La teoría de la segmentación del mercado de trabajo",
+            "type": "article-journal",
+            "volume": "LXIX"
+        },
+        {
+            "author": [
+                {
+                    "family": "Fernández Massi",
+                    "given": "Mariana"
+                }
+            ],
+            "id": "fernandezmassi_dimensiones_2014",
+            "issue": "62",
+            "issued": {
+                "date-parts": [
+                    [
+                        2014
+                    ]
+                ]
+            },
+            "page": "231-257",
+            "title": "Dimensiones de la precariedad laboral: Un mapa de las características del empleo sectorial en Argentina",
+            "title-short": "Dimensiones de la precariedad laboral",
+            "type": "article-journal",
+            "volume": "33"
+        },
+        {
+            "ISBN": "978-1-5261-1706-9",
+            "abstract": "This book presents new theories and international empirical evidence on the state of work and employment around the world. Changes in production systems, economic conditions and regulatory conditions are posing new questions about the growing use by employers of precarious forms of work, the contradictory approaches of governments towards employment and social policy, and the ability of trade unions to improve the distribution of decent employment conditions. The book proposes a ’new labour market segmentation approach’ for the investigation of issues of job quality, employment inequalities, and precarious work. This approach is distinctive in seeking to place the changing international patterns and experiences of labour market inequalities in the wider context of shifting gender relations, regulatory regimes and production structures",
+            "author": [
+                {
+                    "family": "Grimshaw",
+                    "given": "Damian"
+                },
+                {
+                    "family": "Fagan",
+                    "given": "Colette"
+                },
+                {
+                    "family": "Tavora",
+                    "given": "Isabel"
+                }
+            ],
+            "id": "grimshawMakingWorkMore2017",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017
+                    ]
+                ]
+            },
+            "language": "en-US",
+            "publisher": "Manchester University Press",
+            "publisher-place": "Manchester",
+            "title": "Making work more equal: A new labour market segmentation approach",
+            "title-short": "Making work more equal",
+            "type": "book"
+        },
+        {
+            "ISBN": "978-987-1183-72-2",
+            "annote": "OCLC: ocn191224864",
+            "collection-title": "Grupos de trabajo de CLACSO",
+            "edition": "1a. ed",
+            "editor": [
+                {
+                    "family": "Gutiérrez",
+                    "given": "María Alicia"
+                },
+                {
+                    "literal": "Consejo Latinoamericano de Ciencias Sociales"
+                }
+            ],
+            "id": "gutierrezGeneroFamiliasTrabajo2007",
+            "issued": {
+                "date-parts": [
+                    [
+                        2007
+                    ]
+                ]
+            },
+            "keyword": "Economic aspects,Employment,Families,Latin America,Women,Work and family",
+            "language": "spa por",
+            "publisher": "CLACSO",
+            "publisher-place": "Buenos Aires, Argentina",
+            "title": "Género, familias y trabajo: rupturas y continuidades: desafíos para la investigación política",
+            "title-short": "Género, familias y trabajo",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Julian",
+                    "given": "Dasten"
+                }
+            ],
+            "id": "julian_precariedad_2014",
+            "issue": "23",
+            "issued": {
+                "date-parts": [
+                    [
+                        2014
+                    ]
+                ]
+            },
+            "title": "La precariedad laboral, modernidad y modernización capitalista: Una contribución al debate desde América Latina",
+            "title-short": "La precariedad laboral, modernidad y modernización capitalista",
+            "type": "article-journal"
+        },
+        {
+            "ISSN": "ISSN 0718-8382",
+            "author": [
+                {
+                    "family": "Julian",
+                    "given": "Dasten"
+                }
+            ],
+            "id": "julian_precariedad_2020",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020
+                    ]
+                ]
+            },
+            "page": "125-149",
+            "title": "Precariedad como gobierno de la pandemia: La experiencia de la precariedad laboral en Chile",
+            "title-short": "Precariedad como gobierno de la pandemia",
+            "type": "article-journal",
+            "volume": "11"
+        },
+        {
+            "author": [
+                {
+                    "family": "Lázaro Castellanos",
+                    "given": "Rosa"
+                },
+                {
+                    "family": "Jubany Baucells",
+                    "given": "Olga"
+                }
+            ],
+            "id": "lazarocastellanos_interseccionalidad_2017",
+            "issue": "46",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017
+                    ]
+                ]
+            },
+            "title": "Interseccionalidad del género y mercado de trabajo postfordista",
+            "type": "article-journal",
+            "volume": "5"
+        },
+        {
+            "author": [
+                {
+                    "family": "Marchetti",
+                    "given": "Patricia"
+                }
+            ],
+            "container-title": "Emol",
+            "id": "marchetti_empleo_2020",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020
+                    ]
+                ]
+            },
+            "publisher": "https://www.emol.com/noticias/Economia/2020/08/28/996237/Informalidad-Chile-pandemia-expertos-politicasformalizar.html",
+            "title": "Empleo informal como \"estrategia de sobrevivencia\": Expertos prevén alzas y urgen por políticas para combatirlo",
+            "title-short": "Empleo informal como \"estrategia de sobrevivencia\"",
+            "type": ""
+        },
+        {
+            "ISBN": "978-607-462-063-4",
+            "author": [
+                {
+                    "family": "Mora",
+                    "given": "Minor"
+                }
+            ],
+            "edition": "1a. ed",
+            "id": "mora_ajuste_2010",
+            "issued": {
+                "date-parts": [
+                    [
+                        2010
+                    ]
+                ]
+            },
+            "language": "es-ES",
+            "publisher": "Colegio de México",
+            "publisher-place": "México, D.F",
+            "title": "Ajuste y empleo: la precarización del trabajo asalariado en la era de la globalización",
+            "title-short": "Ajuste y empleo",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Mora",
+                    "given": "Claudia"
+                }
+            ],
+            "id": "mora_interseccionalidad_2019",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "title": "Interseccionalidad y fronteras sociales: Género y clase social en el mercado laboral chileno",
+            "title-short": "Interseccionalidad y fronteras sociales",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "OIT"
+                }
+            ],
+            "id": "oitCOVID19MundoTrabajo2020",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020
+                    ]
+                ]
+            },
+            "title": "El COVID-19 y el mundo del trabajo: Repercusiones y respuestas",
+            "title-short": "El COVID-19 y el mundo del trabajo",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "family": "ONU"
+                }
+            ],
+            "id": "onuClasificacionIndustrialInternacional2009",
+            "issued": {
+                "date-parts": [
+                    [
+                        2009
+                    ]
+                ]
+            },
+            "publisher": "Departamento de Asuntos Económicos y Sociales",
+            "title": "Clasificación Industrial Internacional Uniforme de todas las actividades económicas (CIIU)",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "family": "Pérez",
+                    "given": "C"
+                }
+            ],
+            "container-title": "El Desconcierto",
+            "genre": "El {{Desconcierto}}",
+            "id": "perez_veronica_2019",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "publisher": "https://www.eldesconcierto.cl/2019/12/04/veronica-schild-el-secreto-de-la-economia-chilena-es-la-mano-de-obra-precaria-feminizada/",
+            "title": "Verónica Schild: \"El secreto de la economía chilena es la mano de obra precaria feminizada\"",
+            "title-short": "Verónica Schild",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "family": "Quiñónes Dominguez",
+                    "given": "Mauricio"
+                }
+            ],
+            "id": "quinonesdominguezIndiceCalidadEmpleo2011",
+            "issued": {
+                "date-parts": [
+                    [
+                        2011
+                    ]
+                ]
+            },
+            "title": "El índice de calidad del empleo, una propuesta alternativa aplicada a Colombia",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Ravest",
+                    "given": "Javiera"
+                }
+            ],
+            "id": "ravestFisonomiaSectorServicios2016",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016
+                    ]
+                ]
+            },
+            "publisher": "Departamento de Sociología Universidad de Chile",
+            "title": "La fisonomía del sector servicios en Chile. Avances y proyecciones respecto del “Trabajo Decente”.",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "family": "Schönhaut",
+                    "given": "Constanza"
+                }
+            ],
+            "container-title": "El Desconcierto",
+            "id": "schonhaut_trabajos_2020",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020
+                    ]
+                ]
+            },
+            "title": "Trabajos feminizados en la pandemia: Remunerados y no remunerados",
+            "title-short": "Trabajos feminizados en la pandemia",
+            "type": "article-journal"
+        },
+        {
+            "DOI": "10.1007/s11205-020-02551-0",
+            "ISSN": "0303-8300, 1573-0921",
+            "abstract": "Abstract The article aims to analyse gender segregation in the labour market while comparing two national contexts in Europe and Latin America. Specifically, it will consider the growth trends of female employment in the last 25 years (1992), its distribution between activity sectors and occupations, and the gender pay gap. Feminization models and gender inequalities are framed within labour market segmentation theories, which are in partial contrast to human capital theories and neoclassical economics. The initial hypothesis is that the gender distribution of occupations measured by a segregation index is similar in Italy and Chile, despite significant differences in the socio-economic and institutional contexts. Through this intercontinental comparison, the article intends to shed light on women’s labour market conditions and segregation patterns, which are multidimensional and generalizable (transcontinental) phenomena, connected to the unequal division of labour in the new post-industrial order.",
+            "author": [
+                {
+                    "family": "Semenza",
+                    "given": "Renata"
+                },
+                {
+                    "family": "Boccardo",
+                    "given": "Giorgio"
+                },
+                {
+                    "family": "Sarti",
+                    "given": "Simone"
+                }
+            ],
+            "container-title": "Social Indicators Research",
+            "id": "semenza_far_2021",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021,
+                        4
+                    ]
+                ]
+            },
+            "language": "en-US",
+            "page": "917-942",
+            "title": "So Far, so Similar? Labour Market Feminization in Italy and Chile",
+            "title-short": "So Far, so Similar?",
+            "type": "article-journal",
+            "volume": "154"
+        },
+        {
+            "author": [
+                {
+                    "family": "Standing",
+                    "given": "Guy"
+                }
+            ],
+            "collection-title": "3rd series",
+            "container-title": "World Development",
+            "id": "standingGlobalFeminizationFlexible1999",
+            "issued": {
+                "date-parts": [
+                    [
+                        1999
+                    ]
+                ]
+            },
+            "page": "583-602",
+            "title": "Global Feminization Through Flexible Labor: A Theme Revisited",
+            "title-short": "Global Feminization Through Flexible Labor",
+            "type": "article-journal",
+            "volume": "27"
+        },
+        {
+            "DOI": "10.1177/1536504214558209",
+            "ISSN": "1536-5042, 1537-6052",
+            "abstract": "Economist Guy Standing explains how millions of people are in the precariat, and in defining this emerging class, points to the dangerous political and social consequences as well as the exciting progressive revival that this class could produce.",
+            "author": [
+                {
+                    "family": "Standing",
+                    "given": "Guy"
+                }
+            ],
+            "container-title": "Contexts",
+            "id": "standingPrecariat2014",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2014,
+                        11
+                    ]
+                ]
+            },
+            "language": "en-US",
+            "page": "10-12",
+            "title": "The Precariat",
+            "type": "article-journal",
+            "volume": "13"
+        },
+        {
+            "DOI": "10.1057/pol.2012.15",
+            "ISSN": "0032-3497, 1744-1684",
+            "author": [
+                {
+                    "family": "Standing",
+                    "given": "Guy"
+                }
+            ],
+            "container-title": "Polity",
+            "id": "standingPrecariatDenizensCitizens2012",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2012,
+                        10
+                    ]
+                ]
+            },
+            "language": "en-US",
+            "page": "588-608",
+            "title": "The Precariat: From Denizens to Citizens?",
+            "title-short": "The Precariat",
+            "type": "article-journal",
+            "volume": "44"
+        },
+        {
+            "ISBN": "978-1-84966-351-9 978-1-84966-352-6 978-1-4725-3616-7",
+            "author": [
+                {
+                    "family": "Standing",
+                    "given": "Guy"
+                }
+            ],
+            "id": "standingPrecariatNewDangerous2014",
+            "issued": {
+                "date-parts": [
+                    [
+                        2014
+                    ]
+                ]
+            },
+            "keyword": "Casual labor,Minimum wage,Precarious employment",
+            "publisher": "Bloomsbury",
+            "publisher-place": "London, UK ; New York, NY",
+            "title": "The precariat: The new dangerous class",
+            "title-short": "The precariat",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Weller",
+                    "given": "Jürgen"
+                }
+            ],
+            "id": "weller_empleo_2004",
+            "issued": {
+                "date-parts": [
+                    [
+                        2004
+                    ]
+                ]
+            },
+            "publisher": "Revista de la CEPAL No.84",
+            "title": "El empleo terciario en América Latina: Entre la modernidad y la sobrevivencia",
+            "title-short": "El empleo terciario en América Latina",
+            "type": ""
+        },
+        {
+            "ISBN": "978-92-1-321949-2",
+            "annote": "OCLC: ocm49504791",
+            "author": [
+                {
+                    "family": "Weller",
+                    "given": "Jürgen"
+                }
+            ],
+            "collection-number": "6",
+            "collection-title": "Serie Macroeconomía del desarrollo",
+            "id": "wellerProcesosExclusionInclusion2001",
+            "issued": {
+                "date-parts": [
+                    [
+                        2001
+                    ]
+                ]
+            },
+            "keyword": "Labor market,Latin America,Social integration",
+            "publisher": "Naciones Unidas, CEPAL, División de Desarrollo Económico",
+            "publisher-place": "Santiago, Chile",
+            "title": "Procesos de exclusión e inclusión laboral: La expasión del empleo en el sector terciario",
+            "title-short": "Procesos de exclusión e inclusión laboral",
+            "type": "book"
+        }
+    ],
+    "project_biblios": []
+}

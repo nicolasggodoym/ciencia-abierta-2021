@@ -1,0 +1,12 @@
+base
+usethis
+devtools
+summarytools
+scatterplot3d
+MASS
+poLCA
+sjPlot
+dplyr
+tidyr
+reshape2
+ggplot2
