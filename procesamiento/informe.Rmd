@@ -437,7 +437,7 @@ Se estima a la vez un 99,4% de probabilidades de no obtener vacaciones pagadas, 
 Finalmente, se aprecia una mayor probabilidad de esta clase a poseer jornadas laborales de entre 31 a 45 horas semanales (66,9%), y a la vez, ser la clase con la mayor probabilidad de trabajar bajo horarios de 30 horas semanales o menos (23,8%).
 Por ello, esta se denominará *clase multiprecarizada*.
 
-Por otra parte, la tercera clase identificada corresponde a un 44% de los trabajadores del sector servicios.
+Por otra parte, la tercera clase identificada corresponde a un *44%* de los trabajadores del sector servicios.
 Esta se caracteriza por contar con un contrato, siendo altamente probable de que este sea de carácter indefinido (74,9%) y con un contratista o subcontratista de bienes y servicios (83,3%); lo que, aludiendo a la primera dimensión de la operacionalización, suponiendo una combinación de rasgos de estabilidad e inestabilidad.
 Respecto al segundo componente de la precariedad laboral, es muy probable que los individuos de la clase en cuestión cuenten con cotización previsional (99.1%), de salud (100%) y de seguro de desempleo (100%); dando cuenta de rasgos de seguridad.
 En relación a los ingresos, el modelo de clases latentes indica que es probable que los trabajadores de esta clase tengan ingresos distribuidos entre los distintos quintiles, aunque es menos probable que se trate del primer quintil (17,9%).
@@ -446,11 +446,7 @@ En esta misma línea, el modelo de clases latentes indica que es altamente proba
 Adicionalmente, esta clase contempla altas probabilidades de trabajar entre 31 y 45 horas semanales (84,4%).
 En virtud de lo anterior, esta se denominará *clase subcontratada protegida*.
 
-
-*protegida*.
-
-La cuarta clase, .....
-Por ende, se denominará a este conjunto *clase de servicios temporales protegida*.
+Finalmente, la Clase 4 , la cual corresponde a un *30%* del total, presenta existencia de contratos, con una probabilidad del 99,7%. Respecto a la duración del contrato, con una probabilidad del 74%, la Clase 4 es propensa a los contratos indefinidos. Correspondiente a con quién se establece el subcontrato, hay un 72,7% de probabilidad de ser con una empresa de servicios temporales o suministradora de trabajadores y un 27,3 con un contratista o subcontratista de bienes y servicios, teniendo una ausencia de casos en el subcontrato con un enganchador (contratista agrícola). Ahora respecto a las diferentes cotizaciones, la Clase 4 tiene altas probabilidades de contar con cotizaciones previsionales y de salud, con un 95,5 % y 99,5 % respectivamente. No obstante, referido a cotización por seguro de desempleo, la probabilidad es de un 60%. En cuanto a los ingresos, existe 32,6 % de probabilidad de pertenecer al cuarto quintil (\$500.001 a \$779.787), un 12,2% de probabilidad de pertenecer al quintil más bajo (\$0 a \$291.974) y un 25,3% y 29,9% de pertenecer al segundo y tercer quintil respectivamente. Lo que concierne al lugar de trabajo, la Clase 4 tiene una probabilidad de un 76,1% de trabajar en instalaciones, oficina o casa del cliente o empleador, por otro lado, tiene un 20,5% de probabilidad de trabajar en instalaciones u oficinas propias o arrendadas, en hogar propio o anexos. Respecto a diferentes derechos laborales, la Clase 4 tiene una probabilidad de 99,1% de tener vacaciones pagadas, asimismo la probabilidad de tener días pagos por enfermedad y maternidad corresponde a un 99,2% y un 98,3% respectivamente. En cambio, derecho a guardería, la probabilidad baja a un 63,4%. Para finalizar, correspondiente a las horas de trabajo, la Clase 4 tiene un 83,3% de probabilidad de tener horas de trabajo entre 31 y 45 horas semanales. Por ende, se denominará a este conjunto *clase de servicios temporales protegida*.
 
 ```{r model_graph, echo=TRUE, message=FALSE, warning=FALSE}
 
@@ -479,6 +475,10 @@ lca4_graph
 
 ```
 
+##Tablas cruzadas
+
+El desglose del análisis de clases a partir del nivel educacional contenido en la Tabla 5 arroja que _Educación secundaria_ es la categoría de mayor proporción dentro de las cuatro clases. Para la *clase subcontratada inestable*, esta categoría representa el 56,4%, seguida por quienes poseen educación primaria (nivel 1 y 2) con un 22,7%, _Educacion tecnica_ con un 13%, y _Educacion universitaria_ con un 7,2% . Para la *clase multiprecarizada*, las cifras se concentran en los primeros niveles educativos, donde _Educacion primaria (nivel 1)_  reune un 13,6% de los casos, _Educacion primaria (nivel 2)_ un 27,3%, y _Educacion secundaria_ un 51,7%. _Educacion tecnica_ y _Educacion universitaria_ solo alcanzan un 3,4% y un 4,5% del total respectivamente. Por su parte, la *clase subcontratada protegida* es aquella que concentra el mayor porcentaje de su total en la categoría _Educacion secundaria_, con un 62,9%, siguiendo _Educacion técnica_ y _Educacion primaria (nivel 2)_, ambas con 11,9%, luego _Educacion universitaria_ con 6,6%, y _Educacion primaria (nivel 1)_ con un 6,4%. Finalmente, la *clase de servicios temporales protegida* es aquella con mayores porcentajes de educación superior, sumando un 47% entre _Educacion tecnica_ y _Educacion universitaria_ (con mayor proporción de la primera, con un 30,4% de los casos). Además, es la única clase con una proporción mayor a cero de _Postitulos y maestria_ (1,3%), pese a que este porcentaje es aún muy reducido. Se sigue que para un 42,8% de esta clase su mayor nivel alcanzado es el secundario, y para un 8,8% es el primario (niveles 1 y 2).
+
 ```{r cross_table_sex, echo=TRUE, message=FALSE, warning=FALSE}
 
 #Asginar la clase de precariedad a cada sujeto
@@ -491,7 +491,7 @@ base_proc <- base_proc %>% rename(Clase=`lc4$predclass`)
 sjt.xtab(base_proc$Clase, base_proc$sexo,
          title = "Tabla 4.
          Proporciones por clase de precariedad y sexo",
-         show.cell.prc = T)
+         show.row.prc = T)
 
 ```
 
@@ -500,7 +500,7 @@ sjt.xtab(base_proc$Clase, base_proc$sexo,
 sjt.xtab(base_proc$Clase, base_proc$educacion,
          title = "Tabla 5.
          Proporciones por clase de precariedad y nivel educacional",
-         show.cell.prc = T)
+         show.row.prc = TRUE)
 ```
 
 ```{r cross_table_age, echo=TRUE, message=FALSE, warning=FALSE}
@@ -508,7 +508,7 @@ sjt.xtab(base_proc$Clase, base_proc$educacion,
 sjt.xtab(base_proc$Clase, base_proc$edad,
          title = "Tabla 6.
          Proporciones por clase de precariedad y edad",
-         show.cell.prc = T,
+         show.row.prc = T,
          encoding = 'UTF-8')
 ```
 
