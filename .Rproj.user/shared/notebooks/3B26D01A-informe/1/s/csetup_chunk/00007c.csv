@@ -1,3 +1,0 @@
-"0","Una vez filtrados todos aquellos casos en que la actividad económica de la empresa en que trabajan no perteneciese al sector de servicios (es decir, todos aquellos sujetos cuyos valores en la variable `b13_rev4cl_caenes` fuesen diferentes a 1 (*Agricultura, ganadería, silvicultura y pesca*), 2 (*Explotación de minas y canteras*), 3 (*Industrias manufactureras*) y 6 (*Construcción*)), los datos redujeron su cantidad de observaciones (n) de 71.935 a *3.756*."
-"2","Error: unexpected symbol in ""Una vez""
-"
