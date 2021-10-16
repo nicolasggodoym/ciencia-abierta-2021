@@ -1,0 +1,346 @@
+"0","knitr::opts_chunk$set(echo = FALSE, # oculta código"
+"0","        warning=F, message=F,  # oculta warnings y mensajes"
+"0","        cache=TRUE # guarda en la memoria resultados, más velocidad"
+"0",")"
+"0",""
+"0","library(devtools)"
+"2","Loading required package: usethis
+"
+"0","devtools::install_github(""crsh/citr"", force = TRUE)"
+"2","WARNING: Rtools is required to build R packages, but is not currently installed.
+
+Please download and install Rtools 4.0 from https://cran.r-project.org/bin/windows/Rtools/.
+"
+"2","Downloading GitHub repo crsh/citr@HEAD
+"
+"1","These packages have more recent versions available.
+It is recommended to update all of them.
+Which would you like to update?"
+"1",""
+"1","
+"
+"1",""
+"1","
+"
+"1"," 1: All                                 "
+"1","
+"
+"1"," 2: CRAN packages only                  "
+"1","
+"
+"1"," 3: None                                "
+"1","
+"
+"1"," 4: htmltools (0.5.1.1 -> 0.5.2 ) [CRAN]"
+"1","
+"
+"1"," 5: later     (1.2.0   -> 1.3.0 ) [CRAN]"
+"1","
+"
+"1"," 6: digest    (0.6.27  -> 0.6.28) [CRAN]"
+"1","
+"
+"1"," 7: lifecycle (1.0.0   -> 1.0.1 ) [CRAN]"
+"1","
+"
+"1"," 8: cachem    (1.0.5   -> 1.0.6 ) [CRAN]"
+"1","
+"
+"1"," 9: mime      (0.11    -> 0.12  ) [CRAN]"
+"1","
+"
+"1","10: httpuv    (1.6.1   -> 1.6.3 ) [CRAN]"
+"1","
+"
+"1","11: stringi   (1.7.3   -> 1.7.5 ) [CRAN]"
+"1","
+"
+"1","12: cpp11     (0.3.1   -> 0.4.0 ) [CRAN]"
+"1","
+"
+"1","13: openssl   (1.4.4   -> 1.4.5 ) [CRAN]"
+"1","
+"
+"1","14: lubridate (1.7.10  -> 1.8.0 ) [CRAN]"
+"1","
+"
+"1",""
+"1","
+"
+"0","Finalmente, la Clase 4 , la cual corresponde a un *30%* del total, presenta existencia de contratos, con una probabilidad del 99,7%."
+"0","Respecto a la duración del contrato, con una probabilidad del 74%, la Clase 4 es propensa a los contratos indefinidos."
+"0","Correspondiente a con quién se establece el subcontrato, hay un 72,7% de probabilidad de ser con una empresa de servicios temporales o suministradora de trabajadores y un 27,3 con un contratista o subcontratista de bienes y servicios, teniendo una ausencia de casos en el subcontrato con un enganchador (contratista agrícola)."
+"0","Ahora respecto a las diferentes cotizaciones, la Clase 4 tiene altas probabilidades de contar con cotizaciones previsionales y de salud, con un 95,5 % y 99,5 % respectivamente."
+"0","No obstante, referido a cotización por seguro de desempleo, la probabilidad es de un 60%."
+"0","En cuanto a los ingresos, existe 32,6 % de probabilidad de pertenecer al cuarto quintil (\$500.001 a \$779.787), un 12,2% de probabilidad de pertenecer al quintil más bajo (\$0 a \$291.974) y un 25,3% y 29,9% de pertenecer al segundo y tercer quintil respectivamente."
+"0","Lo que concierne al lugar de trabajo, la Clase 4 tiene una probabilidad de un 76,1% de trabajar en instalaciones, oficina o casa del cliente o empleador, por otro lado, tiene un 20,5% de probabilidad de trabajar en instalaciones u oficinas propias o arrendadas, en hogar propio o anexos."
+"0","Respecto a diferentes derechos laborales, la Clase 4 tiene una probabilidad de 99,1% de tener vacaciones pagadas, asimismo la probabilidad de tener días pagos por enfermedad y maternidad corresponde a un 99,2% y un 98,3% respectivamente."
+"0","En cambio, derecho a guardería, la probabilidad baja a un 63,4%."
+"0","Para finalizar, correspondiente a las horas de trabajo, la Clase 4 tiene un 83,3% de probabilidad de tener horas de trabajo entre 31 y 45 horas semanales."
+"0","Por ende, se denominará a este conjunto *clase de servicios temporales protegida*."
+"0","itle: ""¿Cómo se distribuye la precariedad laboral en Chile? Una propuesta tipológica para analizar las condiciones de trabajo del sector servicios durante la pandemia"""
+"0","author: Emilia Barrientos, Pablo Campos, Nicolás Godoy, Monserrat Greene y Gonzalo"
+"0","  López"
+"0","date: ""04-10-2021"""
+"0","output:"
+"0","  html_document:"
+"0","    highlight: textmate"
+"0","    theme: paper"
+"0","    toc: yes"
+"0","    code_folding: hide"
+"0","    toc_float: true"
+"0","bibliography: ../input/bib/ciencia_abierta.bib"
+"0","csl: ../input/bib/apa_csl.csl"
+"0","editor_options: "
+"0","  markdown: "
+"0","    wrap: sentence"
+"0","---"
+"0",""
+"2","Installing 9 packages: sass, bslib, sourcetools, fontawesome, shiny, shinyjs, miniUI, bibtex, RefManageR
+"
+"2","Installing packages into ‘C:/Users/emili/OneDrive/Documentos/R/win-library/4.1’
+(as ‘lib’ is unspecified)
+"
+"2","also installing the dependency ‘htmltools’
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/htmltools_0.5.2.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 347845 bytes (339 KB)
+"
+"2","downloaded 339 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/sass_0.4.0.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 3639186 bytes (3.5 MB)
+"
+"2","downloaded 3.5 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/bslib_0.3.1.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 5038481 bytes (4.8 MB)
+"
+"2","downloaded 4.8 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/sourcetools_0.1.7.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 691471 bytes (675 KB)
+"
+"2","downloaded 675 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/fontawesome_0.2.2.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 1529187 bytes (1.5 MB)
+"
+"2","downloaded 1.5 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/shiny_1.7.1.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 4233536 bytes (4.0 MB)
+"
+"2","downloaded 4.0 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/shinyjs_2.0.0.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 1127186 bytes (1.1 MB)
+"
+"2","downloaded 1.1 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/miniUI_0.1.1.1.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 36644 bytes (35 KB)
+"
+"2","downloaded 35 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/bibtex_0.4.2.3.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 128178 bytes (125 KB)
+"
+"2","downloaded 125 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/RefManageR_1.3.0.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 790027 bytes (771 KB)
+"
+"2","downloaded 771 KB
+
+"
+"1","package ‘htmltools’ successfully unpacked and MD5 sums checked
+"
+"2","Warning:"
+"2"," cannot remove prior installation of package ‘htmltools’
+"
+"2","Warning in file.copy(savedcopy, lib, recursive = TRUE) :"
+"2","
+ "
+"2"," problem copying C:\Users\emili\OneDrive\Documentos\R\win-library\4.1\00LOCK\htmltools\libs\x64\htmltools.dll to C:\Users\emili\OneDrive\Documentos\R\win-library\4.1\htmltools\libs\x64\htmltools.dll: Permission denied
+"
+"2","Warning:"
+"2"," restored ‘htmltools’
+"
+"1","package ‘sass’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘bslib’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘sourcetools’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘fontawesome’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘shiny’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘shinyjs’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘miniUI’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘bibtex’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘RefManageR’ successfully unpacked and MD5 sums checked
+"
+"1","
+"
+"1",""
+"1","The downloaded binary packages are in
+	C:\Users\emili\AppData\Local\Temp\RtmpIRzJ1N\downloaded_packages"
+"1",""
+"1","
+"
+"2","WARNING: Rtools is required to build R packages, but is not currently installed.
+
+Please download and install Rtools 4.0 from https://cran.r-project.org/bin/windows/Rtools/.
+"
+"1","  "
+"1","  "
+"1",""
+"1",""
+"1","  "
+"1","[32m√[39m  [38;5;247mchecking for file 'C:\Users\emili\AppData\Local\Temp\RtmpIRzJ1N\remotes7083b671851\crsh-citr-0e8243d/DESCRIPTION'[39m[36m[36m (894ms)[36m[39m"
+"1",""
+"1","
+"
+"1",""
+"1",""
+"1",""
+"1","  "
+"1","  "
+"1",""
+"1",""
+"1","  "
+"1","[38;5;247m-[39m[38;5;247m  [39m[38;5;247mpreparing 'citr':[39m[36m[36m (3.9s)[36m[39m"
+"1",""
+"1","
+"
+"1","   checking DESCRIPTION meta-information ..."
+"1",""
+"1",""
+"1","  "
+"1","   checking DESCRIPTION meta-information ... "
+"1",""
+"1",""
+"1","  "
+"1","[32m√[39m  [38;5;247mchecking DESCRIPTION meta-information[39m[36m[39m"
+"1",""
+"1","
+"
+"1",""
+"1",""
+"1",""
+"1","  "
+"1","  "
+"1",""
+"1",""
+"1","  "
+"1","[38;5;247m-[39m[38;5;247m  [39m[38;5;247mchecking for LF line-endings in source and make files and shell scripts[39m[36m[39m"
+"1",""
+"1","
+"
+"1",""
+"1",""
+"1",""
+"1","  "
+"1","[38;5;247m-[39m[38;5;247m  [39m[38;5;247mchecking for empty or unneeded directories[39m[36m[39m"
+"1",""
+"1","
+"
+"1",""
+"1",""
+"1",""
+"1","  "
+"1","   Omitted 'LazyData' from DESCRIPTION"
+"1",""
+"1","
+"
+"1",""
+"1",""
+"1",""
+"1","  "
+"1","  "
+"1",""
+"1",""
+"1","  "
+"1","[38;5;247m-[39m[38;5;247m  [39m[38;5;247mbuilding 'citr_0.3.2.tar.gz'[39m[36m[39m"
+"1",""
+"1","
+"
+"1",""
+"1",""
+"1",""
+"1","  "
+"1","   "
+"1",""
+"1","
+"
+"1",""
+"1",""
+"1",""
+"2","Installing package into ‘C:/Users/emili/OneDrive/Documentos/R/win-library/4.1’
+(as ‘lib’ is unspecified)
+"
+"1","* installing *source* package 'citr' ...
+"
+"1","** using staged installation
+"
+"1","** R
+"
+"1","** inst
+"
+"1","** byte-compile and prepare package for lazy loading
+"
+"1","Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
+"
+"1","  namespace 'htmltools' 0.5.1.1 is being loaded, but >= 0.5.2 is required
+"
+"1","Calls: <Anonymous> ... namespaceImport -> loadNamespace -> namespaceImport -> loadNamespace
+"
+"1","Ejecución interrumpida
+"
+"1","ERROR: lazy loading failed for package 'citr'
+"
+"1","* removing 'C:/Users/emili/OneDrive/Documentos/R/win-library/4.1/citr'
+"
+"2","Warning in i.p(...) :"
+"2","
+ "
+"2"," installation of package ‘C:/Users/emili/AppData/Local/Temp/RtmpIRzJ1N/file7085e354961/citr_0.3.2.tar.gz’ had non-zero exit status
+"
+"0","```{r setup, include=FALSE}"
+"2","Error: attempt to use zero-length variable name
+"
