@@ -1,19 +1,22 @@
 ---
-title: "¿Cómo se distribuye la precariedad laboral en Chile? Una propuesta tipológica para analizar las condiciones de trabajo del sector servicios durante la pandemia"
-author: "Emilia Barrientos, Pablo Campos, Nicolás Godoy, Monserrat Greene y Gonzalo
-  López"
+title: ¿Cómo se distribuye la precariedad laboral en Chile? Una propuesta tipológica
+  para analizar las condiciones de trabajo del sector servicios durante la pandemia
+author: Emilia Barrientos, Pablo Campos, Nicolás Godoy, Monserrat Greene y Gonzalo
+  López
 date: "04-10-2021"
 output:
+  pdf_document:
+    toc: yes
   html_document:
     highlight: textmate
     theme: paper
     toc: yes
     code_folding: hide
-    toc_float: true
+    toc_float: yes
 bibliography: ../input/bib/ciencia_abierta.bib
 csl: ../input/bib/apa_csl.csl
-editor_options: 
-  markdown: 
+editor_options:
+  markdown:
     wrap: sentence
 ---
 
@@ -52,11 +55,13 @@ En Chile, según @perez2019, el mundo laboral ha sido marcado por las modernizac
 
 Así, la precariedad laboral se vió amplificada en un contexto en el que el Estado no es garante de derechos, dado su carácter neoliberal Lázaro Castellanos y Jubany Baucells [-@lazarocastellanos2017].
 
-La flexiprecariedad como fenómeno resume la inestabilidad laboral ligada a las normativas económicas capitalistas implementadas en Chile. Es decir, corresponde a una característica central en el proceso de producción capitalista y es un mecanismo que conlleva consecuencias directas en detrimento de las personas trabajadoras del país, menciona Aguiar [-@aguiar2010].
+La flexiprecariedad como fenómeno resume la inestabilidad laboral ligada a las normativas económicas capitalistas implementadas en Chile.
+Es decir, corresponde a una característica central en el proceso de producción capitalista y es un mecanismo que conlleva consecuencias directas en detrimento de las personas trabajadoras del país, menciona Aguiar [-@aguiar2010].
 
 Tomando en cuenta estos antecedentes, es menester considerar la calidad laboral como un fenómeno multidimensional, donde no solo las remuneraciones son decisivas, sino también las relaciones contractuales, las oportunidades de trabajo, la calidad del empleo, a partir de lo señalado por @anxo2017
 
-Para efectos del presente trabajo, se examinarán las condiciones de trabajo y precariedad del sector servicios. Este sector económico puede albergar las condiciones de empleo más precarizadas, debido a los patrones asociados en la fuerza de trabajo, lo que da pie a niveles o posiciones que oscilan entre la precarización y otras no precarias.
+Para efectos del presente trabajo, se examinarán las condiciones de trabajo y precariedad del sector servicios.
+Este sector económico puede albergar las condiciones de empleo más precarizadas, debido a los patrones asociados en la fuerza de trabajo, lo que da pie a niveles o posiciones que oscilan entre la precarización y otras no precarias.
 
 A nivel global, patrones masculinos y femeninos de participación en la fuerza de trabajo han entrado en convergencia, siendo los tipos de empleo tradicionalmente relacionados a las mujeres -de baja remuneración, inestables, inseguros, desprotegidos-, ampliados a tipos de empleo asociados a hombres -estables, sindicalizados, regulares, señala @standing1999.
 
@@ -66,9 +71,13 @@ Por ello, se puede relacionar la composición feminizada del sector a condicione
 
 En añadidura, este sector de la economía resulta complejo de definir ya que los cambios tecnológicos de la última década han diversificado aún más las actividades de servicios, indica @weller2001. Pese a esto, existe consenso en establecer que dicho sector guarda una clara heterogeneidad en su composición (@weller2001; @ravest2016), ya sea desde una mirada a las actividades productivas, como desde una mirada a variables más clasificatorias de la población (sexo, nivel educativo, edad). En adición, puede entenderse que "la producción terciaria es definida por residual como consistiendo en todas las demás actividades económicas, las principales de las cuales son: transporte, distribución, administración pública, servicio doméstico y todas las demás actividades cuyo producto es de una naturaleza no-material" Guadagni, [-@guadagni1964, pp.187].
 
-No obstante, @weller2001 plantea que las características propias de las actividades terciarias lo constituyen como un sector dinámico y cambiante a lo largo del tiempo. En tal sentido, el autor recomienda que la mejor manera de diferenciar dichas actividades va a depender de la interrogante que siga cada investigación. Sin embargo, de acuerdo a @schonhaut2020, existen ciertas ocupaciones del sector servicios de carácter notablemente feminizado, tales como la educación, salud y servicios de aseo.
+No obstante, @weller2001 plantea que las características propias de las actividades terciarias lo constituyen como un sector dinámico y cambiante a lo largo del tiempo.
+En tal sentido, el autor recomienda que la mejor manera de diferenciar dichas actividades va a depender de la interrogante que siga cada investigación.
+Sin embargo, de acuerdo a @schonhaut2020, existen ciertas ocupaciones del sector servicios de carácter notablemente feminizado, tales como la educación, salud y servicios de aseo.
 
-Al respecto, @semenza2021 sostienen que pese al incremento en la participación de las mujeres en todos los sectores de las actividades terciarias, ellas se encuentran mayoritariamente concentradas "en servicios de baja calificación o, si son altamente calificadas, se emplean principalmente en ocupaciones vinculadas a los sectores de la salud o la educación" (p. 10). Además, en dicho estudio se evidencia que las mujeres se concentran en sólo dos sectores a saber, educación, salud humana, otros servicios y administración pública, mientras que se encuentran subrepresentadas en lo que es entendido en el estudio como sector terciario avanzado. De esta manera, en la realidad chilena pueden reconocerse múltiples ocupaciones donde prima la mano de obra femenina, expuesta en mayor o menor grado a condiciones de precarización laboral.
+Al respecto, @semenza2021 sostienen que pese al incremento en la participación de las mujeres en todos los sectores de las actividades terciarias, ellas se encuentran mayoritariamente concentradas "en servicios de baja calificación o, si son altamente calificadas, se emplean principalmente en ocupaciones vinculadas a los sectores de la salud o la educación" (p. 10).
+Además, en dicho estudio se evidencia que las mujeres se concentran en sólo dos sectores a saber, educación, salud humana, otros servicios y administración pública, mientras que se encuentran subrepresentadas en lo que es entendido en el estudio como sector terciario avanzado.
+De esta manera, en la realidad chilena pueden reconocerse múltiples ocupaciones donde prima la mano de obra femenina, expuesta en mayor o menor grado a condiciones de precarización laboral.
 
 Para sintetizar; en primer lugar, la subcontratación en el sector servicios en un contexto sanitario como el COVID- 19 constituye una temática que debe ser profundizada mediante nuevas investigaciones para ampliar el conocimiento de las dinámicas y consecuencias de la pandemia sobre la estructura del mercado laboral.
 
@@ -121,16 +130,19 @@ En otros términos, la precariedad laboral se entiende como:
 
 Desde una aproximación multidimensional, @blanco2019 propone que la precariedad daría cuenta de una situación fluida y múltiple de fisionomías vinculadas a las profundas transformaciones a nivel del mercado laboral, las formas de acumulación del capital y las relaciones de producción.
 
-En la misma línea, @mora2010 plantea que la precariedad laboral no es una condición estática, sino una situación que puede agravarse cuando las instituciones sociales y los actores laborales que debieran regular el empleo no frenan tal deterioro. Asimismo, para @julian2014 la precarización constituye el proceso temporal que implica la profundización de una situación de "falta" inicial.
+En la misma línea, @mora2010 plantea que la precariedad laboral no es una condición estática, sino una situación que puede agravarse cuando las instituciones sociales y los actores laborales que debieran regular el empleo no frenan tal deterioro.
+Asimismo, para @julian2014 la precarización constituye el proceso temporal que implica la profundización de una situación de "falta" inicial.
 
 ## Sector servicios: una intersección de precariedad, feminización y segregación laboral
 
-La marcada heterogeneidad interna de este sector ha dificultado una definición concreta y específica del mismo. Con el fin de establecer sus especificidades, las concepciones se volcaron a la identificación de elementos comunes entre las actividades pertenecientes a éste.
+La marcada heterogeneidad interna de este sector ha dificultado una definición concreta y específica del mismo.
+Con el fin de establecer sus especificidades, las concepciones se volcaron a la identificación de elementos comunes entre las actividades pertenecientes a éste.
 Así, aparecen aspectos como "que serían intangibles, intransferibles y perecederos y no podrían almacenarse, y que además tendrían una elevada intensidad laboral debido a las limitaciones para sustituir la mano de obra por capital y tecnología" (Weller, [-@weller_empleo_2004], pp.161).
 
 No obstante, el factor tecnológico ha supuesto un incremento tanto en la heterogeneidad del sector servicios, como indica @weller2004, así como también en la estratificación de la sociedad, dado las diferentes formas en que las personas se insertan laboralmente según @arriagada2007.
 
-Sin duda, este proceso de terciarización del trabajo documentado por @arriagada2007, es escenario de procesos de inclusión y exclusión, como complementa @weller2001. De acuerdo con lo planteado por el autor, los procesos de inclusión en el sector terciario se vinculan al rol cada vez más importante de estas actividades en la estructura productiva y social; mientras que los procesos de exclusión se vinculan con la generación de trabajos mal remunerados, de baja productividad y mala calidad.
+Sin duda, este proceso de terciarización del trabajo documentado por @arriagada2007, es escenario de procesos de inclusión y exclusión, como complementa @weller2001.
+De acuerdo con lo planteado por el autor, los procesos de inclusión en el sector terciario se vinculan al rol cada vez más importante de estas actividades en la estructura productiva y social; mientras que los procesos de exclusión se vinculan con la generación de trabajos mal remunerados, de baja productividad y mala calidad.
 
 Esto último refiere, en los términos de @weller2001, a las barreras de ciertas actividades del sector servicios en las que los requisitos de capital, tecnología y capital humano son prácticamente nulos, lo que da pie a una inserción o "refugio" de la fuerza laboral que no encuentra posibilidades de inserción en actividades que supongan mayor productividad y sean mejor pagadas.
 
@@ -145,41 +157,44 @@ Una vez filtrados todos aquellos casos en que la actividad económica de la empr
 ESI, elaborada por el Instituto Nacional de Estadísticas (INE) [-@instituonacionaldeestadisticas2021] tiene por objeto *caracterizar los ingresos laborales en el mes de referencia de las personas que son clasificadas como ocupadas en la Encuesta Nacional de Empleo (ENE)*, y *caracterizar los ingresos de otras fuentes de los hogares en el mes de referencia*. Siguiendo el diseño muestral de ENE, también producida por el INE [-@instituonacionaldeestadisticas2020], la ESI presenta una estrategia de muestreo **probabilística, estratificada y bietápica**, en que los estratos de muestro corresponden a la combinación *Estrato geográfico -- Estrato socioeconómico*, en caso de que tal combinación pueda existir en cada estrato en particular.
 
 Así, la ESI busca ser **representativa de la completitud del territorio chileno**, abarcando el 97% de las comunas del país, con errores de muestreo aceptables para los dominios nacional, nacional urbano, nacional rural, regional, área urbana de todas las regiones, y área rural de las regiones de O'Higgins, El Maule, La Araucanía, Los Lagos, Metropolitana, Los Ríos y Ñuble.
-Las variables seleccionadas para el análisis corresponden a las presentadas en la operacionalización multidimensional de la precariedad laboral elaborada por Blanco y Julian [-@blanco2019], que incluye cinco componentes que incorporan las siguientes variables: 
+Las variables seleccionadas para el análisis corresponden a las presentadas en la operacionalización multidimensional de la precariedad laboral elaborada por Blanco y Julian [-@blanco2019], que incluye cinco componentes que incorporan las siguientes variables:
 
-1. *(In)estabilidad*: ausencia de contrato, existencia de contratos temporales, de corta duración o de incierta finalización + [contrato] (originalmente b8): En ese empleo ¿tiene contrato escrito?
-  
-  + [contrato_duracion] (originalmente b9): ¿La duración de ese contrato o acuerdo de trabajo es... 
-  + [contrato_sub] (originalmente b12): ¿Está contratado o tiene un acuerdo de trabajo... 
+1.  *(In)estabilidad*: ausencia de contrato, existencia de contratos temporales, de corta duración o de incierta finalización + [contrato] (originalmente b8): En ese empleo ¿tiene contrato escrito?
 
-1. *(In)seguridad*: ausencia (o no) de cobertura de salud y previsión social.
- 
-  + [cotiza_prev] (originalmente b7a_1): Su empleador, ¿cotiza por usted en el sistema previsional o de pensión?
-  + [cotiza_salud] (originalmente b7a_2): Su empleador, ¿cotiza por usted en el sistema de salud público o privado?
-  + [cotiza_seguro] (originalmente b7a_3): Su empleador, ¿cotiza por usted en el sistema de seguro de desempleo?
+-   [contrato_duracion] (originalmente b9): ¿La duración de ese contrato o acuerdo de trabajo es...
+-   [contrato_sub] (originalmente b12): ¿Está contratado o tiene un acuerdo de trabajo...
 
-1. *(In)suficiencia*: cantidad de salario/ingreso.
-  
-  + [ingresos] (originalmente ing_t\_p): Recodificación de variable ingresos a categórica, a partir de quintiles de ingreso.
+1.  *(In)seguridad*: ausencia (o no) de cobertura de salud y previsión social.
 
-1. *Condiciones de trabajo*: refiere a la "(...) accidentabilidad porocupación y la caracterización de los lugares de trabajo" (Blanco y Julián, 2019, p. 104).
+-   [cotiza_prev] (originalmente b7a_1): Su empleador, ¿cotiza por usted en el sistema previsional o de pensión?
+-   [cotiza_salud] (originalmente b7a_2): Su empleador, ¿cotiza por usted en el sistema de salud público o privado?
+-   [cotiza_seguro] (originalmente b7a_3): Su empleador, ¿cotiza por usted en el sistema de seguro de desempleo?
 
-  + [lugar_trab] (originalmente b16): En la semana que terminó el domingo pasado, ¿dónde realizó principalmente sus tareas?
-  + [cond_vacaciones] (originalmente b7b_1): En este trabajo, ¿tiene derecho, aunque no utilice, a vacaciones anuales?
-  + [cond_enfermedad] (originalmente b7b\_\_2): En este trabajo, ¿tiene derecho, aunque no utilice, a días pagados por enfermedad?
-  + [cond_maternidad] (originalmente b7b_3): En este trabajo, ¿tiene derecho, aunque no utilice, a permiso por maternidad y paternidad?
-  + [cond_guarderia] (originalmente b7b_4): En este trabajo, ¿tiene derecho, aunque no utilice, a servicio de guardería infantil?\
+1.  *(In)suficiencia*: cantidad de salario/ingreso.
 
-1. *Cronopiedad*: cantidad de horas de trabajo realizadas semanalmente.
+-   [ingresos] (originalmente ing_t\_p): Recodificación de variable ingresos a categórica, a partir de quintiles de ingreso.
 
-  + [horas] (originalmente c2_1\_3): Actividad principal: Total horas semanales trabajadas habitualmente, recodificada en categorías.
+1.  *Condiciones de trabajo*: refiere a la "(...) accidentabilidad porocupación y la caracterización de los lugares de trabajo" (Blanco y Julián, 2019, p. 104).
 
-Se incorporan además variables **demográficas** 
-1. [sexo]: sexo de la persona que responde el cuestionario.
-1. [edad]: edad de la persona que responde el cuestionario, recodificada en tramos.
-1. [educacion] (originalmente cine): Clasificación Internacional de nivel Educacional (CINE).
+-   [lugar_trab] (originalmente b16): En la semana que terminó el domingo pasado, ¿dónde realizó principalmente sus tareas?
+-   [cond_vacaciones] (originalmente b7b_1): En este trabajo, ¿tiene derecho, aunque no utilice, a vacaciones anuales?
+-   [cond_enfermedad] (originalmente b7b\_\_2): En este trabajo, ¿tiene derecho, aunque no utilice, a días pagados por enfermedad?
+-   [cond_maternidad] (originalmente b7b_3): En este trabajo, ¿tiene derecho, aunque no utilice, a permiso por maternidad y paternidad?
+-   [cond_guarderia] (originalmente b7b_4): En este trabajo, ¿tiene derecho, aunque no utilice, a servicio de guardería infantil?\
+
+1.  *Cronopiedad*: cantidad de horas de trabajo realizadas semanalmente.
+
+-   [horas] (originalmente c2_1\_3): Actividad principal: Total horas semanales trabajadas habitualmente, recodificada en categorías.
+
+Se incorporan además variables **demográficas** 1.
+[sexo]: sexo de la persona que responde el cuestionario.
+1.
+[edad]: edad de la persona que responde el cuestionario, recodificada en tramos.
+1.
+[educacion] (originalmente cine): Clasificación Internacional de nivel Educacional (CINE).
 
 Todo lo anterior se sintetiza en *tabla 1*:
+
 ```{r library, echo=TRUE, warning=FALSE, message=FALSE, include = FALSE}
 pacman::p_load(summarytools, #para estadísticos descriptivos
                poLCA, #para estimar los modelos LCA
@@ -196,15 +211,18 @@ base_proc <- readRDS("../input/data/data_proc.rds")
 ```
 
 #### Tabla 1. Descripción de variables por analizar
+
 ```{r table, echo=TRUE, warning=FALSE, message=FALSE, results='asis' }
 print(summarytools::dfSummary(base_proc, headings=FALSE, plain.ascii = FALSE), method = 'render')
 ```
 
 # Análisis
 
-Para cumplir con los objetivos de esta investigación se llevará a cabo un **análisis de clases latentes** que conduzca a la elaboración de una tipología sobre la variable latente *precariedad laboral*. El análisis de clases latentes refiere a una técnica estadística para la identificación de subgrupos diferentes a partir de datos observados, bajo el supuesto de que la membresía a estas clases puede explicarse según los patrones de respuesta, en razón de lo señalado por @weller2020.
+Para cumplir con los objetivos de esta investigación se llevará a cabo un **análisis de clases latentes** que conduzca a la elaboración de una tipología sobre la variable latente *precariedad laboral*.
+El análisis de clases latentes refiere a una técnica estadística para la identificación de subgrupos diferentes a partir de datos observados, bajo el supuesto de que la membresía a estas clases puede explicarse según los patrones de respuesta, en razón de lo señalado por @weller2020.
 
-Para ello, se trabajará con el paquete *Polytomous variable Latent Class Analysis* o poLCA elaborado por @linzer2011. Los análisis propuestos serán ralizados con el softare estadístico `R` en su versión 4.1.0 "Camp Pontanezen".
+Para ello, se trabajará con el paquete *Polytomous variable Latent Class Analysis* o poLCA elaborado por @linzer2011.
+Los análisis propuestos serán ralizados con el softare estadístico `R` en su versión 4.1.0 "Camp Pontanezen".
 
 En aras de encontrar el modelo más parsimonioso, con la menor cantidad de clases y que tenga un ajuste aceptable, se considerará el *chi-cuadrado de Pearson (X\^2)*, *chi-cuadrado de razón de verosimilitud* (G2), Log-likelihood, *criterio de información de Akaike* (AIC) y *criterio de información bayesiano* (BIC), según lo propuesto por @hagenaars2002.
 
@@ -429,48 +447,66 @@ sjPlot::tab_df(modelo,
 
 ```
 
-La primera clase identificada, correspondiente al *17,9 %* de la población en estudio, presenta un 98,2 % de probabilidad de existencia de contratos. Respecto a la duración de éstos, en la Tabla 3 se presenta una alta probabilidad de esta clase (96,2 %) de poseer contratos definidos.
+La primera clase identificada, correspondiente al *17,9 %* de la población en estudio, presenta un 98,2 % de probabilidad de existencia de contratos.
+Respecto a la duración de éstos, en la Tabla 3 se presenta una alta probabilidad de esta clase (96,2 %) de poseer contratos definidos.
 En relación con el personal que presenta subcontrato en esta clase, existe una probabilidad del 70 % que este tipo de vínculo laboral se mantenga con un contratista o subcontratista de bienes y servicios.
 
 Al mismo tiempo, se indica con una probabilidad del 22,4 % que esta relación sea con una empresa de servicios temporales o suministradora de trabajadores, mientras que se muestra una probabilidad del 7,5 % que este vínculo sea a través de un enganchador (contratista agrícola).
-Sobre la cotización previsional, se estima con un 97,9 % de probabilidades que esta clase cuenten con dicha cotización. Lo mismo sucede con las cotizaciones de salud y de seguro de desempleo, con unas probabilidades de presentarlas de 99,3 % y 91,2 % respectivamente.
+Sobre la cotización previsional, se estima con un 97,9 % de probabilidades que esta clase cuenten con dicha cotización.
+Lo mismo sucede con las cotizaciones de salud y de seguro de desempleo, con unas probabilidades de presentarlas de 99,3 % y 91,2 % respectivamente.
 
 En cuanto a los quintiles de ingresos, en la Tabla 3 se indican un 44 % de probabilidades que esta clase pertenezca al primer quintil de ingresos (\$0 a \$291.974), asimismo, se estiman un 24,9 % de probabilidades de pertenecer al segundo quintil de ingresos (\$291.975 a \$380.500).
 En cuanto a la probabilidad de pertenecer tanto al tercer como al cuarto quintil de ingresos, se muestran unas probabilidades menores al 20 % (18,5 % y 12, 7 % respectivamente).
 
 Respecto al lugar de trabajo, se estima un 45,5 % de probabilidades que les trabajadores de esta clase realicen sus actividades en instalaciones, oficinas o casa del cliente o empleador.
-En relación a lo anterior, existe un 43,9 % de probabilidades que el lugar de trabajo de esta clase corresponda a obras de construcción, mineras, predios agrícolas o similares. En cuanto a quienes desarrollan sus actividades en la calle, vía pública u otro, esta clase presenta un 9,3 % de probabilidades, al mismo tiempo que presenta un 1,3 % de realizar sus funciones en instalaciones u oficinas propias o arrendadas, en hogar propio o anexos.Concerniente al pago de vacaciones, la clase en cuestión presenta un 81,1 % de probabilidades que estas no sean pagadas. Sin embargo, al tratarse de los días pagos por enfermedad existe un 85,1 % que estos sean pagados. En cuanto a los días por maternidad, se estima un 65 % de probabilidad que estos resulten efectivamente pagados, mientras que para la clase se muestra una probabilidad de 96,9 % que no cuenten con derecho a guardería.Por último, sobre el total de horas semanales habituales en la actividad principal, en la Tabla 3 se indica un 78,2 % de probabilidades que quienes pertenezcan a esta clase trabajen entre 31 y 45 horas semanales.
+En relación a lo anterior, existe un 43,9 % de probabilidades que el lugar de trabajo de esta clase corresponda a obras de construcción, mineras, predios agrícolas o similares.
+En cuanto a quienes desarrollan sus actividades en la calle, vía pública u otro, esta clase presenta un 9,3 % de probabilidades, al mismo tiempo que presenta un 1,3 % de realizar sus funciones en instalaciones u oficinas propias o arrendadas, en hogar propio o anexos.Concerniente al pago de vacaciones, la clase en cuestión presenta un 81,1 % de probabilidades que estas no sean pagadas.
+Sin embargo, al tratarse de los días pagos por enfermedad existe un 85,1 % que estos sean pagados.
+En cuanto a los días por maternidad, se estima un 65 % de probabilidad que estos resulten efectivamente pagados, mientras que para la clase se muestra una probabilidad de 96,9 % que no cuenten con derecho a guardería.Por último, sobre el total de horas semanales habituales en la actividad principal, en la Tabla 3 se indica un 78,2 % de probabilidades que quienes pertenezcan a esta clase trabajen entre 31 y 45 horas semanales.
 
-Al mismo tiempo, existe una probabilidad de 11,7 % que las personas de esta clase trabajen una cantidad mayor a 45 horas semanales, mientras que se estima con un 10,1% de probabilidades que este grupo trabaje una cantidad igual o menor a 30 horas semanales. Por lo tanto, se propone nombrarla *clase subcontratada inestable*.
+Al mismo tiempo, existe una probabilidad de 11,7 % que las personas de esta clase trabajen una cantidad mayor a 45 horas semanales, mientras que se estima con un 10,1% de probabilidades que este grupo trabaje una cantidad igual o menor a 30 horas semanales.
+Por lo tanto, se propone nombrarla *clase subcontratada inestable*.
 
-Por su parte, la Clase 2 contempla un *6,9%* de la población estudiada, y es caracterizada por una amplia probabilidad de no poseer contrato (92%), y en caso de poseer, que éste sea indefinido (87,5%). Luego, se estima en el modelo un 53% de probabilidad de esta clase de emplearse con un contratista o subcontratista de bienes y servicios, 33% con un enganchador (contratista agrícola), y un 13% de probabilidades de ser contratado por una empresa de servicios temporales o suministradora de trabajadores.
+Por su parte, la Clase 2 contempla un *6,9%* de la población estudiada, y es caracterizada por una amplia probabilidad de no poseer contrato (92%), y en caso de poseer, que éste sea indefinido (87,5%).
+Luego, se estima en el modelo un 53% de probabilidad de esta clase de emplearse con un contratista o subcontratista de bienes y servicios, 33% con un enganchador (contratista agrícola), y un 13% de probabilidades de ser contratado por una empresa de servicios temporales o suministradora de trabajadores.
 
 En lo que respecta a seguridad laboral, se estima una probabilidad de 96% de carecer de cotización previsional, un 96,5% de no poseer cotización en servicios de salud, y un 99,4% de no contar con cotizaciones en seguro de desempleo.
 
 Sumado a ello, la probabilidad según quintiles de ingreso se ordena de modo decreciente, siendo el primer quintil el de mayor proporción (73,10%), luego el segundo (13,6%), siguiéndole el tercero (10,5%), y finalmente el cuarto quintil (2,8%).
 
-En cuanto a lugar de trabajo, esta clase se caracteriza por una probabilidad de 64,6% de trabajar en obras de construcción, mineras, predio agrícola o similares. Se estima a la vez un 99,4% de probabilidades de no obtener vacaciones pagadas, un 100% de probabilidad de no recibir pago por días de enfermedad, un 99,4% de probabilidad de no ser remunerado/a en días de ausencia por maternidad, y un 100% de probabilidad de no poseer derecho a guardería.
+En cuanto a lugar de trabajo, esta clase se caracteriza por una probabilidad de 64,6% de trabajar en obras de construcción, mineras, predio agrícola o similares.
+Se estima a la vez un 99,4% de probabilidades de no obtener vacaciones pagadas, un 100% de probabilidad de no recibir pago por días de enfermedad, un 99,4% de probabilidad de no ser remunerado/a en días de ausencia por maternidad, y un 100% de probabilidad de no poseer derecho a guardería.
 
-Finalmente, se aprecia una mayor probabilidad de esta clase a poseer jornadas laborales de entre 31 a 45 horas semanales (66,9%), y a la vez, ser la clase con la mayor probabilidad de trabajar bajo horarios de 30 horas semanales o menos (23,8%). Por ello, esta se denominará *clase multiprecarizada*.
+Finalmente, se aprecia una mayor probabilidad de esta clase a poseer jornadas laborales de entre 31 a 45 horas semanales (66,9%), y a la vez, ser la clase con la mayor probabilidad de trabajar bajo horarios de 30 horas semanales o menos (23,8%).
+Por ello, esta se denominará *clase multiprecarizada*.
 
-Por otra parte, la tercera clase identificada corresponde a un *44%* de los trabajadores del sector servicios. Esta se caracteriza por contar con un contrato, siendo altamente probable de que este sea de carácter indefinido (74,9%) y con un contratista o subcontratista de bienes y servicios (83,3%); lo que, aludiendo a la primera dimensión de la operacionalización, suponiendo una combinación de rasgos de estabilidad e inestabilidad.
+Por otra parte, la tercera clase identificada corresponde a un *44%* de los trabajadores del sector servicios.
+Esta se caracteriza por contar con un contrato, siendo altamente probable de que este sea de carácter indefinido (74,9%) y con un contratista o subcontratista de bienes y servicios (83,3%); lo que, aludiendo a la primera dimensión de la operacionalización, suponiendo una combinación de rasgos de estabilidad e inestabilidad.
 
 Respecto al segundo componente de la precariedad laboral, es altamente probable que los individuos de la clase en cuestión cuenten con cotización previsional (99.1%), de salud (100%) y de seguro de desempleo (100%); dando cuenta de rasgos de seguridad.
 
 En relación a los ingresos, el modelo de clases latentes indica que es probable que los trabajadores de esta clase tengan ingresos distribuidos entre los distintos quintiles, aunque es menos probable que se trate del primer quintil (17,9%).
 
-En cuanto a las condiciones de trabajo, es probable que la tercera clase trabaje en instalaciones del cliente o empleador (58,0%) y, en menor medida, en obras de construcción, mineras, predio agrícola o similares (23,3%). En esta misma línea, el modelo de clases latentes indica que es altamente probable que tales trabajadores cuenten con vacaciones pagadas (99,8%), tengan derecho a días pagados por enfermedad (99,4%) y días pagados por maternidad, aunque es poco probable que tengan derecho a guardería (22,8%).
+En cuanto a las condiciones de trabajo, es probable que la tercera clase trabaje en instalaciones del cliente o empleador (58,0%) y, en menor medida, en obras de construcción, mineras, predio agrícola o similares (23,3%).
+En esta misma línea, el modelo de clases latentes indica que es altamente probable que tales trabajadores cuenten con vacaciones pagadas (99,8%), tengan derecho a días pagados por enfermedad (99,4%) y días pagados por maternidad, aunque es poco probable que tengan derecho a guardería (22,8%).
 
-Adicionalmente, esta clase contempla altas probabilidades de trabajar entre 31 y 45 horas semanales (84,4%). En virtud de lo anterior, esta se denominará *clase subcontratada protegida*.
+Adicionalmente, esta clase contempla altas probabilidades de trabajar entre 31 y 45 horas semanales (84,4%).
+En virtud de lo anterior, esta se denominará *clase subcontratada protegida*.
 
-Finalmente, la Clase 4 , la cual corresponde a un *30%* del total, presenta existencia de contratos, con una probabilidad del 99,7%. Respecto a la duración del contrato, con una probabilidad del 74%, la Clase 4 es propensa a los contratos indefinidos. Respecto de con quién se establece el subcontrato, hay un 72,7% de probabilidad de hacerlo con una empresa de servicios temporales o suministradora de trabajadores y un 27,3% de realizarlo con un contratista o subcontratista de bienes y servicios, presentando una ausencia de casos en el subcontrato con un enganchador (contratista agrícola).
+Finalmente, la Clase 4 , la cual corresponde a un *30%* del total, presenta existencia de contratos, con una probabilidad del 99,7%.
+Respecto a la duración del contrato, con una probabilidad del 74%, la Clase 4 es propensa a los contratos indefinidos.
+Respecto de con quién se establece el subcontrato, hay un 72,7% de probabilidad de hacerlo con una empresa de servicios temporales o suministradora de trabajadores y un 27,3% de realizarlo con un contratista o subcontratista de bienes y servicios, presentando una ausencia de casos en el subcontrato con un enganchador (contratista agrícola).
 
-Ahora bien, respecto a las diferentes cotizaciones, la clase 4 tiene altas probabilidades de contar con cotizaciones previsionales y de salud, con un 95,5 % y 99,5 % respectivamente. No obstante, referido a cotización por seguro de desempleo, la probabilidad es de un 60%.
-En cuanto a los ingresos, existe 32,6 % de probabilidad de pertenecer al cuarto quintil ($500.001 a $779.787), un 12,2% de probabilidad de pertenecer al quintil más bajo ($0 a $291.974) y un 25,3% y 29,9% de pertenecer al segundo y tercer quintil respectivamente.
+Ahora bien, respecto a las diferentes cotizaciones, la clase 4 tiene altas probabilidades de contar con cotizaciones previsionales y de salud, con un 95,5 % y 99,5 % respectivamente.
+No obstante, referido a cotización por seguro de desempleo, la probabilidad es de un 60%.
+En cuanto a los ingresos, existe 32,6 % de probabilidad de pertenecer al cuarto quintil (\$500.001 a \$779.787), un 12,2% de probabilidad de pertenecer al quintil más bajo (\$0 a \$291.974) y un 25,3% y 29,9% de pertenecer al segundo y tercer quintil respectivamente.
 
-En lo que concierne al lugar de trabajo, la clase 4 tiene una probabilidad de un 76,1% de trabajar en instalaciones, oficina o casa del cliente o empleador, por otro lado, tiene un 20,5% de probabilidad de trabajar en instalaciones u oficinas propias o arrendadas, en hogar propio o anexos. Respecto a diferentes derechos laborales, la clase 4 tiene una probabilidad de 99,1% de tener vacaciones pagadas, asimismo la probabilidad de tener días pagos por enfermedad y maternidad corresponde a un 99,2% y un 98,3% respectivamente. En cambio, derecho a guardería, la probabilidad baja a un 63,4%.
+En lo que concierne al lugar de trabajo, la clase 4 tiene una probabilidad de un 76,1% de trabajar en instalaciones, oficina o casa del cliente o empleador, por otro lado, tiene un 20,5% de probabilidad de trabajar en instalaciones u oficinas propias o arrendadas, en hogar propio o anexos.
+Respecto a diferentes derechos laborales, la clase 4 tiene una probabilidad de 99,1% de tener vacaciones pagadas, asimismo la probabilidad de tener días pagos por enfermedad y maternidad corresponde a un 99,2% y un 98,3% respectivamente.
+En cambio, derecho a guardería, la probabilidad baja a un 63,4%.
 
-Para finalizar, correspondiente a las horas de trabajo, la Clase 4 tiene un 83,3% de probabilidad de tener horas de trabajo entre 31 y 45 horas semanales. Por ende, se denominará a este conjunto *clase de servicios temporales protegida*.
+Para finalizar, correspondiente a las horas de trabajo, la Clase 4 tiene un 83,3% de probabilidad de tener horas de trabajo entre 31 y 45 horas semanales.
+Por ende, se denominará a este conjunto *clase de servicios temporales protegida*.
 
 ```{r model_graph, echo=TRUE, message=FALSE, warning=FALSE}
 
@@ -501,7 +537,14 @@ lca4_graph
 
 ## Tablas cruzadas
 
-La _tabla 4_ da cuenta de la distribución de los individuos en cada clase de precariedad laboral según sexo.Para empezar, la _clase subcontratada inestable_ se compone mayoritariamente por hombres (67,5 %), siendo las mujeres un 32,5 %. Asimismo, la _clase multiprecarizada_ presenta una mayor presencia masculina (76,1 %),con un 23,9% de mujeres. En la misma línea, la _clase subcontratada protegida_ posee un carácter masculinizado, en tanto 64,2% de la clase refiere a hombres y 35,8% a mujeres. Finalmente, a diferencia del resto de las clases previamente descritas, la _clase de servicios temporales protegida_ se compone predominantemente por mujeres (76,7 %), siendo los hombres sólo un 23,3%. Cabe señalar que, a nivel global entre las clases, más de la mitad de los hombres trabajadores del sector servicios (56.2 %) se concentran en la _clase subcontratada protegida_; mientras que casi la mitad de las mujeres trabajadoras (49.3 %) pertenecen a la _clase de servicios temporales protegida_. Asimismo, el 35,7 % de las mujeres trabajadoras del sector servicios pertenecen a la _clase de servicios temporales protegida_. Estos hallazgos son interesantes, en tanto dan cuenta de que la posición de los hombres en los empleos del sector servicios sería más precaria que la de las mujeres durante el año 2019; sin embargo, no es posible aseverar tal hallazgo sin considerar la fuerte salida de las mujeres del mercado laboral con la pandemia. Necesariamente, quello abre la interrogante  sobre qué empleos del sector servicios fueron eliminados con la pademia y cómo complementaría aquello los hallazgos aquí presentados.  
+La *tabla 4* da cuenta de la distribución de los individuos en cada clase de precariedad laboral según sexo.Para empezar, la *clase subcontratada inestable* se compone mayoritariamente por hombres (67,5 %), siendo las mujeres un 32,5 %.
+Asimismo, la *clase multiprecarizada* presenta una mayor presencia masculina (76,1 %),con un 23,9% de mujeres.
+En la misma línea, la *clase subcontratada protegida* posee un carácter masculinizado, en tanto 64,2% de la clase refiere a hombres y 35,8% a mujeres.
+Finalmente, a diferencia del resto de las clases previamente descritas, la *clase de servicios temporales protegida* se compone predominantemente por mujeres (76,7 %), siendo los hombres sólo un 23,3%.
+Cabe señalar que, a nivel global entre las clases, más de la mitad de los hombres trabajadores del sector servicios (56.2 %) se concentran en la *clase subcontratada protegida*; mientras que casi la mitad de las mujeres trabajadoras (49.3 %) pertenecen a la *clase de servicios temporales protegida*.
+Asimismo, el 35,7 % de las mujeres trabajadoras del sector servicios pertenecen a la *clase de servicios temporales protegida*.
+Estos hallazgos son interesantes, en tanto dan cuenta de que la posición de los hombres en los empleos del sector servicios sería más precaria que la de las mujeres durante el año 2019; sin embargo, no es posible aseverar tal hallazgo sin considerar la fuerte salida de las mujeres del mercado laboral con la pandemia.
+Necesariamente, quello abre la interrogante sobre qué empleos del sector servicios fueron eliminados con la pademia y cómo complementaría aquello los hallazgos aquí presentados.
 
 ```{r cross_table_sex, echo=TRUE, message=FALSE, warning=FALSE}
 
@@ -520,8 +563,13 @@ sjt.xtab(base_proc$Clase, base_proc$sexo,
 
 ```
 
-El desglose del análisis de clases a partir del nivel educacional contenido en la _tabla 5_ arroja que *Educación secundaria* es la categoría de mayor proporción dentro de las cuatro clases. Para la *clase subcontratada inestable*, esta categoría representa el 56,4%, seguida por quienes poseen educación primaria (nivel 1 y 2) con un 22,7%, *Educacion tecnica* con un 13%, y *Educacion universitaria* con un 7,2% . Para la *clase multiprecarizada*, las cifras se concentran en los primeros niveles educativos, donde *Educacion primaria (nivel 1)* reune un 13,6% de los casos, *Educacion primaria (nivel 2)* un 27,3%, y *Educacion secundaria* un 51,7%.
-*Educacion tecnica* y *Educacion universitaria* solo alcanzan un 3,4% y un 4,5% del total respectivamente. Por su parte, la *clase subcontratada protegida* es aquella que concentra el mayor porcentaje de su total en la categoría *Educacion secundaria*, con un 62,9%, siguiendo *Educacion técnica* y *Educacion primaria (nivel 2)*, ambas con 11,9%, luego *Educacion universitaria* con 6,6%, y *Educacion primaria (nivel 1)* con un 6,4%. Finalmente, la *clase de servicios temporales protegida* es aquella con mayores porcentajes de educación superior, sumando un 47% entre *Educacion tecnica* y *Educacion universitaria* (con mayor proporción de la primera, con un 30,4% de los casos). Además, es la única clase con una proporción mayor a cero de *Postitulos y maestria* (1,3%), pese a que este porcentaje es aún muy reducido.
+El desglose del análisis de clases a partir del nivel educacional contenido en la *tabla 5* arroja que *Educación secundaria* es la categoría de mayor proporción dentro de las cuatro clases.
+Para la *clase subcontratada inestable*, esta categoría representa el 56,4%, seguida por quienes poseen educación primaria (nivel 1 y 2) con un 22,7%, *Educacion tecnica* con un 13%, y *Educacion universitaria* con un 7,2% .
+Para la *clase multiprecarizada*, las cifras se concentran en los primeros niveles educativos, donde *Educacion primaria (nivel 1)* reune un 13,6% de los casos, *Educacion primaria (nivel 2)* un 27,3%, y *Educacion secundaria* un 51,7%.
+*Educacion tecnica* y *Educacion universitaria* solo alcanzan un 3,4% y un 4,5% del total respectivamente.
+Por su parte, la *clase subcontratada protegida* es aquella que concentra el mayor porcentaje de su total en la categoría *Educacion secundaria*, con un 62,9%, siguiendo *Educacion técnica* y *Educacion primaria (nivel 2)*, ambas con 11,9%, luego *Educacion universitaria* con 6,6%, y *Educacion primaria (nivel 1)* con un 6,4%.
+Finalmente, la *clase de servicios temporales protegida* es aquella con mayores porcentajes de educación superior, sumando un 47% entre *Educacion tecnica* y *Educacion universitaria* (con mayor proporción de la primera, con un 30,4% de los casos).
+Además, es la única clase con una proporción mayor a cero de *Postitulos y maestria* (1,3%), pese a que este porcentaje es aún muy reducido.
 Se sigue que para un 42,8% de esta clase su mayor nivel alcanzado es el secundario, y para un 8,8% es el primario (niveles 1 y 2).
 
 ```{r cross_table_education, echo=TRUE, message=FALSE, warning=FALSE}
@@ -532,8 +580,17 @@ sjt.xtab(base_proc$Clase, base_proc$educacion,
          show.row.prc = TRUE)
 ```
 
-Sobre la distribución etaria según cada una de las clases de precariedad, en la _tabla 6_ se indica que la clase subcontratada inestable (Clase 1) se compone casi la mitad (48,8 %) de trabajadores entre los 25 a 49 años. Asimismo, alrededor de un cuarto de dicha clase se encuentra en el tramo etario entre los 20 hasta 29 años, mientras que un quinto de este grupo (20,5 %) tiene entre 50 a 64 años. El 6,4 % restante de la clase se distribuye en iguales proporciones entre los tramos de 15 a 19 años y 65 años o más. En cuanto a la clase multiprecarizada (Clase 2), un 48,4% se encuentra en el tramo entre los 25 a 49 años, al mismo tiempo que más de un tercio (31,2 %) tiene entre 50 a 64 años. Ambos tramos etarios concentran al 79,6 % de trabajadores de esta clase. Además, menos de un quinto del grupo (19,3 %) se encuentra entre los 20 y 29 años de edad, mientras que un 5,1 % tiene 65 años o más y sólo un 3 % entre 15 a 19 años. Por su parte, un 43,1 % de la clase subcontrata protegida (Clase 3) se encuentra en el tramo entre los 25 a 49 años, mientras que más de un tercio (34,7 %) tiene entre 50 a 64 años. En cuanto a la población entre los 20 a 29 años de edad, esta se compone por menos de un quinto de la clase (17,2 %). De esta forma, el tramo entre los 65 años o más agrupa al 4,1 % del grupo, restando sólo un 1 % de trabajadores entre los 15 a 19 años.
-Por último, casi la mitad (48,6 %) de la clase de servicios temporales (Clase 4) tiene entre 25 a 49 años de edad, con más de un tercio (33,7 %) de trabajadores en el tramo entre los 50 a 64 años. Asimismo, un 12,9 % de la clase se encuentra entre los 20 a 29 años, con un 4,6 % de personas con 65 años o más y un 0,3 % del grupo entre los 15 a 19 años.
+Sobre la distribución etaria según cada una de las clases de precariedad, en la *tabla 6* se indica que la clase subcontratada inestable (Clase 1) se compone casi la mitad (48,8 %) de trabajadores entre los 25 a 49 años.
+Asimismo, alrededor de un cuarto de dicha clase se encuentra en el tramo etario entre los 20 hasta 29 años, mientras que un quinto de este grupo (20,5 %) tiene entre 50 a 64 años.
+El 6,4 % restante de la clase se distribuye en iguales proporciones entre los tramos de 15 a 19 años y 65 años o más.
+En cuanto a la clase multiprecarizada (Clase 2), un 48,4% se encuentra en el tramo entre los 25 a 49 años, al mismo tiempo que más de un tercio (31,2 %) tiene entre 50 a 64 años.
+Ambos tramos etarios concentran al 79,6 % de trabajadores de esta clase.
+Además, menos de un quinto del grupo (19,3 %) se encuentra entre los 20 y 29 años de edad, mientras que un 5,1 % tiene 65 años o más y sólo un 3 % entre 15 a 19 años.
+Por su parte, un 43,1 % de la clase subcontrata protegida (Clase 3) se encuentra en el tramo entre los 25 a 49 años, mientras que más de un tercio (34,7 %) tiene entre 50 a 64 años.
+En cuanto a la población entre los 20 a 29 años de edad, esta se compone por menos de un quinto de la clase (17,2 %).
+De esta forma, el tramo entre los 65 años o más agrupa al 4,1 % del grupo, restando sólo un 1 % de trabajadores entre los 15 a 19 años.
+Por último, casi la mitad (48,6 %) de la clase de servicios temporales (Clase 4) tiene entre 25 a 49 años de edad, con más de un tercio (33,7 %) de trabajadores en el tramo entre los 50 a 64 años.
+Asimismo, un 12,9 % de la clase se encuentra entre los 20 a 29 años, con un 4,6 % de personas con 65 años o más y un 0,3 % del grupo entre los 15 a 19 años.
 
 ```{r cross_table_age, echo=TRUE, message=FALSE, warning=FALSE}
 #Creación de tabla cruzada para variable edad
@@ -546,16 +603,32 @@ sjt.xtab(base_proc$Clase, base_proc$edad,
 
 # Conclusiones
 
-A partir del análisis de la medida de ajuste de los modelos de clases latentes elaborados, que contemplaron entre 1 y 12 clases, se optó por el modelo de 4 clases, que incluye la denominada _clase de servicios temporales protegida_, que corresponde a un 30% del total de trabajadores del sector servicios, con alta probabilidad de poseer contratos indefinidos y, en general, condiciones laborales e ingresos no precarios. Es así como puede señalarse que se cumple la primera hipótesis planteada. 
+A partir del análisis de la medida de ajuste de los modelos de clases latentes elaborados, que contemplaron entre 1 y 12 clases, se optó por el modelo de 4 clases, que incluye la denominada *clase de servicios temporales protegida*, que corresponde a un 30% del total de trabajadores del sector servicios, con alta probabilidad de poseer contratos indefinidos y, en general, condiciones laborales e ingresos no precarios.
+Es así como puede señalarse que se cumple la primera hipótesis planteada.
 
-En relación con la segunda hipótesis, es posible señalar que esta no se cumple del todo. En efecto, la _clase de servicios temporales protegida_ es la única que presenta una mayor proporción de trabajadoras. Las clases _multiprecarizada_ y _subcontratada protegida_, a su vez, presentan un carácter masculinizado. A nivel global, más de la mitad de los trabajadores masculinos del sector servicios se concentran en la clase subcontratada protegida; mientras que casi la mitad de las mujeres trabajadoras pertenecen a la clase de servicios temporales protegida. No obstante, hay que considerar el retroceso de aproximadamente 10 años en términos de la inserción laboral de las mujeres producido por la crisis sanitaria: es probable que gran parte de las trabajadoras cuya inserción laboral tuviese un carácter más precario se encontrasen desocupadas al momento de la medición. Junto con ello, la crisis de los cuidados - engrandecida por la pandemia - también puede haber sido un elemento que restase a la fuerza de trabajo femenina perteneciente a las clases más precarias. 
+En relación con la segunda hipótesis, es posible señalar que esta no se cumple del todo.
+En efecto, la *clase de servicios temporales protegida* es la única que presenta una mayor proporción de trabajadoras.
+Las clases *multiprecarizada* y *subcontratada protegida*, a su vez, presentan un carácter masculinizado.
+A nivel global, más de la mitad de los trabajadores masculinos del sector servicios se concentran en la clase subcontratada protegida; mientras que casi la mitad de las mujeres trabajadoras pertenecen a la clase de servicios temporales protegida.
+No obstante, hay que considerar el retroceso de aproximadamente 10 años en términos de la inserción laboral de las mujeres producido por la crisis sanitaria: es probable que gran parte de las trabajadoras cuya inserción laboral tuviese un carácter más precario se encontrasen desocupadas al momento de la medición.
+Junto con ello, la crisis de los cuidados - engrandecida por la pandemia - también puede haber sido un elemento que restase a la fuerza de trabajo femenina perteneciente a las clases más precarias.
 
-La clase _subcontratada inestable_ presenta una alta proporción de trabajadores cuyo nivel educacional es igual o inferior a la educación secundaria. Lo mismo sucede con la _clase multiprecarizada_. En ambos casos, la proporción de trabajadores cuyo nivel educacional es universitario o superior es inferior al 10%. La clase _de servicios temporales protegida_, por su parte, es la que concentra el mayor porcentaje de trabajadores con un nivel educacional técnico y universitario. Así, se cumple la tercera hipótesis planteada. 
+La clase *subcontratada inestable* presenta una alta proporción de trabajadores cuyo nivel educacional es igual o inferior a la educación secundaria.
+Lo mismo sucede con la *clase multiprecarizada*.
+En ambos casos, la proporción de trabajadores cuyo nivel educacional es universitario o superior es inferior al 10%.
+La clase *de servicios temporales protegida*, por su parte, es la que concentra el mayor porcentaje de trabajadores con un nivel educacional técnico y universitario.
+Así, se cumple la tercera hipótesis planteada.
 
-Por último, casi un 25% de los trabajadores pertenecientes a la clase _subcontratada inestable_ tiene una edad inferior a 29 años. Asimismo, un 20% de los trabajadores pertenecientes a esta clase tienen una edad cercana a la jubilación.  La clase _multiprecarizada_, por su parte, también se concentra cerca de un quinto trabajadores con menos de 29 años; y en torno a un tercio de los trabajadores que se integran a esta clase se encuentran cerca de la edad de jubilación. No obstante, la distribución etaria para todas las clases (incluyendo aquellas con mayores niveles de protección) es similar, por lo cual puede sostenerse que no es posible concluir que quienes tienen menos de 30 años, o quienes se encuentran prontos a jubilar, están insertados de manera más precaria en el mercado del trabajo chileno. 
+Por último, casi un 25% de los trabajadores pertenecientes a la clase *subcontratada inestable* tiene una edad inferior a 29 años.
+Asimismo, un 20% de los trabajadores pertenecientes a esta clase tienen una edad cercana a la jubilación.
+La clase *multiprecarizada*, por su parte, también se concentra cerca de un quinto trabajadores con menos de 29 años; y en torno a un tercio de los trabajadores que se integran a esta clase se encuentran cerca de la edad de jubilación.
+No obstante, la distribución etaria para todas las clases (incluyendo aquellas con mayores niveles de protección) es similar, por lo cual puede sostenerse que no es posible concluir que quienes tienen menos de 30 años, o quienes se encuentran prontos a jubilar, están insertados de manera más precaria en el mercado del trabajo chileno.
 
 En base a lo anterior, es posible cumplir el objetivo general que guía a esta investigación: a saber, determinar la distribución de los diferentes tipos de precariedad laboral de trabajadoras y trabajadores en el sector servicios en 2020 en Chile, según sexo, edad, edad y nivel educacional.
 
-No obstante, hay todavía muchos elementos que valdría la pena investigar en torno a la precarización laboral en Chile desde una perspectiva multidimensional. Entre ellos, valdría la pena analizar el resto de los sectores de la economía (industrias manufactureras y de extracción de materias primas), así como establecer comparaciones de los niveles de precariedad de estos respecto del sector de servicios, analizado en esta investigación. También sería interesante analizar, por ejemplo, el acceso a transferencias proveídas por el Estado durante la pandemia - como el Ingreso Familiar de Emergencia, entre otros - para cada una de las clases aquí presentadas. También podría resultar de sumo interés científico y público preguntarse por la relación entre estas clases y el tiempo dedicado al trabajo no remunerado, entre otros. 
+No obstante, hay todavía muchos elementos que valdría la pena investigar en torno a la precarización laboral en Chile desde una perspectiva multidimensional.
+Entre ellos, valdría la pena analizar el resto de los sectores de la economía (industrias manufactureras y de extracción de materias primas), así como establecer comparaciones de los niveles de precariedad de estos respecto del sector de servicios, analizado en esta investigación.
+También sería interesante analizar, por ejemplo, el acceso a transferencias proveídas por el Estado durante la pandemia - como el Ingreso Familiar de Emergencia, entre otros - para cada una de las clases aquí presentadas.
+También podría resultar de sumo interés científico y público preguntarse por la relación entre estas clases y el tiempo dedicado al trabajo no remunerado, entre otros.
 
 # Referencias
